@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arcana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Telegram Mini App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #0e0e11;
+      color: #e6e6eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      opacity: 0.7;
+      margin-bottom: 32px;
+    }
+
+    button {
+      background: #e6e6eb;
+      color: #0e0e11;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .card {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #2a2a32;
+    }
+
+    .position {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 6px;
+    }
+
+    .text {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Arcana</h1>
+  <div class="subtitle">A path guided by the cards</div>
+
+  <button id="start">Make a spread</button>
+
+  <div id="result"></div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+
+    const userId = tg.initDataUnsafe?.user?.id || 0;
+    const lang = tg.initDataUnsafe?.user?.language_code || "en";
+
+    document.getElementById("start").addEventListener("click", () => {
+      fetch(`https://YOUR_BACKEND_URL/spread/three?user_id=${userId}&language=${lang}`)
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById("result");
+          container.innerHTML = "";
+
+          data.cards.forEach(card => {
+            const el = document.createElement("div");
+            el.className = "card";
+
+            el.innerHTML = `
+              <div class="position">${card.position}</div>
+              <div class="text">${card.meaning.full}</div>
+            `;
+
+            container.appendChild(el);
+          });
+        })
+        .catch(() => {
+          document.getElementById("result").innerHTML =
+            "<div class='text'>Unable to load the spread.</div>";
+        });
+    });
+  </script>
+
+</body>
+</html>
