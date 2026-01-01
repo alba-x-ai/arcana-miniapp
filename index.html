@@ -77,7 +77,7 @@
     const lang = tg.initDataUnsafe?.user?.language_code || "en";
 
     document.getElementById("start").addEventListener("click", () => {
-      fetch(`https://YOUR_BACKEND_URL/spread/three?user_id=${userId}&language=${lang}`)
+      fetch(`https://arcana-backend-re9i.onrender.com/spread/three?user_id=${userId}&language=${lang}`)
         .then(res => res.json())
         .then(data => {
           const container = document.getElementById("result");
