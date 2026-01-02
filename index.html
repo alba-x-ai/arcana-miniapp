@@ -1,182 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Arcana</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arcana</title>
 
-  <!-- Telegram Mini App -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #0b0b0f;
+    color: #f2f2f2;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  }
 
-  <style>
-    body {
-      margin: 0;
-      padding: 28px 20px 44px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Arial, sans-serif;
-      background: #0f0f11;
-      color: #e8e8ea;
-    }
+  h1 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
 
-    h1 {
-      font-size: 17px;
-      font-weight: 500;
-      margin-bottom: 28px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0.7;
-    }
+  .subtitle {
+    opacity: 0.6;
+    margin-bottom: 24px;
+  }
 
-    button {
-      width: 100%;
-      padding: 15px 16px;
-      background: #1b1b1f;
-      color: #e8e8ea;
-      border: none;
-      border-radius: 12px;
-      font-size: 15px;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      margin-bottom: 12px;
-    }
+  button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 999px;
+    border: none;
+    background: #f2f2f2;
+    color: #0b0b0f;
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
 
-    button:hover {
-      background: #242428;
-    }
+  #result {
+    margin-top: 24px;
+  }
 
-    #result {
-      margin-top: 36px;
-    }
+  /* ===== CARD VISUAL ===== */
 
-    .card-block {
-      margin-bottom: 40px;
-    }
+  .card-image-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
 
-    .card-name {
-      font-size: 15px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      opacity: 0.75;
-      margin-bottom: 10px;
-    }
+  .card-image-wrapper img {
+    width: 100%;
+    display: block;
+    transition: transform 0.8s ease;
+  }
 
-    .orientation {
-      font-size: 12px;
-      opacity: 0.45;
-      margin-bottom: 14px;
-    }
+  .card-image-wrapper.reversed img {
+    transform: rotate(180deg);
+  }
 
-    .card-meaning {
-      font-size: 15px;
-      line-height: 1.55;
-    }
+  .card-label {
+    position: absolute;
+    bottom: 14px;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    opacity: 0.75;
+    pointer-events: none;
+  }
 
-    .loading {
-      opacity: 0.6;
-      font-size: 14px;
-    }
+  .card-meaning {
+    font-size: 15px;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
 
-    .error {
-      color: #d88;
-      font-size: 14px;
-    }
-  </style>
+  .orientation {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .error {
+    color: #ff6b6b;
+    opacity: 0.8;
+  }
+</style>
 </head>
 
 <body>
 
-  <h1>Arcana</h1>
+<h1>Arcana</h1>
+<div class="subtitle">A path guided by the cards</div>
 
-  <button id="oneCard">
-    One card — one question
-  </button>
+<button id="draw">One card — one question</button>
 
-  <button id="dailyCard">
-    Card of the day
-  </button>
+<div id="result"></div>
 
-  <div id="result"></div>
+<script>
+  const result = document.getElementById("result");
+  const drawBtn = document.getElementById("draw");
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
+  const lang =
+    window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code || "en";
 
-    const oneCardBtn = document.getElementById("oneCard");
-    const dailyBtn = document.getElementById("dailyCard");
-    const result = document.getElementById("result");
+  drawBtn.addEventListener("click", async () => {
+    result.innerHTML = "…";
 
-    const userLang = tg.initDataUnsafe?.user?.language_code || "en";
-    const lang = userLang.startsWith("ru") ? "ru" : "en";
+    try {
+      const res = await fetch(
+        `https://arcana-backend-re9i.onrender.com/spread/one?language=${lang}`
+      );
 
-    // --- ONE CARD ---
-    oneCardBtn.addEventListener("click", async () => {
-      result.innerHTML = "<div class='loading'>Drawing a card…</div>";
-
-      try {
-        const response = await fetch(
-          `https://arcana-backend-re9i.onrender.com/spread/one?language=${lang}`
-        );
-
-        const data = await response.json();
-        renderCard(data.card.name, data.card.orientation, data.meaning);
-
-      } catch (e) {
-        result.innerHTML = "<div class='error'>Unable to draw a card.</div>";
-        console.error(e);
-      }
-    });
-
-    // --- CARD OF THE DAY ---
-    dailyBtn.addEventListener("click", async () => {
-      result.innerHTML = "<div class='loading'>Revealing today’s card…</div>";
-
-      try {
-        const response = await fetch(
-          `https://arcana-backend-re9i.onrender.com/spread/daily?language=${lang}`
-        );
-
-        const data = await response.json();
-        renderCard(
-          data.card.name,
-          data.card.orientation,
-          data.meaning,
-          true
-        );
-
-      } catch (e) {
-        result.innerHTML = "<div class='error'>Unable to reveal today’s card.</div>";
-        console.error(e);
-      }
-    });
-
-    // --- RENDER FUNCTION ---
-    function renderCard(name, orientation, meaning, isDaily = false) {
+      const data = await res.json();
       result.innerHTML = "";
 
-      let orientationNote = "";
-      if (orientation === "reversed") {
-        orientationNote = lang === "ru"
-          ? (isDaily
-              ? "Карта дня выпала перевёрнутой"
-              : "Карта выпала перевёрнутой")
-          : (isDaily
-              ? "Today’s card was drawn reversed"
-              : "The card was drawn reversed");
-      }
+      const wrapper = document.createElement("div");
+      wrapper.className = `card-image-wrapper ${data.card.orientation}`;
 
-      const el = document.createElement("div");
-      el.className = "card-block";
-
-      el.innerHTML = `
-        <div class="card-name">${name}</div>
-        ${orientationNote ? `<div class="orientation">${orientationNote}</div>` : ""}
-        <div class="card-meaning">
-          ${meaning}
-        </div>
+      wrapper.innerHTML = `
+        <img src="cards/${data.card.key}.png" />
+        <div class="card-label">${data.card.name.toUpperCase()}</div>
       `;
 
-      result.appendChild(el);
+      const orientation =
+        data.card.orientation === "reversed"
+          ? lang === "ru"
+            ? "Перевёрнутая карта"
+            : "Reversed card"
+          : "";
+
+      result.appendChild(wrapper);
+
+      if (orientation) {
+        const o = document.createElement("div");
+        o.className = "orientation";
+        o.textContent = orientation;
+        result.appendChild(o);
+      }
+
+      const meaning = document.createElement("div");
+      meaning.className = "card-meaning";
+      meaning.textContent = data.meaning;
+      result.appendChild(meaning);
+
+    } catch (e) {
+      console.error(e);
+      result.innerHTML =
+        "<div class='error'>Unable to draw a card.</div>";
     }
-  </script>
+  });
+</script>
 
 </body>
 </html>
