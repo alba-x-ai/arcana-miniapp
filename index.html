@@ -20,10 +20,20 @@
     h1 {
       font-size: 18px;
       font-weight: 500;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       opacity: 0.75;
+    }
+
+    .toggle {
+      margin-bottom: 18px;
+      font-size: 13px;
+      opacity: 0.75;
+    }
+
+    .toggle input {
+      margin-right: 8px;
     }
 
     button {
@@ -47,7 +57,7 @@
     }
 
     .card-block {
-      margin-bottom: 36px;
+      margin-bottom: 40px;
     }
 
     .position {
@@ -61,7 +71,13 @@
       font-size: 14px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      opacity: 0.65;
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+
+    .orientation {
+      font-size: 12px;
+      opacity: 0.45;
       margin-bottom: 12px;
     }
 
@@ -93,6 +109,11 @@
 
   <h1>Arcana</h1>
 
+  <label class="toggle">
+    <input type="checkbox" id="allowReversed">
+    Read reversed meanings
+  </label>
+
   <button id="makeSpread">
     Draw a spread
   </button>
@@ -105,6 +126,7 @@
 
     const button = document.getElementById("makeSpread");
     const result = document.getElementById("result");
+    const reversedToggle = document.getElementById("allowReversed");
 
     const userLang = tg.initDataUnsafe?.user?.language_code || "en";
     const lang = userLang.startsWith("ru") ? "ru" : "en";
@@ -112,9 +134,11 @@
     button.addEventListener("click", async () => {
       result.innerHTML = "<div class='loading'>Drawing the cards…</div>";
 
+      const allowReversed = reversedToggle.checked;
+
       try {
         const response = await fetch(
-          `https://arcana-backend-re9i.onrender.com/spread/three?language=${lang}`
+          `https://arcana-backend-re9i.onrender.com/spread/three?language=${lang}&allow_reversed=${allowReversed}`
         );
 
         const data = await response.json();
@@ -124,9 +148,21 @@
           const el = document.createElement("div");
           el.className = "card-block";
 
+          const orientationNote =
+            card.orientation === "reversed"
+              ? (allowReversed
+                  ? (lang === "ru"
+                      ? "Карта выпала перевёрнутой"
+                      : "The card was drawn reversed")
+                  : (lang === "ru"
+                      ? "Карта выпала перевёрнутой, но читается прямо"
+                      : "The card was drawn reversed, but read upright"))
+              : "";
+
           el.innerHTML = `
             <div class="position">${card.position.toUpperCase()}</div>
             <div class="card-name">${card.card.name}</div>
+            ${orientationNote ? `<div class="orientation">${orientationNote}</div>` : ""}
 
             <div class="card-meaning">
               ${card.meaning.card}
