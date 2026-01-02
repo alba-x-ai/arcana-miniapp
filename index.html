@@ -36,6 +36,7 @@
       font-size: 15px;
       letter-spacing: 0.08em;
       cursor: pointer;
+      margin-bottom: 12px;
     }
 
     button:hover {
@@ -89,19 +90,25 @@
     One card — one question
   </button>
 
+  <button id="dailyCard">
+    Card of the day
+  </button>
+
   <div id="result"></div>
 
   <script>
     const tg = window.Telegram.WebApp;
     tg.expand();
 
-    const button = document.getElementById("oneCard");
+    const oneCardBtn = document.getElementById("oneCard");
+    const dailyBtn = document.getElementById("dailyCard");
     const result = document.getElementById("result");
 
     const userLang = tg.initDataUnsafe?.user?.language_code || "en";
     const lang = userLang.startsWith("ru") ? "ru" : "en";
 
-    button.addEventListener("click", async () => {
+    // --- ONE CARD ---
+    oneCardBtn.addEventListener("click", async () => {
       result.innerHTML = "<div class='loading'>Drawing a card…</div>";
 
       try {
@@ -110,33 +117,65 @@
         );
 
         const data = await response.json();
-        result.innerHTML = "";
-
-        const orientationNote =
-          data.card.orientation === "reversed"
-            ? (lang === "ru"
-                ? "Карта выпала перевёрнутой"
-                : "The card was drawn reversed")
-            : "";
-
-        const el = document.createElement("div");
-        el.className = "card-block";
-
-        el.innerHTML = `
-          <div class="card-name">${data.card.name}</div>
-          ${orientationNote ? `<div class="orientation">${orientationNote}</div>` : ""}
-          <div class="card-meaning">
-            ${data.meaning}
-          </div>
-        `;
-
-        result.appendChild(el);
+        renderCard(data.card.name, data.card.orientation, data.meaning);
 
       } catch (e) {
         result.innerHTML = "<div class='error'>Unable to draw a card.</div>";
         console.error(e);
       }
     });
+
+    // --- CARD OF THE DAY ---
+    dailyBtn.addEventListener("click", async () => {
+      result.innerHTML = "<div class='loading'>Revealing today’s card…</div>";
+
+      try {
+        const response = await fetch(
+          `https://arcana-backend-re9i.onrender.com/spread/daily?language=${lang}`
+        );
+
+        const data = await response.json();
+        renderCard(
+          data.card.name,
+          data.card.orientation,
+          data.meaning,
+          true
+        );
+
+      } catch (e) {
+        result.innerHTML = "<div class='error'>Unable to reveal today’s card.</div>";
+        console.error(e);
+      }
+    });
+
+    // --- RENDER FUNCTION ---
+    function renderCard(name, orientation, meaning, isDaily = false) {
+      result.innerHTML = "";
+
+      let orientationNote = "";
+      if (orientation === "reversed") {
+        orientationNote = lang === "ru"
+          ? (isDaily
+              ? "Карта дня выпала перевёрнутой"
+              : "Карта выпала перевёрнутой")
+          : (isDaily
+              ? "Today’s card was drawn reversed"
+              : "The card was drawn reversed");
+      }
+
+      const el = document.createElement("div");
+      el.className = "card-block";
+
+      el.innerHTML = `
+        <div class="card-name">${name}</div>
+        ${orientationNote ? `<div class="orientation">${orientationNote}</div>` : ""}
+        <div class="card-meaning">
+          ${meaning}
+        </div>
+      `;
+
+      result.appendChild(el);
+    }
   </script>
 
 </body>
