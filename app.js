@@ -51,10 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Show card image
-  function showCard(cardIndex) {
-    cardImage.src = `./images/cards/${cardIndex}.png`;
-    cardImage.classList.remove("hidden");
-  }
+function showCard(cardIndex) {
+  cardImage.src = `/arcana-miniapp/images/cards/${cardIndex}.png`;
+  cardImage.classList.remove("hidden");
+}
 
   // Button
   cardButton.addEventListener("click", getCardOfTheDay);
