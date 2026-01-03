@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------- Data ---------- */
   let cardsData = {};
 
-  // загрузка смыслов карт
+  // Загружаем значения карт
   fetch("./cards.json")
     .then(res => res.json())
     .then(data => {
@@ -53,14 +53,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showCard(cardIndex, reversed) {
-    // приводим номер к формату 00, 01, … 21
+    // номер файла: 00, 01, ... 21
     const fileIndex = String(cardIndex).padStart(2, "0");
 
-    // универсальный basePath для GitHub Pages
-    const basePath = window.location.pathname.split("/")[1];
+    // БАЗОВЫЙ URL СТРАНИЦЫ (работает в GitHub Pages и Telegram)
+    const baseUrl = new URL(document.baseURI);
+
+    // формируем абсолютный путь к картинке
+    const imageUrl =
+      `${baseUrl.origin}${baseUrl.pathname}images/cards/${fileIndex}.png`;
+
+    console.log("IMAGE URL:", imageUrl);
 
     // картинка
-    cardImage.src = `/${basePath}/images/cards/${fileIndex}.png`;
+    cardImage.src = imageUrl;
     cardImage.classList.remove("hidden");
     cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
 
