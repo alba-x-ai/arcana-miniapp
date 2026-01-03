@@ -1,24 +1,112 @@
-[
-  { "id": 0, "name": "The Fool", "meaning": "Beginnings, openness, trust in the path." },
-  { "id": 1, "name": "The Magician", "meaning": "Will, focus, manifestation." },
-  { "id": 2, "name": "The High Priestess", "meaning": "Inner knowledge, silence, intuition." },
-  { "id": 3, "name": "The Empress", "meaning": "Creation, growth, nourishment." },
-  { "id": 4, "name": "The Emperor", "meaning": "Structure, authority, stability." },
-  { "id": 5, "name": "The Hierophant", "meaning": "Tradition, learning, guidance." },
-  { "id": 6, "name": "The Lovers", "meaning": "Choice, union, alignment." },
-  { "id": 7, "name": "The Chariot", "meaning": "Direction, determination, movement." },
-  { "id": 8, "name": "Strength", "meaning": "Inner power, calm courage." },
-  { "id": 9, "name": "The Hermit", "meaning": "Withdrawal, insight, solitude." },
-  { "id": 10, "name": "Wheel of Fortune", "meaning": "Cycles, change, turning points." },
-  { "id": 11, "name": "Justice", "meaning": "Balance, truth, responsibility." },
-  { "id": 12, "name": "The Hanged Man", "meaning": "Pause, surrender, new perspective." },
-  { "id": 13, "name": "Death", "meaning": "Endings, transition, transformation." },
-  { "id": 14, "name": "Temperance", "meaning": "Harmony, moderation, integration." },
-  { "id": 15, "name": "The Devil", "meaning": "Attachment, illusion, awareness." },
-  { "id": 16, "name": "The Tower", "meaning": "Disruption, revelation, breakdown." },
-  { "id": 17, "name": "The Star", "meaning": "Hope, clarity, renewal." },
-  { "id": 18, "name": "The Moon", "meaning": "Uncertainty, intuition, the unseen." },
-  { "id": 19, "name": "The Sun", "meaning": "Vitality, openness, presence." },
-  { "id": 20, "name": "Judgement", "meaning": "Awakening, call, realization." },
-  { "id": 21, "name": "The World", "meaning": "Completion, wholeness, arrival." }
-]
+{
+  "0": {
+    "name": "The Fool",
+    "upright": "Начало, доверие жизни, шаг в неизвестное, открытость опыту.",
+    "reversed": "Страх нового, инфантильность, избегание ответственности."
+  },
+  "1": {
+    "name": "The Magician",
+    "upright": "Воля, концентрация, способность влиять на реальность.",
+    "reversed": "Манипуляция, утечка энергии, рассеянность."
+  },
+  "2": {
+    "name": "The High Priestess",
+    "upright": "Интуиция, внутреннее знание, тишина и наблюдение.",
+    "reversed": "Игнорирование интуиции, внутренний шум, самообман."
+  },
+  "3": {
+    "name": "The Empress",
+    "upright": "Плодородие, забота, изобилие, принятие.",
+    "reversed": "Истощение, зависимость от одобрения, утрата ресурса."
+  },
+  "4": {
+    "name": "The Emperor",
+    "upright": "Структура, ответственность, устойчивость, контроль.",
+    "reversed": "Жёсткость, страх потери контроля, тирания."
+  },
+  "5": {
+    "name": "The Hierophant",
+    "upright": "Традиции, знание, наставничество, смысл.",
+    "reversed": "Слепое следование правилам, внутренний конфликт с системой."
+  },
+  "6": {
+    "name": "The Lovers",
+    "upright": "Выбор сердцем, союз, согласие ценностей.",
+    "reversed": "Раздвоенность, неверный выбор, конфликт желаний."
+  },
+  "7": {
+    "name": "The Chariot",
+    "upright": "Движение вперёд, воля, управление направлением.",
+    "reversed": "Потеря контроля, внутренний разлад, пробуксовка."
+  },
+  "8": {
+    "name": "Strength",
+    "upright": "Внутренняя сила, мягкость, контроль над импульсами.",
+    "reversed": "Подавленные эмоции, слабость, утрата уверенности."
+  },
+  "9": {
+    "name": "The Hermit",
+    "upright": "Уединение, поиск истины, внутренняя работа.",
+    "reversed": "Изоляция, бегство от себя, страх тишины."
+  },
+  "10": {
+    "name": "Wheel of Fortune",
+    "upright": "Циклы, перемены, поворот судьбы.",
+    "reversed": "Сопротивление изменениям, застревание."
+  },
+  "11": {
+    "name": "Justice",
+    "upright": "Баланс, честность, ответственность за выбор.",
+    "reversed": "Несправедливость, самооправдание, искажение истины."
+  },
+  "12": {
+    "name": "The Hanged Man",
+    "upright": "Пауза, смена взгляда, добровольная жертва.",
+    "reversed": "Застревание, бессмысленное ожидание, сопротивление."
+  },
+  "13": {
+    "name": "Death",
+    "upright": "Завершение, трансформация, освобождение.",
+    "reversed": "Страх конца, цепляние за прошлое."
+  },
+  "14": {
+    "name": "Temperance",
+    "upright": "Гармония, умеренность, интеграция.",
+    "reversed": "Дисбаланс, крайности, утрата меры."
+  },
+  "15": {
+    "name": "The Devil",
+    "upright": "Привязанности, искушения, материальные цепи.",
+    "reversed": "Освобождение, осознание зависимости."
+  },
+  "16": {
+    "name": "The Tower",
+    "upright": "Резкий слом, разрушение иллюзий, правда.",
+    "reversed": "Отложенный кризис, сопротивление неизбежному."
+  },
+  "17": {
+    "name": "The Star",
+    "upright": "Надежда, исцеление, свет после тьмы.",
+    "reversed": "Потеря веры, разочарование, истощение."
+  },
+  "18": {
+    "name": "The Moon",
+    "upright": "Неясность, страхи, подсознание.",
+    "reversed": "Прояснение, выход из иллюзий."
+  },
+  "19": {
+    "name": "The Sun",
+    "upright": "Радость, ясность, жизненная энергия.",
+    "reversed": "Затмение радости, выгорание."
+  },
+  "20": {
+    "name": "Judgement",
+    "upright": "Пробуждение, призыв, осознание.",
+    "reversed": "Отказ слышать зов, застревание в прошлом."
+  },
+  "21": {
+    "name": "The World",
+    "upright": "Завершённость, целостность, интеграция опыта.",
+    "reversed": "Незавершённость, ощущение незакрытого круга."
+  }
+}
