@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ---------- Telegram ---------- */
   const tg = window.Telegram.WebApp;
   tg.ready();
 
@@ -10,60 +9,49 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  /* ---------- Backend ---------- */
   const API_URL = "https://arcana-1.onrender.com/card-of-the-day";
 
-  /* ---------- DOM ---------- */
   const cardButton = document.getElementById("cardButton");
   const cardImage = document.getElementById("cardImage");
   const cardName = document.getElementById("cardName");
   const cardMeaning = document.getElementById("cardMeaning");
   const resultBlock = document.getElementById("result");
 
-  /* ---------- Cards meanings ---------- */
   let cardsData = {};
 
   fetch("/arcana-miniapp/cards.json")
     .then(res => res.json())
-    .then(data => {
-      cardsData = data;
-    })
-    .catch(err => {
-      console.error("Failed to load cards.json", err);
+    .then(data => cardsData = data);
+
+  async function getCardOfTheDay() {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id: userId })
     });
 
-  /* ---------- Main ---------- */
-  async function getCardOfTheDay() {
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId })
-      });
-
-      const data = await response.json();
-      showCard(data.card);
-
-    } catch (err) {
-      console.error(err);
-      alert("Ошибка получения карты");
-    }
+    const data = await response.json();
+    showCard(data.card, data.reversed);
   }
 
-  function showCard(cardIndex) {
-    // картинка (PNG + GitHub Pages)
+  function showCard(cardIndex, reversed) {
     cardImage.src = `/arcana-miniapp/images/cards/${cardIndex}.png`;
     cardImage.classList.remove("hidden");
 
-    // текст
+    // переворот картинки
+    cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
+
     const card = cardsData[cardIndex];
-    if (card) {
-      cardName.textContent = card.name;
-      cardMeaning.textContent = card.meaning;
-      resultBlock.classList.remove("hidden");
-    }
+    if (!card) return;
+
+    cardName.textContent =
+      card.name + (reversed ? " (Reversed)" : "");
+
+    cardMeaning.textContent =
+      reversed ? card.reversed : card.upright;
+
+    resultBlock.classList.remove("hidden");
   }
 
   cardButton.addEventListener("click", getCardOfTheDay);
-
 });
