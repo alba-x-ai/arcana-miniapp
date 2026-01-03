@@ -58,3 +58,10 @@ button:active {
   font-size: 15px;
   opacity: 0.9;
 }
+
+.card-image {
+  width: 220px;
+  max-width: 80vw;
+  border-radius: 16px;
+  margin-top: 12px;
+}
