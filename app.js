@@ -11,7 +11,7 @@ if (!userId) {
 }
 
 // URL backend
-const API_URL = "https://ТВОЙ_СЕРВЕР/card-of-the-day";
+const API_URL = "https://arcana-1.onrender.com";
 
 // DOM элементы
 const cardButton = document.getElementById("cardButton");
