@@ -4,10 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   tg.ready();
 
   const userId = tg.initDataUnsafe?.user?.id;
-  if (!userId) {
-    alert("Не удалось получить user_id");
-    return;
-  }
+  if (!userId) return;
 
   const API_URL = "https://arcana-1.onrender.com/card-of-the-day";
 
@@ -16,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardName = document.getElementById("cardName");
   const cardMeaning = document.getElementById("cardMeaning");
   const resultBlock = document.getElementById("result");
+  const reversedMark = document.getElementById("reversedMark");
 
   let cardsData = {};
 
@@ -35,23 +33,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showCard(cardIndex, reversed) {
+    // image
     cardImage.src = `/arcana-miniapp/images/cards/${cardIndex}.png`;
     cardImage.classList.remove("hidden");
-
-    // переворот картинки
     cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
 
+    // marker
+    reversedMark.classList.toggle("hidden", !reversed);
+
+    // text
     const card = cardsData[cardIndex];
     if (!card) return;
 
-    cardName.textContent =
-      card.name + (reversed ? " (Reversed)" : "");
-
-    cardMeaning.textContent =
-      reversed ? card.reversed : card.upright;
-
+    cardName.textContent = card.name;
+    cardMeaning.textContent = reversed ? card.reversed : card.upright;
     resultBlock.classList.remove("hidden");
   }
 
   cardButton.addEventListener("click", getCardOfTheDay);
+
 });
