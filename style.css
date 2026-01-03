@@ -25,25 +25,31 @@ body {
   font-weight: 500;
 }
 
+/* ---------- BUTTONS ---------- */
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 button {
   padding: 14px 24px;
-  font-size: 16px;
+  font-size: 15px;
   background: #1c1f26;
   color: #ffffff;
   border: none;
   border-radius: 12px;
   cursor: pointer;
+  transition: opacity 0.15s ease;
 }
 
 button:active {
   opacity: 0.85;
 }
 
-/* --- CARD --- */
-
-.card-wrapper {
-  position: relative;
-}
+/* ---------- CARD IMAGE ---------- */
 
 .card-image {
   width: 220px;
@@ -52,16 +58,7 @@ button:active {
   transition: transform 0.4s ease;
 }
 
-.reversed-mark {
-  position: absolute;
-  bottom: -14px;
-  right: -14px;
-  font-size: 20px;
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-/* --- TEXT --- */
+/* ---------- RESULT TEXT ---------- */
 
 .result {
   max-width: 320px;
@@ -71,13 +68,22 @@ button:active {
 
 .card-name {
   font-size: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
+}
+
+.card-position {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-bottom: 10px;
+  font-style: italic;
 }
 
 .card-meaning {
   font-size: 15px;
   opacity: 0.9;
 }
+
+/* ---------- UTILS ---------- */
 
 .hidden {
   display: none;
