@@ -1,158 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Arcana</title>
+  <meta charset="UTF-8" />
+  <title>Arcana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-  body {
-    margin: 0;
-    padding: 24px;
-    background: #0b0b0f;
-    color: #f2f2f2;
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  }
+  <!-- Telegram WebApp -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  h1 {
-    font-size: 22px;
-    margin-bottom: 6px;
-  }
-
-  .subtitle {
-    opacity: 0.6;
-    margin-bottom: 24px;
-  }
-
-  button {
-    width: 100%;
-    padding: 14px;
-    border-radius: 999px;
-    border: none;
-    background: #f2f2f2;
-    color: #0b0b0f;
-    font-size: 15px;
-    margin-bottom: 24px;
-  }
-
-  #result {
-    margin-top: 24px;
-  }
-
-  /* ===== CARD VISUAL ===== */
-
-  .card-image-wrapper {
-    position: relative;
-    width: 100%;
-    border-radius: 18px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-
-  .card-image-wrapper img {
-    width: 100%;
-    display: block;
-    transition: transform 0.8s ease;
-  }
-
-  .card-image-wrapper.reversed img {
-    transform: rotate(180deg);
-  }
-
-  .card-label {
-    position: absolute;
-    bottom: 14px;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    letter-spacing: 0.28em;
-    opacity: 0.75;
-    pointer-events: none;
-  }
-
-  .card-meaning {
-    font-size: 15px;
-    line-height: 1.6;
-    opacity: 0.9;
-  }
-
-  .orientation {
-    font-size: 12px;
-    opacity: 0.5;
-    margin-bottom: 8px;
-    text-align: center;
-  }
-
-  .error {
-    color: #ff6b6b;
-    opacity: 0.8;
-  }
-</style>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<h1>Arcana</h1>
-<div class="subtitle">A path guided by the cards</div>
+  <div class="app">
 
-<button id="draw">One card — one question</button>
+    <h1 class="title">Arcana</h1>
 
-<div id="result"></div>
+    <button id="cardButton">
+      Card of the Day
+    </button>
 
-<script>
-  const result = document.getElementById("result");
-  const drawBtn = document.getElementById("draw");
+    <div id="result" class="result hidden">
+      <div id="cardName" class="card-name"></div>
+      <div id="cardMeaning" class="card-meaning"></div>
+    </div>
 
-  const lang =
-    window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code || "en";
+  </div>
 
-  drawBtn.addEventListener("click", async () => {
-    result.innerHTML = "…";
-
-    try {
-      const res = await fetch(
-        `https://arcana-backend-re9i.onrender.com/spread/one?language=${lang}`
-      );
-
-      const data = await res.json();
-      result.innerHTML = "";
-
-      const wrapper = document.createElement("div");
-      wrapper.className = `card-image-wrapper ${data.card.orientation}`;
-
-      wrapper.innerHTML = `
-        <img src="cards/${data.card.key}.png" />
-        <div class="card-label">${data.card.name.toUpperCase()}</div>
-      `;
-
-      const orientation =
-        data.card.orientation === "reversed"
-          ? lang === "ru"
-            ? "Перевёрнутая карта"
-            : "Reversed card"
-          : "";
-
-      result.appendChild(wrapper);
-
-      if (orientation) {
-        const o = document.createElement("div");
-        o.className = "orientation";
-        o.textContent = orientation;
-        result.appendChild(o);
-      }
-
-      const meaning = document.createElement("div");
-      meaning.className = "card-meaning";
-      meaning.textContent = data.meaning;
-      result.appendChild(meaning);
-
-    } catch (e) {
-      console.error(e);
-      result.innerHTML =
-        "<div class='error'>Unable to draw a card.</div>";
-    }
-  });
-</script>
-
+  <script src="app.js"></script>
 </body>
 </html>
