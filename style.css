@@ -25,7 +25,7 @@ body {
   font-weight: 500;
 }
 
-/* ---------- BUTTONS ---------- */
+/* ---------- BUTTONS LAYOUT ---------- */
 
 .buttons {
   display: flex;
@@ -34,19 +34,66 @@ body {
   justify-content: center;
 }
 
+/* ---------- PEARLESCENT BUTTONS ---------- */
+
 button {
-  padding: 14px 24px;
+  position: relative;
+  padding: 14px 26px;
   font-size: 15px;
-  background: #1c1f26;
-  color: #ffffff;
+  color: #f2f2f2;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
-  transition: opacity 0.15s ease;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.18),
+      rgba(180,190,200,0.08),
+      rgba(255,255,255,0.12)
+    ),
+    linear-gradient(
+      180deg,
+      #1a1e24,
+      #12151a
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.25),
+    inset 0 -1px 0 rgba(0,0,0,0.4),
+    0 6px 18px rgba(0,0,0,0.45);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.2s ease;
+  overflow: hidden;
 }
 
+/* subtle pearlescent sheen */
+button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      120% 80% at 20% 10%,
+      rgba(255,255,255,0.25),
+      transparent 60%
+    );
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* hover */
+button:hover {
+  filter: brightness(1.05);
+}
+
+/* active (press) */
 button:active {
-  opacity: 0.85;
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 3px 10px rgba(0,0,0,0.5);
 }
 
 /* ---------- CARD IMAGE ---------- */
