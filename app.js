@@ -20,31 +20,26 @@ const cardImage = document.getElementById("cardImage");
 // Основная функция — карта дня
 async function getCardOfTheDay() {
   try {
+    console.log("Sending user_id:", userId);
+
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        user_id: userId
-      })
+      body: JSON.stringify({ user_id: userId })
     });
 
-    if (!response.ok) {
-      throw new Error("Server error");
-    }
+    console.log("Response status:", response.status);
 
     const data = await response.json();
-
-    if (data.card === undefined) {
-      throw new Error("Card not returned");
-    }
+    console.log("Response data:", data);
 
     showCard(data.card);
 
   } catch (err) {
-    console.error(err);
-    alert("Ошибка получения карты дня");
+    console.error("FULL ERROR:", err);
+    alert(err.message);
   }
 }
 
