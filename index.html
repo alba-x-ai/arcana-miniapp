@@ -5,9 +5,7 @@
   <title>Arcana</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Telegram WebApp -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,16 +14,19 @@
 
     <h1 class="title">Arcana</h1>
 
-    <button id="cardButton">
-      Card of the Day
-    </button>
+    <button id="cardButton">Card of the Day</button>
 
-    <img
-      id="cardImage"
-      class="card-image hidden"
-      alt="Tarot card"
-    />
+    <!-- КАРТА -->
+    <div class="card-wrapper">
+      <img
+        id="cardImage"
+        class="card-image hidden"
+        alt="Tarot card"
+      />
+      <div id="reversedMark" class="reversed-mark hidden">↕</div>
+    </div>
 
+    <!-- ТЕКСТ -->
     <div id="result" class="result hidden">
       <div id="cardName" class="card-name"></div>
       <div id="cardMeaning" class="card-meaning"></div>
