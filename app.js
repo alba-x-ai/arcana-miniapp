@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // Telegram Mini App init
   const tg = window.Telegram.WebApp;
   tg.ready();
 
@@ -10,24 +11,29 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // API backend
   const API_URL = "https://arcana-1.onrender.com/card-of-the-day";
 
+  // DOM
   const cardButton = document.getElementById("cardButton");
   const cardImage = document.getElementById("cardImage");
 
   if (!cardButton || !cardImage) {
-    console.error("DOM elements not found:", { cardButton, cardImage });
-    alert("Ошибка интерфейса: не найдены элементы");
+    console.error("DOM elements not found", { cardButton, cardImage });
+    alert("Ошибка интерфейса");
     return;
   }
 
+  // Main action
   async function getCardOfTheDay() {
     try {
       console.log("Sending user_id:", userId);
 
       const response = await fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({ user_id: userId })
       });
 
@@ -44,11 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Show card image
   function showCard(cardIndex) {
-    cardImage.src = `./cards/${cardIndex}.jpg`;
-    cardImage.style.display = "block";
+    cardImage.src = `./images/cards/${cardIndex}.png`;
+    cardImage.classList.remove("hidden");
   }
 
+  // Button
   cardButton.addEventListener("click", getCardOfTheDay);
 
 });
