@@ -5,9 +5,7 @@
   <title>Arcana</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Telegram WebApp SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,12 +14,13 @@
 
     <h1 class="title">Arcana</h1>
 
-    <!-- КНОПКА -->
-    <button id="cardButton">
-      Card of the Day
-    </button>
+    <!-- КНОПКИ -->
+    <div class="buttons">
+      <button id="cardButton">Card of the Day</button>
+      <button id="questionButton">Card for a Question</button>
+    </div>
 
-    <!-- КАРТИНКА КАРТЫ -->
+    <!-- КАРТА -->
     <img
       id="cardImage"
       class="card-image hidden"
@@ -30,11 +29,8 @@
 
     <!-- РЕЗУЛЬТАТ -->
     <div id="result" class="result hidden">
-
-      <!-- НАЗВАНИЕ КАРТЫ -->
       <div id="cardName" class="card-name"></div>
 
-      <!-- ПОЛОЖЕНИЕ КАРТЫ (ТОЛЬКО ДЛЯ ПЕРЕВЁРНУТОЙ) -->
       <div
         id="cardPosition"
         class="card-position hidden"
@@ -42,14 +38,11 @@
         Перевёрнутое положение
       </div>
 
-      <!-- ТРАКТОВКА -->
       <div id="cardMeaning" class="card-meaning"></div>
-
     </div>
 
   </div>
 
-  <!-- ОСНОВНОЙ JS -->
   <script src="app.js"></script>
 </body>
 </html>
