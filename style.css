@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #0f1114;
+  color: #e6e6e6;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+button {
+  padding: 14px 24px;
+  font-size: 16px;
+  background: #1c1f26;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+button:active {
+  opacity: 0.85;
+}
+
+.result {
+  max-width: 320px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.hidden {
+  display: none;
+}
+
+.card-name {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.card-meaning {
+  font-size: 15px;
+  opacity: 0.9;
+}
