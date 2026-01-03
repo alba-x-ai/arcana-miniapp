@@ -1,27 +1,60 @@
+// Инициализация Telegram Mini App
 const tg = window.Telegram.WebApp;
 tg.ready();
 
-const button = document.getElementById("cardButton");
-const result = document.getElementById("result");
-const cardName = document.getElementById("cardName");
-const cardMeaning = document.getElementById("cardMeaning");
+// Получаем user_id Telegram
+const userId = tg.initDataUnsafe?.user?.id;
 
-let cards = [];
+if (!userId) {
+  alert("Не удалось получить user_id");
+  throw new Error("No Telegram user_id");
+}
 
-fetch("cards.json")
-  .then(response => response.json())
-  .then(data => {
-    cards = data;
-  });
+// URL backend
+const API_URL = "https://ТВОЙ_СЕРВЕР/card-of-the-day";
 
-button.addEventListener("click", () => {
-  if (!cards.length) return;
+// DOM элементы
+const cardButton = document.getElementById("cardButton");
+const cardImage = document.getElementById("cardImage");
 
-  const randomIndex = Math.floor(Math.random() * cards.length);
-  const card = cards[randomIndex];
+// Основная функция — карта дня
+async function getCardOfTheDay() {
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        user_id: userId
+      })
+    });
 
-  cardName.textContent = card.name;
-  cardMeaning.textContent = card.meaning;
+    if (!response.ok) {
+      throw new Error("Server error");
+    }
 
-  result.classList.remove("hidden");
+    const data = await response.json();
+
+    if (data.card === undefined) {
+      throw new Error("Card not returned");
+    }
+
+    showCard(data.card);
+
+  } catch (err) {
+    console.error(err);
+    alert("Ошибка получения карты дня");
+  }
+}
+
+// Отображение карты
+function showCard(cardIndex) {
+  cardImage.src = `./cards/${cardIndex}.jpg`;
+  cardImage.style.display = "block";
+}
+
+// Обработчик кнопки
+cardButton.addEventListener("click", () => {
+  getCardOfTheDay();
 });
