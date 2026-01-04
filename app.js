@@ -37,96 +37,30 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => cardsData = data)
     .catch(() => alert("Ошибка загрузки cards.json"));
 
-  /* ---------- DAY TEXTS (ALL 22) ---------- */
+  /* ---------- DAY TEXTS (22) ---------- */
   const DAY_TEXTS = {
-    0: {
-      ru: "День открывает новое пространство. Можно позволить себе идти без чёткого плана.",
-      en: "The day opens a new space. You may move without a clear plan."
-    },
-    1: {
-      ru: "Сегодня особенно заметно, как намерение формирует происходящее.",
-      en: "Today highlights how intention shapes reality."
-    },
-    2: {
-      ru: "День располагает к тишине и вниманию к внутренним ощущениям.",
-      en: "The day invites silence and attention to inner signals."
-    },
-    3: {
-      ru: "Сегодняшний день поддерживает заботу, рост и мягкое внимание.",
-      en: "The day supports nurturing, growth, and gentle attention."
-    },
-    4: {
-      ru: "Структура и границы сегодня дают ощущение устойчивости.",
-      en: "Structure and boundaries bring a sense of stability today."
-    },
-    5: {
-      ru: "День может напомнить о ценностях и внутренних ориентирах.",
-      en: "The day may remind you of values and inner guidance."
-    },
-    6: {
-      ru: "Сегодня важен внутренний выбор и согласие с собой.",
-      en: "Today emphasizes inner choice and alignment."
-    },
-    7: {
-      ru: "День несёт ощущение движения и направления.",
-      en: "The day carries a sense of movement and direction."
-    },
-    8: {
-      ru: "Мягкая внутренняя сила сегодня важнее внешнего давления.",
-      en: "Gentle inner strength matters more than force today."
-    },
-    9: {
-      ru: "День подходит для уединения и внутренней настройки.",
-      en: "The day is suited for solitude and inner alignment."
-    },
-    10: {
-      ru: "Сегодня могут проявиться повороты и смена ритма.",
-      en: "Shifts and changes in rhythm may appear today."
-    },
-    11: {
-      ru: "День требует честного взгляда и внутреннего баланса.",
-      en: "The day calls for honesty and inner balance."
-    },
-    12: {
-      ru: "Сегодня полезно сделать паузу и изменить точку зрения.",
-      en: "A pause and a shift in perspective may be helpful today."
-    },
-    13: {
-      ru: "День связан с завершением и освобождением пространства.",
-      en: "The day relates to endings and clearing space."
-    },
-    14: {
-      ru: "Сегодня важно чувство меры и спокойное соединение противоположностей.",
-      en: "Balance and gentle integration are key today."
-    },
-    15: {
-      ru: "День может подсветить привязанности и скрытые напряжения.",
-      en: "The day may highlight attachments and hidden tensions."
-    },
-    16: {
-      ru: "Сегодня возможен внутренний или внешний слом привычных конструкций.",
-      en: "A disruption of familiar structures may occur today."
-    },
-    17: {
-      ru: "День несёт мягкий свет надежды и восстановления.",
-      en: "The day carries a gentle light of hope and renewal."
-    },
-    18: {
-      ru: "Сегодня важно бережно относиться к неясным чувствам.",
-      en: "Handle unclear feelings gently today."
-    },
-    19: {
-      ru: "День наполнен ясностью и жизненной энергией.",
-      en: "The day is filled with clarity and vitality."
-    },
-    20: {
-      ru: "Сегодня может прийти осознание или внутренний зов.",
-      en: "An inner call or realization may arise today."
-    },
-    21: {
-      ru: "День ощущается как завершённый и целостный.",
-      en: "The day feels complete and whole."
-    }
+    0:{ru:"День открывает новое пространство. Можно идти без чёткого плана.",en:"The day opens new space. You may move without a clear plan."},
+    1:{ru:"Сегодня намерение особенно влияет на происходящее.",en:"Today intention strongly shapes events."},
+    2:{ru:"День располагает к тишине и вниманию к внутренним ощущениям.",en:"The day invites silence and inner listening."},
+    3:{ru:"Сегодня поддерживается забота и мягкий рост.",en:"The day supports nurturing and gentle growth."},
+    4:{ru:"Структура и границы сегодня дают устойчивость.",en:"Structure and boundaries bring stability today."},
+    5:{ru:"День напоминает о ценностях и внутренних ориентирах.",en:"The day reminds you of values and inner guidance."},
+    6:{ru:"Сегодня важен внутренний выбор и согласие с собой.",en:"Inner choice and alignment matter today."},
+    7:{ru:"День несёт движение и направление.",en:"The day carries movement and direction."},
+    8:{ru:"Мягкая сила сегодня важнее давления.",en:"Gentle strength outweighs force today."},
+    9:{ru:"Подходит время для уединения и внутренней настройки.",en:"A good day for solitude and inner alignment."},
+    10:{ru:"Сегодня возможны повороты и смена ритма.",en:"Shifts and changes in rhythm may appear."},
+    11:{ru:"День требует честности и внутреннего баланса.",en:"Honesty and balance are required today."},
+    12:{ru:"Полезна пауза и смена взгляда.",en:"A pause and new perspective are helpful."},
+    13:{ru:"День связан с завершением и освобождением.",en:"The day is about endings and release."},
+    14:{ru:"Сегодня важны мера и гармония.",en:"Moderation and harmony matter today."},
+    15:{ru:"Могут проявиться скрытые привязанности.",en:"Hidden attachments may surface today."},
+    16:{ru:"Возможен слом привычных конструкций.",en:"Familiar structures may break down."},
+    17:{ru:"День несёт тихую надежду и восстановление.",en:"A gentle sense of hope and renewal appears."},
+    18:{ru:"Важно бережно относиться к неясным чувствам.",en:"Handle unclear emotions gently."},
+    19:{ru:"День наполнен ясностью и жизненной энергией.",en:"The day is filled with clarity and vitality."},
+    20:{ru:"Может прийти внутренний зов или осознание.",en:"An inner call or realization may arise."},
+    21:{ru:"День ощущается целостным и завершённым.",en:"The day feels whole and complete."}
   };
 
   /* ---------- CARD OF THE DAY ---------- */
@@ -135,7 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: user.id })
+        body: JSON.stringify({
+          user_id: user.id,
+          timezoneOffset: new Date().getTimezoneOffset()
+        })
       });
 
       const data = await response.json();
@@ -153,27 +90,24 @@ document.addEventListener("DOMContentLoaded", () => {
     showQuestionCard(cardIndex, reversed);
   }
 
-  /* ---------- RENDER: DAY ---------- */
+  /* ---------- RENDER DAY ---------- */
   function showDayCard(cardIndex, reversed) {
     const card = cardsData[cardIndex];
     if (!card) return;
 
     renderImage(cardIndex, reversed);
-
     cardName.textContent = card.name[LANG];
     cardMeaning.textContent = DAY_TEXTS[cardIndex][LANG];
-
     cardPosition.classList.add("hidden");
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- RENDER: QUESTION ---------- */
+  /* ---------- RENDER QUESTION ---------- */
   function showQuestionCard(cardIndex, reversed) {
     const card = cardsData[cardIndex];
     if (!card) return;
 
     renderImage(cardIndex, reversed);
-
     cardName.textContent = card.name[LANG];
     cardMeaning.textContent = reversed
       ? card.reversed[LANG]
@@ -187,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderImage(cardIndex, reversed) {
     const fileIndex = String(cardIndex).padStart(2, "0");
     const baseUrl = new URL(document.baseURI);
-
     cardImage.src =
       `${baseUrl.origin}${baseUrl.pathname}images/cards/${fileIndex}.png`;
 
