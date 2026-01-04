@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Arcana</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Telegram WebApp SDK -->
+  <!-- Telegram WebApp -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- CSS (ВАЖНО: cache-bust, чтобы Telegram точно обновил стиль) -->
-  <link rel="stylesheet" href="style.css?v=4" />
+  <!-- CSS (cache bust!) -->
+  <link rel="stylesheet" href="style.css?v=9" />
 </head>
 <body>
 
@@ -17,41 +17,20 @@
 
     <h1 class="title">Arcana</h1>
 
-    <!-- КНОПКИ -->
     <div class="buttons">
       <button id="cardButton">Card of the Day</button>
       <button id="questionButton">Card for a Question</button>
     </div>
 
-    <!-- КАРТИНКА КАРТЫ -->
-    <img
-      id="cardImage"
-      class="card-image hidden"
-      alt="Tarot card"
-    />
-
-    <!-- РЕЗУЛЬТАТ -->
     <div id="result" class="result hidden">
-
-      <!-- НАЗВАНИЕ КАРТЫ -->
+      <img id="cardImage" class="card-image hidden" />
       <div id="cardName" class="card-name"></div>
-
-      <!-- ПОЛОЖЕНИЕ (только если перевёрнута) -->
-      <div
-        id="cardPosition"
-        class="card-position hidden"
-      >
-        Перевёрнутое положение
-      </div>
-
-      <!-- ТРАКТОВКА -->
+      <div id="cardPosition" class="card-position hidden">Reversed</div>
       <div id="cardMeaning" class="card-meaning"></div>
-
     </div>
 
   </div>
 
-  <!-- ОСНОВНОЙ JS -->
-  <script src="app.js"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>
