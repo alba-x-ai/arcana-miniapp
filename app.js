@@ -14,6 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ? user.language_code
     : "ru";
 
+  const POSITION_TEXT = {
+    ru: "Перевёрнутая",
+    en: "Reversed"
+  };
+
   const API_URL = "https://arcana-1.onrender.com/card-of-the-day";
 
   const cardButton     = document.getElementById("cardButton");
@@ -80,8 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = cardsData[cardIndex];
     if (!card) return;
 
-    document.body.classList.add("show-card");
-
     renderImage(cardIndex, reversed);
     cardName.textContent = card.name[LANG];
     cardMeaning.textContent = DAY_TEXTS[cardIndex][LANG];
@@ -94,15 +97,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = cardsData[cardIndex];
     if (!card) return;
 
-    document.body.classList.add("show-card");
-
     renderImage(cardIndex, reversed);
     cardName.textContent = card.name[LANG];
     cardMeaning.textContent = reversed
       ? card.reversed[LANG]
       : card.upright[LANG];
 
-    cardPosition.classList.toggle("hidden", !reversed);
+    if (reversed) {
+      cardPosition.textContent = POSITION_TEXT[LANG];
+      cardPosition.classList.remove("hidden");
+    } else {
+      cardPosition.classList.add("hidden");
+    }
+
     resultBlock.classList.remove("hidden");
   }
 
