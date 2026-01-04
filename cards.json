@@ -1,112 +1,265 @@
 {
   "0": {
-    "name": "The Fool",
-    "upright": "Начало, доверие жизни, шаг в неизвестное, открытость опыту.",
-    "reversed": "Страх нового, инфантильность, избегание ответственности."
+    "name": { "ru": "Шут", "en": "The Fool" },
+    "upright": {
+      "ru": "Начало пути, открытость новому опыту, доверие жизни.",
+      "en": "A new beginning, openness to experience, trust in life."
+    },
+    "reversed": {
+      "ru": "Безрассудство, отсутствие направления, наивность.",
+      "en": "Recklessness, lack of direction, immaturity."
+    }
   },
+
   "1": {
-    "name": "The Magician",
-    "upright": "Воля, концентрация, способность влиять на реальность.",
-    "reversed": "Манипуляция, утечка энергии, рассеянность."
+    "name": { "ru": "Маг", "en": "The Magician" },
+    "upright": {
+      "ru": "Сила намерения, концентрация, способность влиять на реальность.",
+      "en": "Focused intention, personal power, ability to manifest."
+    },
+    "reversed": {
+      "ru": "Манипуляции, рассеянность, утрата контроля.",
+      "en": "Manipulation, lack of focus, misuse of power."
+    }
   },
+
   "2": {
-    "name": "The High Priestess",
-    "upright": "Интуиция, внутреннее знание, тишина и наблюдение.",
-    "reversed": "Игнорирование интуиции, внутренний шум, самообман."
+    "name": { "ru": "Верховная Жрица", "en": "The High Priestess" },
+    "upright": {
+      "ru": "Интуиция, внутреннее знание, скрытые процессы.",
+      "en": "Intuition, inner knowledge, hidden influences."
+    },
+    "reversed": {
+      "ru": "Игнорирование интуиции, закрытость, путаница.",
+      "en": "Ignoring intuition, secrecy, confusion."
+    }
   },
+
   "3": {
-    "name": "The Empress",
-    "upright": "Плодородие, забота, изобилие, принятие.",
-    "reversed": "Истощение, зависимость от одобрения, утрата ресурса."
+    "name": { "ru": "Императрица", "en": "The Empress" },
+    "upright": {
+      "ru": "Рост, изобилие, забота, творческая энергия.",
+      "en": "Growth, abundance, nurturing, creative energy."
+    },
+    "reversed": {
+      "ru": "Истощение, зависимость, утрата ресурса.",
+      "en": "Depletion, dependence, creative block."
+    }
   },
+
   "4": {
-    "name": "The Emperor",
-    "upright": "Структура, ответственность, устойчивость, контроль.",
-    "reversed": "Жёсткость, страх потери контроля, тирания."
+    "name": { "ru": "Император", "en": "The Emperor" },
+    "upright": {
+      "ru": "Структура, ответственность, опора, порядок.",
+      "en": "Structure, authority, stability, control."
+    },
+    "reversed": {
+      "ru": "Жёсткость, контроль любой ценой, слабая опора.",
+      "en": "Rigidity, domination, unstable authority."
+    }
   },
+
   "5": {
-    "name": "The Hierophant",
-    "upright": "Традиции, знание, наставничество, смысл.",
-    "reversed": "Слепое следование правилам, внутренний конфликт с системой."
+    "name": { "ru": "Иерофант", "en": "The Hierophant" },
+    "upright": {
+      "ru": "Традиции, обучение, духовные ценности.",
+      "en": "Tradition, learning, spiritual guidance."
+    },
+    "reversed": {
+      "ru": "Слепое следование, внутренний конфликт с системой.",
+      "en": "Blind conformity, inner rebellion."
+    }
   },
+
   "6": {
-    "name": "The Lovers",
-    "upright": "Выбор сердцем, союз, согласие ценностей.",
-    "reversed": "Раздвоенность, неверный выбор, конфликт желаний."
+    "name": { "ru": "Влюблённые", "en": "The Lovers" },
+    "upright": {
+      "ru": "Выбор, союз, согласие с собой.",
+      "en": "Choice, union, alignment with values."
+    },
+    "reversed": {
+      "ru": "Разрыв, внутренний конфликт, неверный выбор.",
+      "en": "Disharmony, separation, misalignment."
+    }
   },
+
   "7": {
-    "name": "The Chariot",
-    "upright": "Движение вперёд, воля, управление направлением.",
-    "reversed": "Потеря контроля, внутренний разлад, пробуксовка."
+    "name": { "ru": "Колесница", "en": "The Chariot" },
+    "upright": {
+      "ru": "Движение вперёд, воля, преодоление.",
+      "en": "Forward movement, determination, victory."
+    },
+    "reversed": {
+      "ru": "Потеря контроля, сопротивление, застой.",
+      "en": "Loss of control, resistance, stagnation."
+    }
   },
+
   "8": {
-    "name": "Strength",
-    "upright": "Внутренняя сила, мягкость, контроль над импульсами.",
-    "reversed": "Подавленные эмоции, слабость, утрата уверенности."
+    "name": { "ru": "Сила", "en": "Strength" },
+    "upright": {
+      "ru": "Внутренняя устойчивость, мягкая сила, терпение.",
+      "en": "Inner strength, calm confidence, patience."
+    },
+    "reversed": {
+      "ru": "Сомнение в себе, подавленные эмоции.",
+      "en": "Self-doubt, emotional suppression."
+    }
   },
+
   "9": {
-    "name": "The Hermit",
-    "upright": "Уединение, поиск истины, внутренняя работа.",
-    "reversed": "Изоляция, бегство от себя, страх тишины."
+    "name": { "ru": "Отшельник", "en": "The Hermit" },
+    "upright": {
+      "ru": "Уединение, поиск истины, внутренний путь.",
+      "en": "Solitude, introspection, inner guidance."
+    },
+    "reversed": {
+      "ru": "Изоляция, уход от себя, потеря смысла.",
+      "en": "Isolation, withdrawal, loss of direction."
+    }
   },
+
   "10": {
-    "name": "Wheel of Fortune",
-    "upright": "Циклы, перемены, поворот судьбы.",
-    "reversed": "Сопротивление изменениям, застревание."
+    "name": { "ru": "Колесо Фортуны", "en": "Wheel of Fortune" },
+    "upright": {
+      "ru": "Перемены, поворот судьбы, циклы.",
+      "en": "Change, destiny, life cycles."
+    },
+    "reversed": {
+      "ru": "Сопротивление переменам, повторение сценариев.",
+      "en": "Resistance to change, recurring patterns."
+    }
   },
+
   "11": {
-    "name": "Justice",
-    "upright": "Баланс, честность, ответственность за выбор.",
-    "reversed": "Несправедливость, самооправдание, искажение истины."
+    "name": { "ru": "Справедливость", "en": "Justice" },
+    "upright": {
+      "ru": "Честность, баланс, ответственность.",
+      "en": "Fairness, balance, accountability."
+    },
+    "reversed": {
+      "ru": "Несправедливость, самообман, искажение фактов.",
+      "en": "Dishonesty, imbalance, denial."
+    }
   },
+
   "12": {
-    "name": "The Hanged Man",
-    "upright": "Пауза, смена взгляда, добровольная жертва.",
-    "reversed": "Застревание, бессмысленное ожидание, сопротивление."
+    "name": { "ru": "Повешенный", "en": "The Hanged Man" },
+    "upright": {
+      "ru": "Пауза, смена взгляда, принятие.",
+      "en": "Pause, new perspective, surrender."
+    },
+    "reversed": {
+      "ru": "Застревание, сопротивление, жертва без смысла.",
+      "en": "Stagnation, resistance, pointless sacrifice."
+    }
   },
+
   "13": {
-    "name": "Death",
-    "upright": "Завершение, трансформация, освобождение.",
-    "reversed": "Страх конца, цепляние за прошлое."
+    "name": { "ru": "Смерть", "en": "Death" },
+    "upright": {
+      "ru": "Завершение, трансформация, освобождение.",
+      "en": "Endings, transformation, release."
+    },
+    "reversed": {
+      "ru": "Страх перемен, застревание в прошлом.",
+      "en": "Fear of change, clinging to the past."
+    }
   },
+
   "14": {
-    "name": "Temperance",
-    "upright": "Гармония, умеренность, интеграция.",
-    "reversed": "Дисбаланс, крайности, утрата меры."
+    "name": { "ru": "Умеренность", "en": "Temperance" },
+    "upright": {
+      "ru": "Баланс, гармония, мягкое соединение.",
+      "en": "Balance, harmony, gentle integration."
+    },
+    "reversed": {
+      "ru": "Дисбаланс, крайности, утрата меры.",
+      "en": "Imbalance, excess, lack of moderation."
+    }
   },
+
   "15": {
-    "name": "The Devil",
-    "upright": "Привязанности, искушения, материальные цепи.",
-    "reversed": "Освобождение, осознание зависимости."
+    "name": { "ru": "Дьявол", "en": "The Devil" },
+    "upright": {
+      "ru": "Зависимости, привязанности, иллюзии.",
+      "en": "Attachment, addiction, illusion."
+    },
+    "reversed": {
+      "ru": "Освобождение, осознание ограничений.",
+      "en": "Release, awareness, breaking free."
+    }
   },
+
   "16": {
-    "name": "The Tower",
-    "upright": "Резкий слом, разрушение иллюзий, правда.",
-    "reversed": "Отложенный кризис, сопротивление неизбежному."
+    "name": { "ru": "Башня", "en": "The Tower" },
+    "upright": {
+      "ru": "Резкий слом, разрушение иллюзий.",
+      "en": "Sudden change, collapse of false structures."
+    },
+    "reversed": {
+      "ru": "Отсроченный кризис, внутренний разлом.",
+      "en": "Delayed upheaval, inner breakdown."
+    }
   },
+
   "17": {
-    "name": "The Star",
-    "upright": "Надежда, исцеление, свет после тьмы.",
-    "reversed": "Потеря веры, разочарование, истощение."
+    "name": { "ru": "Звезда", "en": "The Star" },
+    "upright": {
+      "ru": "Надежда, исцеление, свет впереди.",
+      "en": "Hope, healing, renewed faith."
+    },
+    "reversed": {
+      "ru": "Утрата веры, сомнение, истощение.",
+      "en": "Loss of faith, doubt, discouragement."
+    }
   },
+
   "18": {
-    "name": "The Moon",
-    "upright": "Неясность, страхи, подсознание.",
-    "reversed": "Прояснение, выход из иллюзий."
+    "name": { "ru": "Луна", "en": "The Moon" },
+    "upright": {
+      "ru": "Неясность, страхи, глубины подсознания.",
+      "en": "Uncertainty, fears, subconscious influences."
+    },
+    "reversed": {
+      "ru": "Прояснение, выход из иллюзий.",
+      "en": "Clarity, release from illusion."
+    }
   },
+
   "19": {
-    "name": "The Sun",
-    "upright": "Радость, ясность, жизненная энергия.",
-    "reversed": "Затмение радости, выгорание."
+    "name": { "ru": "Солнце", "en": "The Sun" },
+    "upright": {
+      "ru": "Ясность, радость, жизненная энергия.",
+      "en": "Joy, clarity, vitality."
+    },
+    "reversed": {
+      "ru": "Затмение радости, внутренние блоки.",
+      "en": "Blocked joy, inner shadows."
+    }
   },
+
   "20": {
-    "name": "Judgement",
-    "upright": "Пробуждение, призыв, осознание.",
-    "reversed": "Отказ слышать зов, застревание в прошлом."
+    "name": { "ru": "Суд", "en": "Judgement" },
+    "upright": {
+      "ru": "Пробуждение, осознание, важный зов.",
+      "en": "Awakening, realization, a higher call."
+    },
+    "reversed": {
+      "ru": "Избегание ответственности, внутренний застой.",
+      "en": "Avoidance, self-doubt, stagnation."
+    }
   },
+
   "21": {
-    "name": "The World",
-    "upright": "Завершённость, целостность, интеграция опыта.",
-    "reversed": "Незавершённость, ощущение незакрытого круга."
+    "name": { "ru": "Мир", "en": "The World" },
+    "upright": {
+      "ru": "Завершённость, целостность, гармония.",
+      "en": "Completion, wholeness, fulfillment."
+    },
+    "reversed": {
+      "ru": "Незавершённость, ощущение нехватки.",
+      "en": "Incompletion, lack of closure."
+    }
   }
 }
