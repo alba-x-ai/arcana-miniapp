@@ -9,11 +9,25 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  /* ---------- LANGUAGE ---------- */
   const SUPPORTED_LANGS = ["ru", "en"];
   const LANG = SUPPORTED_LANGS.includes(user.language_code)
     ? user.language_code
     : "ru";
 
+  /* ---------- BUTTON TEXTS ---------- */
+  const BUTTON_TEXTS = {
+    ru: {
+      day: "Карта дня",
+      question: "Карта вопроса"
+    },
+    en: {
+      day: "Card of the Day",
+      question: "Card for a Question"
+    }
+  };
+
+  /* ---------- POSITION TEXT ---------- */
   const POSITION_TEXT = {
     ru: "Перевёрнутая",
     en: "Reversed"
@@ -21,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const API_URL = "https://arcana-1.onrender.com/card-of-the-day";
 
+  /* ---------- DOM ---------- */
   const cardButton     = document.getElementById("cardButton");
   const questionButton = document.getElementById("questionButton");
 
@@ -30,6 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardPosition = document.getElementById("cardPosition");
   const resultBlock  = document.getElementById("result");
 
+  /* ---------- APPLY BUTTON TEXTS ---------- */
+  cardButton.textContent     = BUTTON_TEXTS[LANG].day;
+  questionButton.textContent = BUTTON_TEXTS[LANG].question;
+
+  /* ---------- DATA ---------- */
   let cardsData = {};
 
   fetch("./cards.json")
