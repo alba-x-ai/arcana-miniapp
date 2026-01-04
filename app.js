@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ---------- Telegram ---------- */
   const tg = window.Telegram.WebApp;
   tg.ready();
 
@@ -10,16 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  /* ---------- Language ---------- */
   const SUPPORTED_LANGS = ["ru", "en"];
   const LANG = SUPPORTED_LANGS.includes(user.language_code)
     ? user.language_code
     : "ru";
 
-  /* ---------- Backend ---------- */
   const API_URL = "https://arcana-1.onrender.com/card-of-the-day";
 
-  /* ---------- DOM ---------- */
   const cardButton     = document.getElementById("cardButton");
   const questionButton = document.getElementById("questionButton");
 
@@ -29,15 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardPosition = document.getElementById("cardPosition");
   const resultBlock  = document.getElementById("result");
 
-  /* ---------- DATA ---------- */
   let cardsData = {};
 
   fetch("./cards.json")
     .then(res => res.json())
-    .then(data => cardsData = data)
-    .catch(() => alert("Ошибка загрузки cards.json"));
+    .then(data => cardsData = data);
 
-  /* ---------- DAY TEXTS ---------- */
   const DAY_TEXTS = {
     0:{ru:"День открывает новое пространство. Можно идти без чёткого плана.",en:"The day opens new space. You may move without a clear plan."},
     1:{ru:"Сегодня намерение особенно влияет на происходящее.",en:"Today intention strongly shapes events."},
@@ -63,85 +56,47 @@ document.addEventListener("DOMContentLoaded", () => {
     21:{ru:"День ощущается целостным и завершённым.",en:"The day feels whole and complete."}
   };
 
-  /* ---------- DAY COMMENTS ---------- */
-  const DAY_COMMENTS = {
-    0:{ru:"Сегодня это состояние проявляется скорее внутри, чем внешне.",en:"Today this state is more internal than external."},
-    1:{ru:"Влияние ощущается тоньше и требует внутренней собранности.",en:"The influence is subtle and requires inner focus."},
-    2:{ru:"Интуитивные процессы идут глубже и не сразу заметны.",en:"Intuitive processes run deeper and are not immediately visible."},
-    3:{ru:"Забота и рост сегодня направлены внутрь.",en:"Nurturing and growth are directed inward."},
-    4:{ru:"Опора формируется изнутри, а не через внешние структуры.",en:"Stability forms internally rather than externally."},
-    5:{ru:"Ценности проявляются через личное переживание.",en:"Values are experienced personally."},
-    6:{ru:"Выбор больше ощущается, чем проявляется.",en:"The choice is felt more than acted upon."},
-    7:{ru:"Движение есть, но оно не всегда заметно.",en:"Movement exists but is not always visible."},
-    8:{ru:"Внутренняя сила работает тихо.",en:"Inner strength works quietly."},
-    9:{ru:"Уединение носит внутренний характер.",en:"Solitude is internal rather than physical."},
-    10:{ru:"Перемены зреют внутри.",en:"Changes are forming internally."},
-    11:{ru:"Баланс начинается с честности с собой.",en:"Balance begins with honesty toward yourself."},
-    12:{ru:"Пауза ощущается глубже, чем кажется.",en:"The pause is deeper than it seems."},
-    13:{ru:"Завершение происходит на внутреннем уровне.",en:"Completion is happening internally."},
-    14:{ru:"Гармония ищется внутри.",en:"Harmony is sought internally."},
-    15:{ru:"Осознание ограничений приходит постепенно.",en:"Awareness of limitations comes gradually."},
-    16:{ru:"Изменения начинаются изнутри.",en:"Change begins internally."},
-    17:{ru:"Надежда присутствует без ярких сигналов.",en:"Hope is present without dramatic signs."},
-    18:{ru:"Неясность связана с внутренними процессами.",en:"Uncertainty relates to inner processes."},
-    19:{ru:"Радость проявляется сдержанно.",en:"Joy is expressed subtly."},
-    20:{ru:"Осознание требует времени.",en:"Realization takes time."},
-    21:{ru:"Целостность ощущается изнутри.",en:"Wholeness is felt from within."}
-  };
-
-  /* ---------- CARD OF THE DAY ---------- */
   async function getCardOfTheDay() {
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user_id: user.id,
-          timezoneOffset: new Date().getTimezoneOffset()
-        })
-      });
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: user.id,
+        timezoneOffset: new Date().getTimezoneOffset()
+      })
+    });
 
-      const data = await response.json();
-      showDayCard(data.card, data.reversed);
-
-    } catch {
-      alert("Ошибка получения карты дня");
-    }
+    const data = await response.json();
+    showDayCard(data.card, data.reversed);
   }
 
-  /* ---------- QUESTION CARD ---------- */
   function getQuestionCard() {
     const cardIndex = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
     showQuestionCard(cardIndex, reversed);
   }
 
-  /* ---------- RENDER DAY ---------- */
   function showDayCard(cardIndex, reversed) {
     const card = cardsData[cardIndex];
     if (!card) return;
 
+    document.body.classList.add("show-card");
+
     renderImage(cardIndex, reversed);
-
-    let text = DAY_TEXTS[cardIndex][LANG];
-    if (reversed && DAY_COMMENTS[cardIndex]) {
-      text += "\n\n" + DAY_COMMENTS[cardIndex][LANG];
-    }
-
     cardName.textContent = card.name[LANG];
-    cardMeaning.textContent = text;
+    cardMeaning.textContent = DAY_TEXTS[cardIndex][LANG];
 
     cardPosition.classList.add("hidden");
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- RENDER QUESTION ---------- */
   function showQuestionCard(cardIndex, reversed) {
     const card = cardsData[cardIndex];
     if (!card) return;
 
-    renderImage(cardIndex, reversed);
+    document.body.classList.add("show-card");
 
+    renderImage(cardIndex, reversed);
     cardName.textContent = card.name[LANG];
     cardMeaning.textContent = reversed
       ? card.reversed[LANG]
@@ -151,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- IMAGE ---------- */
   function renderImage(cardIndex, reversed) {
     const fileIndex = String(cardIndex).padStart(2, "0");
     const baseUrl = new URL(document.baseURI);
@@ -163,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
   }
 
-  /* ---------- EVENTS ---------- */
   cardButton.addEventListener("click", getCardOfTheDay);
   questionButton.addEventListener("click", getQuestionCard);
 
