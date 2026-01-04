@@ -8,7 +8,7 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: #e6e6e6;
 
-  /* ФОНОВАЯ КАРТИНКА */
+  /* ФОН */
   background-image: url("./images/background/bg.png");
   background-size: cover;
   background-position: center;
@@ -16,15 +16,13 @@ body {
   background-attachment: fixed;
 }
 
-/* МЯГКАЯ ВУАЛЬ ПОВЕРХ ФОНА */
+/* МЯГКАЯ ВУАЛЬ */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-
-  /* не чёрная, опаловая */
   background: rgba(240, 242, 245, 0.45);
 }
 
@@ -97,7 +95,7 @@ button:active {
 .result {
   max-width: 320px;
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .card-image {
@@ -123,6 +121,7 @@ button:active {
 .card-meaning {
   font-size: 15px;
   opacity: 0.9;
+  white-space: pre-line; /* важно для комментариев */
 }
 
 .hidden {
