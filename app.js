@@ -37,21 +37,96 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => cardsData = data)
     .catch(() => alert("Ошибка загрузки cards.json"));
 
-  /* ---------- TEXTS FOR CARD OF THE DAY ---------- */
+  /* ---------- DAY TEXTS (ALL 22) ---------- */
   const DAY_TEXTS = {
     0: {
-      ru: "Сегодня важно позволить себе быть в движении, не требуя от себя чёткого плана.",
-      en: "Today invites you to move forward without demanding a clear plan."
+      ru: "День открывает новое пространство. Можно позволить себе идти без чёткого плана.",
+      en: "The day opens a new space. You may move without a clear plan."
+    },
+    1: {
+      ru: "Сегодня особенно заметно, как намерение формирует происходящее.",
+      en: "Today highlights how intention shapes reality."
+    },
+    2: {
+      ru: "День располагает к тишине и вниманию к внутренним ощущениям.",
+      en: "The day invites silence and attention to inner signals."
+    },
+    3: {
+      ru: "Сегодняшний день поддерживает заботу, рост и мягкое внимание.",
+      en: "The day supports nurturing, growth, and gentle attention."
+    },
+    4: {
+      ru: "Структура и границы сегодня дают ощущение устойчивости.",
+      en: "Structure and boundaries bring a sense of stability today."
+    },
+    5: {
+      ru: "День может напомнить о ценностях и внутренних ориентирах.",
+      en: "The day may remind you of values and inner guidance."
+    },
+    6: {
+      ru: "Сегодня важен внутренний выбор и согласие с собой.",
+      en: "Today emphasizes inner choice and alignment."
+    },
+    7: {
+      ru: "День несёт ощущение движения и направления.",
+      en: "The day carries a sense of movement and direction."
+    },
+    8: {
+      ru: "Мягкая внутренняя сила сегодня важнее внешнего давления.",
+      en: "Gentle inner strength matters more than force today."
     },
     9: {
-      ru: "День располагает к тишине и внутренней настройке. Не всё требует немедленного действия.",
-      en: "The day supports silence and inner alignment. Not everything needs immediate action."
+      ru: "День подходит для уединения и внутренней настройки.",
+      en: "The day is suited for solitude and inner alignment."
+    },
+    10: {
+      ru: "Сегодня могут проявиться повороты и смена ритма.",
+      en: "Shifts and changes in rhythm may appear today."
+    },
+    11: {
+      ru: "День требует честного взгляда и внутреннего баланса.",
+      en: "The day calls for honesty and inner balance."
+    },
+    12: {
+      ru: "Сегодня полезно сделать паузу и изменить точку зрения.",
+      en: "A pause and a shift in perspective may be helpful today."
     },
     13: {
-      ru: "Сегодня завершается один внутренний цикл, освобождая место для нового.",
-      en: "Today marks the end of an inner cycle, making space for something new."
+      ru: "День связан с завершением и освобождением пространства.",
+      en: "The day relates to endings and clearing space."
+    },
+    14: {
+      ru: "Сегодня важно чувство меры и спокойное соединение противоположностей.",
+      en: "Balance and gentle integration are key today."
+    },
+    15: {
+      ru: "День может подсветить привязанности и скрытые напряжения.",
+      en: "The day may highlight attachments and hidden tensions."
+    },
+    16: {
+      ru: "Сегодня возможен внутренний или внешний слом привычных конструкций.",
+      en: "A disruption of familiar structures may occur today."
+    },
+    17: {
+      ru: "День несёт мягкий свет надежды и восстановления.",
+      en: "The day carries a gentle light of hope and renewal."
+    },
+    18: {
+      ru: "Сегодня важно бережно относиться к неясным чувствам.",
+      en: "Handle unclear feelings gently today."
+    },
+    19: {
+      ru: "День наполнен ясностью и жизненной энергией.",
+      en: "The day is filled with clarity and vitality."
+    },
+    20: {
+      ru: "Сегодня может прийти осознание или внутренний зов.",
+      en: "An inner call or realization may arise today."
+    },
+    21: {
+      ru: "День ощущается как завершённый и целостный.",
+      en: "The day feels complete and whole."
     }
-    // остальные карты можно добавить постепенно
   };
 
   /* ---------- CARD OF THE DAY ---------- */
@@ -86,11 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderImage(cardIndex, reversed);
 
     cardName.textContent = card.name[LANG];
-
-    // берём специальный текст дня, если есть
-    cardMeaning.textContent =
-      DAY_TEXTS[cardIndex]?.[LANG]
-      || card.upright[LANG]; // fallback
+    cardMeaning.textContent = DAY_TEXTS[cardIndex][LANG];
 
     cardPosition.classList.add("hidden");
     resultBlock.classList.remove("hidden");
