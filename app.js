@@ -4,11 +4,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const tg = window.Telegram.WebApp;
   tg.ready();
 
-  const userId = tg.initDataUnsafe?.user?.id;
-  if (!userId) {
-    alert("Не удалось получить user_id");
+  const user = tg.initDataUnsafe?.user;
+  if (!user) {
+    alert("Не удалось получить данные пользователя");
     return;
   }
+
+  /* ---------- LANGUAGE ---------- */
+  const SUPPORTED_LANGS = ["ru", "en"];
+  const LANG = SUPPORTED_LANGS.includes(user.language_code)
+    ? user.language_code
+    : "ru";
 
   /* ---------- Backend ---------- */
   const API_URL = "https://arcana-1.onrender.com/card-of-the-day";
@@ -29,16 +35,23 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("./cards.json")
     .then(res => res.json())
     .then(data => cardsData = data)
-    .catch(err => console.error("cards.json error", err));
+    .catch(err => {
+      console.error("cards.json load error", err);
+      alert("Ошибка загрузки данных карт");
+    });
 
-  /* ---------- CARD OF THE DAY (server) ---------- */
+  /* ---------- Card of the Day (server) ---------- */
   async function getCardOfTheDay() {
     try {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId })
+        body: JSON.stringify({ user_id: user.id })
       });
+
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+      }
 
       const data = await response.json();
       showCard(data.card, data.reversed);
@@ -49,36 +62,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* ---------- CARD FOR QUESTION (local random) ---------- */
+  /* ---------- Card for Question (local random) ---------- */
   function getQuestionCard() {
-    const cardIndex = Math.floor(Math.random() * 22); // 0–21
+    const cardIndex = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
     showCard(cardIndex, reversed);
   }
 
-  /* ---------- SHOW CARD ---------- */
+  /* ---------- Show Card ---------- */
   function showCard(cardIndex, reversed) {
-    const fileIndex = String(cardIndex).padStart(2, "0");
-
-    const baseUrl = new URL(document.baseURI);
-    const imageUrl =
-      `${baseUrl.origin}${baseUrl.pathname}images/cards/${fileIndex}.png`;
-
-    cardImage.src = imageUrl;
-    cardImage.classList.remove("hidden");
-    cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
-
     const card = cardsData[cardIndex];
     if (!card) return;
 
-    cardName.textContent = card.name;
-    cardMeaning.textContent = reversed ? card.reversed : card.upright;
+    // image
+    const fileIndex = String(cardIndex).padStart(2, "0");
+    const baseUrl = new URL(document.baseURI);
+    cardImage.src =
+      `${baseUrl.origin}${baseUrl.pathname}images/cards/${fileIndex}.png`;
+
+    cardImage.classList.remove("hidden");
+    cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
+
+    // text
+    cardName.textContent = card.name[LANG];
+    cardMeaning.textContent = reversed
+      ? card.reversed[LANG]
+      : card.upright[LANG];
 
     cardPosition.classList.toggle("hidden", !reversed);
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- EVENTS ---------- */
+  /* ---------- Events ---------- */
   cardButton.addEventListener("click", getCardOfTheDay);
   questionButton.addEventListener("click", getQuestionCard);
 
