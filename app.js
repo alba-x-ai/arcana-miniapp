@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  /* ---------- LANGUAGE ---------- */
+  /* ---------- Language ---------- */
   const SUPPORTED_LANGS = ["ru", "en"];
   const LANG = SUPPORTED_LANGS.includes(user.language_code)
     ? user.language_code
@@ -29,18 +29,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardPosition = document.getElementById("cardPosition");
   const resultBlock  = document.getElementById("result");
 
-  /* ---------- Data ---------- */
+  /* ---------- DATA ---------- */
   let cardsData = {};
 
   fetch("./cards.json")
     .then(res => res.json())
     .then(data => cardsData = data)
-    .catch(err => {
-      console.error("cards.json load error", err);
-      alert("Ошибка загрузки данных карт");
-    });
+    .catch(() => alert("Ошибка загрузки cards.json"));
 
-  /* ---------- Card of the Day (server) ---------- */
+  /* ---------- TEXTS FOR CARD OF THE DAY ---------- */
+  const DAY_TEXTS = {
+    0: {
+      ru: "Сегодня важно позволить себе быть в движении, не требуя от себя чёткого плана.",
+      en: "Today invites you to move forward without demanding a clear plan."
+    },
+    9: {
+      ru: "День располагает к тишине и внутренней настройке. Не всё требует немедленного действия.",
+      en: "The day supports silence and inner alignment. Not everything needs immediate action."
+    },
+    13: {
+      ru: "Сегодня завершается один внутренний цикл, освобождая место для нового.",
+      en: "Today marks the end of an inner cycle, making space for something new."
+    }
+    // остальные карты можно добавить постепенно
+  };
+
+  /* ---------- CARD OF THE DAY ---------- */
   async function getCardOfTheDay() {
     try {
       const response = await fetch(API_URL, {
@@ -49,41 +63,46 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ user_id: user.id })
       });
 
-      if (!response.ok) {
-        throw new Error("HTTP " + response.status);
-      }
-
       const data = await response.json();
-      showCard(data.card, data.reversed);
+      showDayCard(data.card, data.reversed);
 
-    } catch (err) {
-      console.error(err);
+    } catch {
       alert("Ошибка получения карты дня");
     }
   }
 
-  /* ---------- Card for Question (local random) ---------- */
+  /* ---------- QUESTION CARD ---------- */
   function getQuestionCard() {
     const cardIndex = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
-    showCard(cardIndex, reversed);
+    showQuestionCard(cardIndex, reversed);
   }
 
-  /* ---------- Show Card ---------- */
-  function showCard(cardIndex, reversed) {
+  /* ---------- RENDER: DAY ---------- */
+  function showDayCard(cardIndex, reversed) {
     const card = cardsData[cardIndex];
     if (!card) return;
 
-    // image
-    const fileIndex = String(cardIndex).padStart(2, "0");
-    const baseUrl = new URL(document.baseURI);
-    cardImage.src =
-      `${baseUrl.origin}${baseUrl.pathname}images/cards/${fileIndex}.png`;
+    renderImage(cardIndex, reversed);
 
-    cardImage.classList.remove("hidden");
-    cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
+    cardName.textContent = card.name[LANG];
 
-    // text
+    // берём специальный текст дня, если есть
+    cardMeaning.textContent =
+      DAY_TEXTS[cardIndex]?.[LANG]
+      || card.upright[LANG]; // fallback
+
+    cardPosition.classList.add("hidden");
+    resultBlock.classList.remove("hidden");
+  }
+
+  /* ---------- RENDER: QUESTION ---------- */
+  function showQuestionCard(cardIndex, reversed) {
+    const card = cardsData[cardIndex];
+    if (!card) return;
+
+    renderImage(cardIndex, reversed);
+
     cardName.textContent = card.name[LANG];
     cardMeaning.textContent = reversed
       ? card.reversed[LANG]
@@ -93,7 +112,19 @@ document.addEventListener("DOMContentLoaded", () => {
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- Events ---------- */
+  /* ---------- IMAGE ---------- */
+  function renderImage(cardIndex, reversed) {
+    const fileIndex = String(cardIndex).padStart(2, "0");
+    const baseUrl = new URL(document.baseURI);
+
+    cardImage.src =
+      `${baseUrl.origin}${baseUrl.pathname}images/cards/${fileIndex}.png`;
+
+    cardImage.classList.remove("hidden");
+    cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
+  }
+
+  /* ---------- EVENTS ---------- */
   cardButton.addEventListener("click", getCardOfTheDay);
   questionButton.addEventListener("click", getQuestionCard);
 
