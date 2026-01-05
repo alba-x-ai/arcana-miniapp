@@ -53,11 +53,22 @@ document.addEventListener("DOMContentLoaded", () => {
   questionButton.textContent = BUTTON_TEXTS[LANG].question;
 
   /* ---------- DATA ---------- */
-  let cardsData = {};
+  let cardsData = null;
+
+  // Блокируем кнопки, пока данные не готовы
+  cardButton.disabled = true;
+  questionButton.disabled = true;
 
   fetch("./cards.json")
     .then(res => res.json())
-    .then(data => cardsData = data);
+    .then(data => {
+      cardsData = data;
+      cardButton.disabled = false;
+      questionButton.disabled = false;
+    })
+    .catch(err => {
+      console.error("Failed to load cards.json", err);
+    });
 
   /* ---------- DAY TEXTS ---------- */
   const DAY_TEXTS = {
@@ -87,6 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- CARD OF THE DAY ---------- */
   async function getCardOfTheDay() {
+    if (!cardsData) return;
+
     try {
       const response = await fetch(
         `${API_URL}?user_id=${user.id}`
@@ -107,6 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- QUESTION CARD ---------- */
   function getQuestionCard() {
+    if (!cardsData) return;
+
     const cardIndex = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
     showQuestionCard(cardIndex, reversed);
