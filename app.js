@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ? user.language_code
     : "ru";
 
+  /* ---------- UI TEXTS ---------- */
   const TEXTS = {
     ru: {
       day: "Карта дня",
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     en: {
       day: "Card of the Day",
-      question: "Card for a Question",
+      question: "Question Card",
       reversed: "Reversed"
     }
   };
@@ -52,36 +53,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- POETIC DAY TEXTS ---------- */
   const DAY_TEXTS = {
-    0:{ru:"День словно раскрытая ладонь. В нём больше воздуха, чем формы. Позволь себе идти, не зная маршрута, и замечать знаки по пути.",en:"The day feels like an open palm. More air than form. Allow yourself to move without a route, noticing signs along the way."},
-    1:{ru:"Сегодня слово и намерение имеют вес. То, что ты выбираешь назвать и поддержать вниманием, начинает собираться в реальность.",en:"Today words and intention carry weight. What you name and nourish with attention begins to take shape."},
-    2:{ru:"День говорит шёпотом. Ответы приходят в паузах, во взгляде внутрь, в тонком ощущении правильного момента.",en:"The day speaks in a whisper. Answers arrive in pauses, inward glances, and subtle timing."},
-    3:{ru:"Сегодня важно беречь то, что растёт. Забота и мягкость создают больше силы, чем спешка.",en:"Today calls for protecting what grows. Care and gentleness create more strength than haste."},
-    4:{ru:"День выстраивает опору. Чёткие формы и границы дают ощущение земли под ногами и спокойствие в движении.",en:"The day builds support. Clear forms and boundaries offer ground and calm movement."},
-    5:{ru:"Сегодня можно вспомнить, на что ты опираешься внутри. Традиции, смыслы и личные истины звучат особенно ясно.",en:"Today invites remembering inner foundations. Values and personal truths speak clearly."},
-    6:{ru:"День о выборе, который совершается тихо. Не между «да» и «нет», а между откликом и привычкой.",en:"The day holds a quiet choice. Not between yes and no, but between resonance and habit."},
-    7:{ru:"Сегодня движение уже началось. Не нужно ускорять его — достаточно удерживать направление.",en:"Movement has already begun today. No need to rush; simply hold the direction."},
-    8:{ru:"Мягкость становится силой. Спокойствие удерживает больше, чем напряжение.",en:"Gentleness becomes strength. Calm holds more than tension."},
-    9:{ru:"День приглашает к уединению. В тишине легче услышать себя без искажений.",en:"The day invites solitude. Silence helps hear yourself without distortion."},
-    10:{ru:"Сегодня возможен поворот. Не обязательно понимать его сразу — достаточно позволить колесу провернуться.",en:"A turn may occur today. Understanding can wait; letting the wheel move is enough."},
-    11:{ru:"День требует честного взгляда. Равновесие рождается там, где вещи называются своими именами.",en:"The day asks for honest sight. Balance arises when things are named as they are."},
-    12:{ru:"Сегодня полезно остановиться. В перевёрнутом взгляде скрывается новый смысл.",en:"Today benefits from pause. A reversed view reveals new meaning."},
-    13:{ru:"День о завершении. Не как потере, а как освобождении пространства для дыхания.",en:"The day speaks of endings—not as loss, but as space freed for breath."},
-    14:{ru:"Сегодня важно не крайнее, а соединённое. Мера удерживает гармонию между полюсами.",en:"Today favors integration over extremes. Moderation holds harmony."},
-    15:{ru:"День может подсветить привязанности. Не для осуждения — для осознания.",en:"The day may highlight attachments. Not for judgment, but for awareness."},
-    16:{ru:"Что-то может пошатнуться. Это не разрушение ради боли, а освобождение от хрупкого.",en:"Something may shake. Not destruction for pain, but release from what was fragile."},
-    17:{ru:"День несёт тихий свет. Надежда проявляется без громких жестов.",en:"The day carries quiet light. Hope appears without loud gestures."},
-    18:{ru:"Сегодня туман чувств. Не спеши прояснять — достаточно быть рядом с ними.",en:"Emotions may feel foggy today. No need to clarify; presence is enough."},
-    19:{ru:"День наполнен теплом и ясностью. Можно позволить себе быть видимой.",en:"The day is filled with warmth and clarity. You may allow yourself to be seen."},
-    20:{ru:"Сегодня может прозвучать внутренний зов. Он не торопит — он приглашает.",en:"An inner call may sound today. It does not rush; it invites."},
-    21:{ru:"День ощущается завершённым. Всё складывается в единую линию.",en:"The day feels complete. Everything aligns into a single line."}
+    0:{ru:"День словно раскрытая ладонь. В нём больше воздуха, чем формы. Позволь себе идти, не зная маршрута.",en:"The day feels like an open palm. More air than form. Allow yourself to move without a route."},
+    1:{ru:"Сегодня слово и намерение имеют вес. Внимание формирует происходящее.",en:"Today words and intention carry weight. Attention shapes events."},
+    2:{ru:"День говорит тише обычного. Ответы приходят в паузах.",en:"The day speaks softly. Answers arrive in pauses."},
+    3:{ru:"Береги то, что растёт. Забота сегодня важнее скорости.",en:"Protect what grows. Care matters more than speed today."},
+    4:{ru:"Чёткие границы создают ощущение устойчивости.",en:"Clear boundaries create a sense of stability."},
+    5:{ru:"Ценности становятся точкой опоры.",en:"Values become an inner reference point."},
+    6:{ru:"Выбор совершается внутри, ещё до действия.",en:"The choice is made inwardly before action."},
+    7:{ru:"Движение уже началось. Удерживай направление.",en:"Movement has begun. Hold the direction."},
+    8:{ru:"Мягкость удерживает больше, чем давление.",en:"Gentleness holds more than force."},
+    9:{ru:"Тишина помогает услышать главное.",en:"Silence helps you hear what matters."},
+    10:{ru:"Повороты происходят естественно. Доверься ритму.",en:"Turns happen naturally. Trust the rhythm."},
+    11:{ru:"Честность возвращает равновесие.",en:"Honesty restores balance."},
+    12:{ru:"Пауза открывает иной взгляд.",en:"A pause opens a new perspective."},
+    13:{ru:"Освобождение приходит через завершение.",en:"Release comes through completion."},
+    14:{ru:"Мера соединяет крайности.",en:"Moderation connects extremes."},
+    15:{ru:"Осознание ослабляет привязанности.",en:"Awareness loosens attachments."},
+    16:{ru:"Хрупкое отпадает, освобождая место.",en:"What is fragile falls away, freeing space."},
+    17:{ru:"Надежда проявляется тихо.",en:"Hope appears quietly."},
+    18:{ru:"Неясность — часть пути.",en:"Uncertainty is part of the path."},
+    19:{ru:"Тепло и ясность доступны.",en:"Warmth and clarity are available."},
+    20:{ru:"Внутренний зов становится слышимым.",en:"An inner call becomes audible."},
+    21:{ru:"Опыт складывается в целое.",en:"Experience integrates into wholeness."}
   };
 
-  /* ---------- POETIC REVERSED COMMENT ---------- */
   const DAY_REVERSED_COMMENT = {
-    ru: "В перевёрнутом положении энергия дня может ощущаться приглушённо. Позволь себе медленный ритм и не требуй от себя ясности немедленно.",
-    en: "In reversed form, the day’s energy may feel muted. Allow a slower rhythm and do not demand immediate clarity."
+    ru: "В перевёрнутом положении энергия дня может ощущаться приглушённо. Не спеши.",
+    en: "In reversed form, the day’s energy may feel muted. There is no need to rush."
   };
 
+  /* ---------- CARD OF THE DAY ---------- */
   async function getCardOfTheDay() {
     const res = await fetch(API_URL, {
       method: "POST",
@@ -90,12 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     const data = await res.json();
     showDayCard(data.card, data.reversed);
-  }
-
-  function getQuestionCard() {
-    const i = Math.floor(Math.random() * 22);
-    const r = Math.random() < 0.5;
-    showQuestionCard(i, r);
   }
 
   function showDayCard(i, reversed) {
@@ -113,6 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
     cardMeaning.textContent = text;
     cardPosition.classList.add("hidden");
     resultBlock.classList.remove("hidden");
+  }
+
+  /* ---------- QUESTION CARD ---------- */
+  function getQuestionCard() {
+    const i = Math.floor(Math.random() * 22);
+    const r = Math.random() < 0.5;
+    showQuestionCard(i, r);
   }
 
   function showQuestionCard(i, r) {
