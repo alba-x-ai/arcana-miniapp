@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ---------- TELEGRAM ---------- */
   const tg = window.Telegram.WebApp;
   tg.ready();
 
@@ -33,7 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     en: "Reversed"
   };
 
-  const API_URL = "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
+  /* ---------- API ---------- */
+  const API_URL =
+    "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
 
   /* ---------- DOM ---------- */
   const cardButton     = document.getElementById("cardButton");
@@ -56,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(res => res.json())
     .then(data => cardsData = data);
 
+  /* ---------- DAY TEXTS ---------- */
   const DAY_TEXTS = {
     0:{ru:"День открывает новое пространство. Можно идти без чёткого плана.",en:"The day opens new space. You may move without a clear plan."},
     1:{ru:"Сегодня намерение особенно влияет на происходящее.",en:"Today intention strongly shapes events."},
@@ -81,26 +85,34 @@ document.addEventListener("DOMContentLoaded", () => {
     21:{ru:"День ощущается целостным и завершённым.",en:"The day feels whole and complete."}
   };
 
+  /* ---------- CARD OF THE DAY ---------- */
   async function getCardOfTheDay() {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user_id: user.id,
-        timezoneOffset: new Date().getTimezoneOffset()
-      })
-    });
+    try {
+      const response = await fetch(
+        `${API_URL}?user_id=${user.id}`
+      );
 
-    const data = await response.json();
-    showDayCard(data.card, data.reversed);
+      if (!response.ok) {
+        console.error("API error:", response.status);
+        return;
+      }
+
+      const data = await response.json();
+      showDayCard(data.cardId, data.reversed);
+
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
   }
 
+  /* ---------- QUESTION CARD ---------- */
   function getQuestionCard() {
     const cardIndex = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
     showQuestionCard(cardIndex, reversed);
   }
 
+  /* ---------- RENDER DAY CARD ---------- */
   function showDayCard(cardIndex, reversed) {
     const card = cardsData[cardIndex];
     if (!card) return;
@@ -113,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resultBlock.classList.remove("hidden");
   }
 
+  /* ---------- RENDER QUESTION CARD ---------- */
   function showQuestionCard(cardIndex, reversed) {
     const card = cardsData[cardIndex];
     if (!card) return;
@@ -133,6 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resultBlock.classList.remove("hidden");
   }
 
+  /* ---------- IMAGE ---------- */
   function renderImage(cardIndex, reversed) {
     const fileIndex = String(cardIndex).padStart(2, "0");
     const baseUrl = new URL(document.baseURI);
@@ -144,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
   }
 
+  /* ---------- EVENTS ---------- */
   cardButton.addEventListener("click", getCardOfTheDay);
   questionButton.addEventListener("click", getQuestionCard);
 
