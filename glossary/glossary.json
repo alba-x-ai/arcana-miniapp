@@ -1,0 +1,287 @@
+{
+  "0": {
+    "ru": {
+      "essence": "Архетип начала, доверия и открытого шага в неизвестное.",
+      "upright": "Состояние внутренней свободы, когда путь ещё не определён, но движение уже возможно. Готовность идти без гарантий.",
+      "reversed": "Сомнение перед началом, страх сделать первый шаг или желание отложить движение."
+    },
+    "en": {
+      "essence": "The archetype of beginnings, trust, and stepping into the unknown.",
+      "upright": "A state of inner freedom where the path is not yet defined, but movement is possible. Readiness without guarantees.",
+      "reversed": "Hesitation before beginning, fear of the first step, or postponement of movement."
+    }
+  },
+
+  "1": {
+    "ru": {
+      "essence": "Архетип воли, намерения и осознанного влияния.",
+      "upright": "Способность направлять энергию и придавать форму происходящему через внимание и выбор.",
+      "reversed": "Рассеянность воли, утрата фокуса или недоверие к собственным возможностям."
+    },
+    "en": {
+      "essence": "The archetype of will, intention, and conscious influence.",
+      "upright": "The ability to direct energy and shape events through focus and choice.",
+      "reversed": "Scattered will, loss of focus, or distrust in one’s own power."
+    }
+  },
+
+  "2": {
+    "ru": {
+      "essence": "Архетип внутреннего знания и скрытой глубины.",
+      "upright": "Молчаливое понимание, которое раскрывается через наблюдение и внутреннюю тишину.",
+      "reversed": "Отрыв от интуиции или попытка услышать ответы исключительно вовне."
+    },
+    "en": {
+      "essence": "The archetype of inner knowing and hidden depth.",
+      "upright": "Silent understanding revealed through observation and inner stillness.",
+      "reversed": "Disconnection from intuition or seeking answers only outside."
+    }
+  },
+
+  "3": {
+    "ru": {
+      "essence": "Архетип роста, заботы и жизненной полноты.",
+      "upright": "Созидательная энергия, питание и поддержка того, что развивается.",
+      "reversed": "Истощение, утрата контакта с телом или отказ от заботы."
+    },
+    "en": {
+      "essence": "The archetype of growth, care, and life fullness.",
+      "upright": "Creative energy, nourishment, and support of what is growing.",
+      "reversed": "Depletion, disconnection from the body, or neglect of care."
+    }
+  },
+
+  "4": {
+    "ru": {
+      "essence": "Архетип структуры, опоры и границ.",
+      "upright": "Устойчивость через порядок, ясные рамки и ответственность.",
+      "reversed": "Жёсткость, контроль или утрата чувства опоры."
+    },
+    "en": {
+      "essence": "The archetype of structure, stability, and boundaries.",
+      "upright": "Stability through order, clear limits, and responsibility.",
+      "reversed": "Rigidity, excessive control, or loss of grounding."
+    }
+  },
+
+  "5": {
+    "ru": {
+      "essence": "Архетип смысла, традиции и передачи знания.",
+      "upright": "Связь с ценностями, внутренними ориентирами и опытом предков.",
+      "reversed": "Слепое следование правилам или отказ от собственных смыслов."
+    },
+    "en": {
+      "essence": "The archetype of meaning, tradition, and shared wisdom.",
+      "upright": "Connection to values, inner guidance, and inherited knowledge.",
+      "reversed": "Blind adherence to rules or rejection of personal meaning."
+    }
+  },
+
+  "6": {
+    "ru": {
+      "essence": "Архетип выбора и согласия с собой.",
+      "upright": "Решение, рождающееся из отклика сердца, а не давления обстоятельств.",
+      "reversed": "Внутренний конфликт, разрыв между желанием и обязанностью."
+    },
+    "en": {
+      "essence": "The archetype of choice and inner alignment.",
+      "upright": "A decision born from inner resonance rather than external pressure.",
+      "reversed": "Inner conflict, tension between desire and duty."
+    }
+  },
+
+  "7": {
+    "ru": {
+      "essence": "Архетип движения и направления.",
+      "upright": "Продвижение вперёд через собранность и удержание курса.",
+      "reversed": "Потеря направления или попытка двигаться без внутреннего согласия."
+    },
+    "en": {
+      "essence": "The archetype of movement and direction.",
+      "upright": "Forward motion through focus and maintaining course.",
+      "reversed": "Loss of direction or movement without inner alignment."
+    }
+  },
+
+  "8": {
+    "ru": {
+      "essence": "Архетип внутренней силы и мягкой устойчивости.",
+      "upright": "Спокойная уверенность, способность удерживать без давления.",
+      "reversed": "Подавление чувств или сомнение в собственной силе."
+    },
+    "en": {
+      "essence": "The archetype of inner strength and gentle resilience.",
+      "upright": "Calm confidence, the ability to hold without force.",
+      "reversed": "Suppressed emotions or doubt in personal strength."
+    }
+  },
+
+  "9": {
+    "ru": {
+      "essence": "Архетип уединения и внутреннего поиска.",
+      "upright": "Сознательное отступление для восстановления связи с собой.",
+      "reversed": "Изоляция, уход от мира или страх одиночества."
+    },
+    "en": {
+      "essence": "The archetype of solitude and inner search.",
+      "upright": "Intentional withdrawal to reconnect inwardly.",
+      "reversed": "Isolation, avoidance of the world, or fear of being alone."
+    }
+  },
+
+  "10": {
+    "ru": {
+      "essence": "Архетип перемен и циклов.",
+      "upright": "Принятие изменчивости и доверие движению жизни.",
+      "reversed": "Сопротивление переменам или ощущение застоя."
+    },
+    "en": {
+      "essence": "The archetype of change and cycles.",
+      "upright": "Acceptance of change and trust in life’s movement.",
+      "reversed": "Resistance to change or a feeling of stagnation."
+    }
+  },
+
+  "11": {
+    "ru": {
+      "essence": "Архетип равновесия и правды.",
+      "upright": "Честный взгляд на ситуацию и готовность принять последствия.",
+      "reversed": "Искажение фактов или избегание ответственности."
+    },
+    "en": {
+      "essence": "The archetype of balance and truth.",
+      "upright": "Honest perception and willingness to face consequences.",
+      "reversed": "Distortion of facts or avoidance of responsibility."
+    }
+  },
+
+  "12": {
+    "ru": {
+      "essence": "Архетип паузы и смены перспективы.",
+      "upright": "Временная остановка ради более глубокого понимания.",
+      "reversed": "Застревание или отказ увидеть ситуацию иначе."
+    },
+    "en": {
+      "essence": "The archetype of pause and altered perspective.",
+      "upright": "A temporary halt that allows deeper understanding.",
+      "reversed": "Stagnation or refusal to see differently."
+    }
+  },
+
+  "13": {
+    "ru": {
+      "essence": "Архетип завершения и трансформации.",
+      "upright": "Естественный конец, освобождающий пространство для нового.",
+      "reversed": "Страх отпускания или затянутое прощание."
+    },
+    "en": {
+      "essence": "The archetype of ending and transformation.",
+      "upright": "A natural ending that frees space for renewal.",
+      "reversed": "Fear of letting go or prolonged attachment."
+    }
+  },
+
+  "14": {
+    "ru": {
+      "essence": "Архетип гармонии и меры.",
+      "upright": "Способность соединять противоположности без крайностей.",
+      "reversed": "Нарушение баланса или потеря чувства меры."
+    },
+    "en": {
+      "essence": "The archetype of harmony and moderation.",
+      "upright": "The ability to integrate opposites without excess.",
+      "reversed": "Imbalance or loss of moderation."
+    }
+  },
+
+  "15": {
+    "ru": {
+      "essence": "Архетип привязанности и тени.",
+      "upright": "Осознание того, что удерживает и требует честного взгляда.",
+      "reversed": "Освобождение от скрытых зависимостей."
+    },
+    "en": {
+      "essence": "The archetype of attachment and shadow.",
+      "upright": "Awareness of what binds and calls for honesty.",
+      "reversed": "Release from hidden dependencies."
+    }
+  },
+
+  "16": {
+    "ru": {
+      "essence": "Архетип внезапного разрушения иллюзий.",
+      "upright": "Слом ложных опор ради подлинной устойчивости.",
+      "reversed": "Страх перемен или попытка удержать разрушенное."
+    },
+    "en": {
+      "essence": "The archetype of sudden collapse of illusions.",
+      "upright": "Breaking false structures to reveal true stability.",
+      "reversed": "Fear of change or clinging to what has fallen."
+    }
+  },
+
+  "17": {
+    "ru": {
+      "essence": "Архетип надежды и тихого восстановления.",
+      "upright": "Мягкое возвращение веры и внутреннего света.",
+      "reversed": "Утрата надежды или недоверие к процессу исцеления."
+    },
+    "en": {
+      "essence": "The archetype of hope and gentle renewal.",
+      "upright": "A quiet return of faith and inner light.",
+      "reversed": "Loss of hope or distrust in healing."
+    }
+  },
+
+  "18": {
+    "ru": {
+      "essence": "Архетип тумана и глубинных чувств.",
+      "upright": "Контакт с неясными эмоциями и скрытыми слоями психики.",
+      "reversed": "Страх перед неопределённостью или подавление чувств."
+    },
+    "en": {
+      "essence": "The archetype of mist and deep emotions.",
+      "upright": "Engagement with unclear feelings and inner depths.",
+      "reversed": "Fear of uncertainty or emotional suppression."
+    }
+  },
+
+  "19": {
+    "ru": {
+      "essence": "Архетип ясности и жизненной радости.",
+      "upright": "Открытость, тепло и естественное проявление себя.",
+      "reversed": "Затенённая радость или страх быть видимой."
+    },
+    "en": {
+      "essence": "The archetype of clarity and vitality.",
+      "upright": "Openness, warmth, and natural self-expression.",
+      "reversed": "Diminished joy or fear of visibility."
+    }
+  },
+
+  "20": {
+    "ru": {
+      "essence": "Архетип пробуждения и внутреннего зова.",
+      "upright": "Осознание своего пути и готовность откликнуться.",
+      "reversed": "Игнорирование внутреннего зова или сомнение в нём."
+    },
+    "en": {
+      "essence": "The archetype of awakening and inner calling.",
+      "upright": "Awareness of one’s path and readiness to respond.",
+      "reversed": "Ignoring the inner call or doubting it."
+    }
+  },
+
+  "21": {
+    "ru": {
+      "essence": "Архетип целостности и завершённого цикла.",
+      "upright": "Интеграция опыта и ощущение завершённости.",
+      "reversed": "Трудность признать итог или отпустить цикл."
+    },
+    "en": {
+      "essence": "The archetype of wholeness and completion.",
+      "upright": "Integration of experience and a sense of closure.",
+      "reversed": "Difficulty accepting an ending or releasing a cycle."
+    }
+  }
+}
