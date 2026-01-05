@@ -11,9 +11,16 @@ body {
   margin: 0;
   padding: 0;
 
-  background-color: #0f1114;
-  color: #e6e6e6;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #e6e6e6;
+
+  /* 🔥 ФОН */
+  background-image: url("./images/background/bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-color: #0f1114; /* запасной */
 }
 
 .app {
@@ -25,6 +32,9 @@ body {
   align-items: center;
   justify-content: center;
   gap: 28px;
+
+  /* лёгкое затемнение для читаемости */
+  background: rgba(0,0,0,0.35);
 }
 
 .title {
@@ -71,7 +81,7 @@ button:active {
 /* ---------- RESULT ---------- */
 
 .result {
-  max-width: 320px;
+  max-width: 340px;
   text-align: center;
   line-height: 1.6;
 
