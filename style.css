@@ -7,6 +7,8 @@ html, body {
   height: 100%;
 }
 
+/* ---------- BODY / BACKGROUND ---------- */
+
 body {
   margin: 0;
   padding: 0;
@@ -14,14 +16,15 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: #e6e6e6;
 
-  /* 🔥 ФОН */
   background-image: url("./images/background/bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  background-color: #0f1114; /* запасной */
+  background-color: #0f1114; /* fallback */
 }
+
+/* ---------- APP CONTAINER ---------- */
 
 .app {
   min-height: 100vh;
@@ -33,9 +36,11 @@ body {
   justify-content: center;
   gap: 28px;
 
-  /* лёгкое затемнение для читаемости */
-  background: rgba(0,0,0,0.35);
+  /* постоянное затемнение */
+  background: rgba(0, 0, 0, 0.45);
 }
+
+/* ---------- TITLE ---------- */
 
 .title {
   font-size: 28px;
@@ -49,6 +54,8 @@ body {
 .buttons {
   display: flex;
   gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 button {
@@ -78,10 +85,10 @@ button:active {
   opacity: 0.8;
 }
 
-/* ---------- RESULT ---------- */
+/* ---------- RESULT BLOCK ---------- */
 
 .result {
-  max-width: 340px;
+  max-width: 360px;
   text-align: center;
   line-height: 1.6;
 
@@ -94,6 +101,8 @@ button:active {
 .hidden {
   display: none;
 }
+
+/* ---------- CARD ---------- */
 
 .card-image {
   width: 220px;
@@ -114,4 +123,5 @@ button:active {
 .card-meaning {
   font-size: 15px;
   opacity: 0.9;
+  white-space: pre-line; /* важно для поэтических переносов */
 }
