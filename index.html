@@ -5,7 +5,9 @@
   <title>Arcana</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Telegram WebApp -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,13 +17,21 @@
     <h1 class="title">Arcana</h1>
 
     <div class="buttons">
+      <!-- тексты задаются из app.js -->
       <button id="cardButton"></button>
       <button id="questionButton"></button>
-      <button id="glossaryButton"></button>
+
+      <!-- переход в глоссарий -->
+      <button
+        id="glossaryButton"
+        onclick="window.location.href='glossary/glossary.html'">
+        Glossary
+      </button>
     </div>
 
     <div id="result" class="result hidden">
       <img id="cardImage" class="card-image hidden" />
+
       <div id="cardName" class="card-name"></div>
       <div id="cardPosition" class="card-position hidden"></div>
       <div id="cardMeaning" class="card-meaning"></div>
