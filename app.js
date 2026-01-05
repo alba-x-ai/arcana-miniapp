@@ -1,29 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const tg = window.Telegram.WebApp;
-  tg.ready();
-
-/* 🔒 ЖЁСТКО ОТКЛЮЧАЕМ ВСЕ TELEGRAM-КНОПКИ */
-tg.MainButton.hide();
-tg.SecondaryButton.hide();
-
-/* 🔒 Запрещаем Telegramу управлять интерфейсом */
-tg.setHeaderColor('#000000');
-tg.expand();
-
-/* 🔒 Контрольное скрытие с задержкой */
-setTimeout(() => {
-  tg.MainButton.hide();
-  tg.SecondaryButton.hide();
-}, 300);
-
+  tg.ready(); // ❗ ТОЛЬКО ЭТО. БОЛЬШЕ НИЧЕГО ОТ TELEGRAM UI.
 
   const user = tg.initDataUnsafe?.user;
   if (!user) {
     alert("Не удалось получить данные пользователя");
     return;
-
-
+  }
 
   /* ---------- LANGUAGE ---------- */
   const SUPPORTED_LANGS = ["ru", "en"];
@@ -31,8 +15,8 @@ setTimeout(() => {
     ? user.language_code
     : "ru";
 
-  /* ---------- BUTTON TEXT ---------- */
-  const BUTTON_TEXTS = {
+  /* ---------- TEXTS ---------- */
+  const TEXTS = {
     ru: {
       day: "Карта дня",
       question: "Карта вопроса",
@@ -58,8 +42,8 @@ setTimeout(() => {
   const cardPosition = document.getElementById("cardPosition");
   const resultBlock  = document.getElementById("result");
 
-  cardButton.textContent     = BUTTON_TEXTS[LANG].day;
-  questionButton.textContent = BUTTON_TEXTS[LANG].question;
+  cardButton.textContent     = TEXTS[LANG].day;
+  questionButton.textContent = TEXTS[LANG].question;
 
   /* ---------- LOAD CARDS ---------- */
   let cardsData = {};
@@ -68,10 +52,12 @@ setTimeout(() => {
     .then(res => res.json())
     .then(data => cardsData = data);
 
+  /* ---------- DAY TEXTS ---------- */
   const DAY_TEXTS = {
     8: { ru: "Мягкая сила.", en: "Gentle strength." }
   };
 
+  /* ---------- CARD OF THE DAY ---------- */
   async function getCardOfTheDay() {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -83,6 +69,7 @@ setTimeout(() => {
     showDayCard(data.card, data.reversed);
   }
 
+  /* ---------- QUESTION CARD ---------- */
   function getQuestionCard() {
     const cardIndex = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
@@ -95,8 +82,7 @@ setTimeout(() => {
 
     renderImage(cardIndex, reversed);
     cardName.textContent = card.name[LANG];
-    cardMeaning.textContent =
-      DAY_TEXTS[cardIndex]?.[LANG] ?? "";
+    cardMeaning.textContent = DAY_TEXTS[cardIndex]?.[LANG] ?? "";
 
     cardPosition.classList.add("hidden");
     resultBlock.classList.remove("hidden");
@@ -113,7 +99,7 @@ setTimeout(() => {
       : card.upright[LANG];
 
     if (reversed) {
-      cardPosition.textContent = BUTTON_TEXTS[LANG].reversed;
+      cardPosition.textContent = TEXTS[LANG].reversed;
       cardPosition.classList.remove("hidden");
     } else {
       cardPosition.classList.add("hidden");
