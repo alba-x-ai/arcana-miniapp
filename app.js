@@ -3,15 +3,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const tg = window.Telegram.WebApp;
   tg.ready();
 
-  /* ❌ УБИРАЕМ TELEGRAM-КНОПКИ */
+/* 🔒 ЖЁСТКО ОТКЛЮЧАЕМ ВСЕ TELEGRAM-КНОПКИ */
+tg.MainButton.hide();
+tg.SecondaryButton.hide();
+
+/* 🔒 Запрещаем Telegramу управлять интерфейсом */
+tg.setHeaderColor('#000000');
+tg.expand();
+
+/* 🔒 Контрольное скрытие с задержкой */
+setTimeout(() => {
   tg.MainButton.hide();
   tg.SecondaryButton.hide();
+}, 300);
+
 
   const user = tg.initDataUnsafe?.user;
   if (!user) {
     alert("Не удалось получить данные пользователя");
     return;
-  }
+
+
 
   /* ---------- LANGUAGE ---------- */
   const SUPPORTED_LANGS = ["ru", "en"];
