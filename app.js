@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- DAY REVERSED COMMENT ---------- */
   const DAY_REVERSED_COMMENT = {
-    ru: "Перевёрнутая позиция добавляет скрытый оттенок и внутреннее сопротивление.",
-    en: "The reversed position adds a hidden nuance and inner resistance."
+    ru: "Перевёрнутая позиция добавляет внутренний оттенок.",
+    en: "The reversed position adds an inner nuance."
   };
 
   /* ---------- API ---------- */
@@ -43,8 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardName     = document.getElementById("cardName");
   const cardMeaning  = document.getElementById("cardMeaning");
   const cardPosition = document.getElementById("cardPosition");
-  const resultBlock  = document.getElementById("result");
   const glossaryGrid = document.getElementById("glossaryGrid");
+  const resultBlock  = document.getElementById("result");
 
   /* ---------- APPLY BUTTON TEXT ---------- */
   cardButton.textContent     = BUTTON_TEXTS[LANG].day;
@@ -63,42 +63,43 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(res => res.json())
     .then(data => glossaryData = data);
 
-  /* ---------- POETIC DAY TEXTS ---------- */
+  /* ---------- POETIC DAY TEXTS (22) ---------- */
   const DAY_TEXTS = {
     0:{ru:"День начинается с чистого шага. Достаточно быть открытой движению.",en:"The day begins with a clean step. Openness to movement is enough."},
-    1:{ru:"Сегодня намерение формирует пространство. Внимание усиливает действие.",en:"Today intention shapes space. Attention amplifies action."},
-    2:{ru:"Тишина несёт ответы. Не торопись с выводами.",en:"Silence carries answers. No need to rush conclusions."},
-    3:{ru:"Рост поддерживается заботой и принятием.",en:"Growth is supported by care and acceptance."},
-    4:{ru:"Опора важнее скорости. Структура создаёт устойчивость.",en:"Stability matters more than speed. Structure creates support."},
+    1:{ru:"Сегодня намерение формирует пространство.",en:"Today intention shapes space."},
+    2:{ru:"Тишина несёт ответы.",en:"Silence carries answers."},
+    3:{ru:"Рост поддерживается заботой.",en:"Growth is supported by care."},
+    4:{ru:"Опора важнее скорости.",en:"Stability matters more than speed."},
     5:{ru:"Внутренние ориентиры становятся яснее.",en:"Inner values become clearer."},
     6:{ru:"Сегодня важен честный внутренний выбор.",en:"An honest inner choice matters today."},
-    7:{ru:"Движение задаёт направление. Доверься вектору.",en:"Movement sets direction. Trust the vector."},
-    8:{ru:"Сила проявляется мягко, без давления.",en:"Strength manifests gently, without force."},
+    7:{ru:"Движение задаёт направление.",en:"Movement sets direction."},
+    8:{ru:"Сила проявляется мягко.",en:"Strength appears gently."},
     9:{ru:"Уединение помогает услышать себя.",en:"Solitude helps you hear yourself."},
-    10:{ru:"Ритм меняется. Будь гибкой к поворотам.",en:"The rhythm shifts. Stay flexible with turns."},
+    10:{ru:"Ритм меняется — будь гибкой.",en:"The rhythm shifts — stay flexible."},
     11:{ru:"Честность возвращает баланс.",en:"Honesty restores balance."},
     12:{ru:"Пауза открывает новый взгляд.",en:"Pause opens a new perspective."},
     13:{ru:"Завершение освобождает пространство.",en:"Endings free space."},
-    14:{ru:"Мера и плавность создают гармонию.",en:"Moderation and flow create harmony."},
+    14:{ru:"Мера создаёт гармонию.",en:"Moderation creates harmony."},
     15:{ru:"Привязанности становятся заметны.",en:"Attachments become visible."},
-    16:{ru:"Иллюзии разрушаются, открывая правду.",en:"Illusions collapse, revealing truth."},
+    16:{ru:"Иллюзии разрушаются.",en:"Illusions collapse."},
     17:{ru:"Тихая надежда присутствует.",en:"Quiet hope is present."},
-    18:{ru:"Будь бережна с неясными чувствами.",en:"Handle unclear feelings gently."},
+    18:{ru:"Будь бережна с чувствами.",en:"Handle feelings gently."},
     19:{ru:"Ясность возвращает энергию.",en:"Clarity restores energy."},
     20:{ru:"Внутренний зов требует внимания.",en:"An inner call asks for attention."},
-    21:{ru:"Целостность уже достигнута.",en:"Wholeness is already reached."}
+    21:{ru:"Целостность уже здесь.",en:"Wholeness is already here."}
   };
 
   /* ---------- HELPERS ---------- */
-  function hideAllViews() {
+  function resetContent() {
     cardImage.classList.add("hidden");
     cardMeaning.classList.add("hidden");
     cardPosition.classList.add("hidden");
     glossaryGrid.classList.add("hidden");
+    glossaryGrid.innerHTML = "";
   }
 
-  function renderImage(cardIndex, reversed) {
-    const fileIndex = String(cardIndex).padStart(2, "0");
+  function renderImage(index, reversed) {
+    const fileIndex = String(index).padStart(2, "0");
     cardImage.src = `./images/cards/${fileIndex}.png`;
     cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
     cardImage.classList.remove("hidden");
@@ -106,26 +107,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- CARD OF THE DAY ---------- */
   async function getCardOfTheDay() {
-    const response = await fetch(API_URL, {
+    resetContent();
+
+    const res = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user_id: user.id })
     });
 
-    const data = await response.json();
-    showDayCard(data.card, data.reversed);
-  }
+    const data = await res.json();
 
-  function showDayCard(cardIndex, reversed) {
-    hideAllViews();
+    renderImage(data.card, data.reversed);
 
-    renderImage(cardIndex, reversed);
-
-    cardName.textContent = cardsData[cardIndex].name[LANG];
-    cardMeaning.textContent = DAY_TEXTS[cardIndex][LANG];
+    cardName.textContent = cardsData[data.card].name[LANG];
+    cardMeaning.textContent = DAY_TEXTS[data.card][LANG];
     cardMeaning.classList.remove("hidden");
 
-    if (reversed) {
+    if (data.reversed) {
       cardPosition.textContent = DAY_REVERSED_COMMENT[LANG];
       cardPosition.classList.remove("hidden");
     }
@@ -135,35 +133,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- QUESTION CARD ---------- */
   function getQuestionCard() {
-    hideAllViews();
+    resetContent();
 
-    const cardIndex = Math.floor(Math.random() * 22);
+    const index = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
 
-    renderImage(cardIndex, reversed);
+    renderImage(index, reversed);
 
-    cardName.textContent = cardsData[cardIndex].name[LANG];
+    cardName.textContent = cardsData[index].name[LANG];
     cardMeaning.textContent = reversed
-      ? cardsData[cardIndex].reversed[LANG]
-      : cardsData[cardIndex].upright[LANG];
+      ? cardsData[index].reversed[LANG]
+      : cardsData[index].upright[LANG];
 
     cardMeaning.classList.remove("hidden");
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- GLOSSARY GRID ---------- */
+  /* ---------- GLOSSARY (INLINE MODE) ---------- */
   function openGlossary() {
-    hideAllViews();
+    resetContent();
 
     cardName.textContent =
       LANG === "ru" ? "Глоссарий Арканов" : "Arcana Glossary";
 
-    glossaryGrid.innerHTML = "";
-
     Object.entries(glossaryData).forEach(([index, card]) => {
       const item = document.createElement("div");
       item.className = "glossary-card";
-
       item.innerHTML = `
         <div class="glossary-card-title">
           ${card.name[LANG]}
@@ -171,33 +166,23 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
 
       item.addEventListener("click", () => {
-        openGlossaryCard(index);
+        resetContent();
+
+        cardName.textContent = card.name[LANG];
+        cardMeaning.innerHTML = `
+          <p>${card.description[LANG]}</p>
+          <p><strong>${LANG === "ru" ? "Прямое значение:" : "Upright meaning:"}</strong><br>
+          ${card.upright[LANG]}</p>
+          <p><strong>${LANG === "ru" ? "Перевёрнутое значение:" : "Reversed meaning:"}</strong><br>
+          ${card.reversed[LANG]}</p>
+        `;
+        cardMeaning.classList.remove("hidden");
       });
 
       glossaryGrid.appendChild(item);
     });
 
     glossaryGrid.classList.remove("hidden");
-    resultBlock.classList.remove("hidden");
-  }
-
-  /* ---------- GLOSSARY CARD VIEW ---------- */
-  function openGlossaryCard(cardIndex) {
-    hideAllViews();
-
-    const card = glossaryData[cardIndex];
-
-    cardName.textContent = card.name[LANG];
-
-    cardMeaning.innerHTML = `
-      <p>${card.description[LANG]}</p>
-      <p><strong>${LANG === "ru" ? "Прямое значение:" : "Upright meaning:"}</strong><br>
-      ${card.upright[LANG]}</p>
-      <p><strong>${LANG === "ru" ? "Перевёрнутое значение:" : "Reversed meaning:"}</strong><br>
-      ${card.reversed[LANG]}</p>
-    `;
-
-    cardMeaning.classList.remove("hidden");
     resultBlock.classList.remove("hidden");
   }
 
