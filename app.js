@@ -17,15 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
     : "ru";
 
   /* ================= TEXTS ================= */
-  const BUTTON_TEXTS = {
+  const TEXTS = {
     ru: {
-      day: "Карта дня",
-      question: "Карта вопроса",
+      dayButton: "Карта дня",
+      questionButton: "Карта вопроса",
       reversed: "Перевёрнутая"
     },
     en: {
-      day: "Card of the Day",
-      question: "Card for a Question",
+      dayButton: "Card of the Day",
+      questionButton: "Card for a Question",
       reversed: "Reversed"
     }
   };
@@ -45,8 +45,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultBlock  = document.getElementById("result");
 
   /* ================= BUTTON TEXT ================= */
-  cardButton.textContent     = BUTTON_TEXTS[LANG].day;
-  questionButton.textContent = BUTTON_TEXTS[LANG].question;
+  cardButton.textContent     = TEXTS[LANG].dayButton;
+  questionButton.textContent = TEXTS[LANG].questionButton;
+
+  /* ================= TELEGRAM BUTTONS ================= */
+  tg.MainButton.setText(TEXTS[LANG].dayButton);
+  tg.MainButton.show();
+
+  tg.SecondaryButton.setText(TEXTS[LANG].questionButton);
+  tg.SecondaryButton.show();
 
   /* ================= DATA ================= */
   let cardsData = {};
@@ -141,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : card.upright[LANG];
 
     if (reversed) {
-      cardPosition.textContent = BUTTON_TEXTS[LANG].reversed;
+      cardPosition.textContent = TEXTS[LANG].reversed;
       cardPosition.classList.remove("hidden");
     } else {
       cardPosition.classList.add("hidden");
@@ -160,5 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ================= EVENTS ================= */
   cardButton.addEventListener("click", getCardOfTheDay);
   questionButton.addEventListener("click", getQuestionCard);
+
+  tg.MainButton.onClick(getCardOfTheDay);
+  tg.SecondaryButton.onClick(getQuestionCard);
 
 });
