@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  /* ---------- REVERSED COMMENT (DAY) ---------- */
+  /* ---------- DAY REVERSED COMMENT ---------- */
   const DAY_REVERSED_COMMENT = {
-    ru: "Перевёрнутая позиция указывает на внутренний оттенок или скрытое сопротивление.",
-    en: "The reversed position points to an inner nuance or subtle resistance."
+    ru: "Перевёрнутая позиция добавляет скрытый оттенок и внутреннее сопротивление.",
+    en: "The reversed position adds a hidden nuance and inner resistance."
   };
 
   /* ---------- API ---------- */
@@ -44,44 +44,65 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardMeaning  = document.getElementById("cardMeaning");
   const cardPosition = document.getElementById("cardPosition");
   const resultBlock  = document.getElementById("result");
+  const glossaryGrid = document.getElementById("glossaryGrid");
 
   /* ---------- APPLY BUTTON TEXT ---------- */
   cardButton.textContent     = BUTTON_TEXTS[LANG].day;
   questionButton.textContent = BUTTON_TEXTS[LANG].question;
   glossaryButton.textContent = BUTTON_TEXTS[LANG].glossary;
 
-  /* ---------- LOAD CARDS (GLOSSARY DATA) ---------- */
+  /* ---------- LOAD DATA ---------- */
   let cardsData = {};
+  let glossaryData = {};
 
   fetch("./cards.json")
     .then(res => res.json())
     .then(data => cardsData = data);
 
-  /* ---------- POETIC DAY TEXTS (22) ---------- */
+  fetch("./glossary/cards.json")
+    .then(res => res.json())
+    .then(data => glossaryData = data);
+
+  /* ---------- POETIC DAY TEXTS ---------- */
   const DAY_TEXTS = {
-    0:{ru:"День начинается с чистого шага. Не требуется план — достаточно открытости и доверия движению.",en:"The day begins with a clean step. No plan is required — openness and trust are enough."},
-    1:{ru:"Сегодня намерение особенно действенно. Слова и решения формируют пространство.",en:"Today intention is especially potent. Words and choices shape the space around you."},
-    2:{ru:"День располагает к тишине. Ответы приходят не через действие, а через внимательное слушание.",en:"The day invites silence. Answers come not through action, but through attentive listening."},
-    3:{ru:"Сегодня поддержан рост. Забота, мягкость и принятие дают плод.",en:"Growth is supported today. Care, gentleness, and acceptance bring fruition."},
-    4:{ru:"Структура и границы создают устойчивость. Опора важнее скорости.",en:"Structure and boundaries provide stability. Grounding matters more than speed."},
-    5:{ru:"День напоминает о внутренних ориентирах. Истина раскрывается через смысл, а не форму.",en:"The day recalls inner values. Truth reveals itself through meaning, not form."},
-    6:{ru:"Сегодня значим внутренний выбор. Согласие с собой важнее внешних компромиссов.",en:"Inner choice matters today. Alignment with yourself outweighs external compromise."},
-    7:{ru:"День несёт движение. Направление важнее контроля — удержи вектор.",en:"The day carries movement. Direction matters more than control — hold the course."},
-    8:{ru:"Сила проявляется мягко. Не через давление, а через присутствие и спокойствие.",en:"Strength manifests gently — through presence and calm, not force."},
-    9:{ru:"Подходит время для уединения. Внутренний свет становится заметнее в тишине.",en:"A time for solitude. Inner light becomes clearer in stillness."},
-    10:{ru:"Сегодня возможен поворот. Не всё зависит от воли — ритм меняется.",en:"A turn may occur today. Not everything is will-driven — the rhythm shifts."},
-    11:{ru:"День требует честности. Баланс восстанавливается через ясное видение.",en:"The day calls for honesty. Balance is restored through clear seeing."},
-    12:{ru:"Пауза несёт смысл. Смена взгляда открывает новые связи.",en:"Pause carries meaning. A shift in perspective reveals new connections."},
-    13:{ru:"Завершение освобождает. Освободи место для нового дыхания.",en:"Endings liberate. Make space for a new breath."},
-    14:{ru:"Гармония рождается из меры. Сегодня важен плавный ритм.",en:"Harmony arises from moderation. A gentle rhythm matters today."},
-    15:{ru:"День показывает привязанности. Осознание снижает их власть.",en:"Attachments become visible today. Awareness softens their hold."},
-    16:{ru:"Старые конструкции могут треснуть. Истина проявляется через слом иллюзий.",en:"Old structures may crack. Truth appears through the collapse of illusion."},
-    17:{ru:"День несёт тихую надежду. Даже слабый свет указывает путь.",en:"The day carries quiet hope. Even a faint light points the way."},
-    18:{ru:"Будь бережна с неясными чувствами. Не всё требует немедкого понимания.",en:"Handle unclear feelings gently. Not everything needs immediate clarity."},
-    19:{ru:"День наполнен ясностью. Простота возвращает энергию.",en:"The day is filled with clarity. Simplicity restores vitality."},
-    20:{ru:"Может прозвучать внутренний зов. Важно его не игнорировать.",en:"An inner call may arise. It’s important not to ignore it."},
-    21:{ru:"День ощущается завершённым. Целостность уже присутствует.",en:"The day feels complete. Wholeness is already present."}
+    0:{ru:"День начинается с чистого шага. Достаточно быть открытой движению.",en:"The day begins with a clean step. Openness to movement is enough."},
+    1:{ru:"Сегодня намерение формирует пространство. Внимание усиливает действие.",en:"Today intention shapes space. Attention amplifies action."},
+    2:{ru:"Тишина несёт ответы. Не торопись с выводами.",en:"Silence carries answers. No need to rush conclusions."},
+    3:{ru:"Рост поддерживается заботой и принятием.",en:"Growth is supported by care and acceptance."},
+    4:{ru:"Опора важнее скорости. Структура создаёт устойчивость.",en:"Stability matters more than speed. Structure creates support."},
+    5:{ru:"Внутренние ориентиры становятся яснее.",en:"Inner values become clearer."},
+    6:{ru:"Сегодня важен честный внутренний выбор.",en:"An honest inner choice matters today."},
+    7:{ru:"Движение задаёт направление. Доверься вектору.",en:"Movement sets direction. Trust the vector."},
+    8:{ru:"Сила проявляется мягко, без давления.",en:"Strength manifests gently, without force."},
+    9:{ru:"Уединение помогает услышать себя.",en:"Solitude helps you hear yourself."},
+    10:{ru:"Ритм меняется. Будь гибкой к поворотам.",en:"The rhythm shifts. Stay flexible with turns."},
+    11:{ru:"Честность возвращает баланс.",en:"Honesty restores balance."},
+    12:{ru:"Пауза открывает новый взгляд.",en:"Pause opens a new perspective."},
+    13:{ru:"Завершение освобождает пространство.",en:"Endings free space."},
+    14:{ru:"Мера и плавность создают гармонию.",en:"Moderation and flow create harmony."},
+    15:{ru:"Привязанности становятся заметны.",en:"Attachments become visible."},
+    16:{ru:"Иллюзии разрушаются, открывая правду.",en:"Illusions collapse, revealing truth."},
+    17:{ru:"Тихая надежда присутствует.",en:"Quiet hope is present."},
+    18:{ru:"Будь бережна с неясными чувствами.",en:"Handle unclear feelings gently."},
+    19:{ru:"Ясность возвращает энергию.",en:"Clarity restores energy."},
+    20:{ru:"Внутренний зов требует внимания.",en:"An inner call asks for attention."},
+    21:{ru:"Целостность уже достигнута.",en:"Wholeness is already reached."}
   };
+
+  /* ---------- HELPERS ---------- */
+  function hideAllViews() {
+    cardImage.classList.add("hidden");
+    cardMeaning.classList.add("hidden");
+    cardPosition.classList.add("hidden");
+    glossaryGrid.classList.add("hidden");
+  }
+
+  function renderImage(cardIndex, reversed) {
+    const fileIndex = String(cardIndex).padStart(2, "0");
+    cardImage.src = `./images/cards/${fileIndex}.png`;
+    cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
+    cardImage.classList.remove("hidden");
+  }
 
   /* ---------- CARD OF THE DAY ---------- */
   async function getCardOfTheDay() {
@@ -95,70 +116,94 @@ document.addEventListener("DOMContentLoaded", () => {
     showDayCard(data.card, data.reversed);
   }
 
-  /* ---------- QUESTION CARD ---------- */
-  function getQuestionCard() {
-    const cardIndex = Math.floor(Math.random() * 22);
-    const reversed = Math.random() < 0.5;
-    showQuestionCard(cardIndex, reversed);
-  }
-
-  /* ---------- RENDER DAY CARD ---------- */
   function showDayCard(cardIndex, reversed) {
-    const card = cardsData[cardIndex];
-    if (!card) return;
+    hideAllViews();
 
     renderImage(cardIndex, reversed);
 
-    cardName.textContent = card.name[LANG];
+    cardName.textContent = cardsData[cardIndex].name[LANG];
     cardMeaning.textContent = DAY_TEXTS[cardIndex][LANG];
+    cardMeaning.classList.remove("hidden");
 
     if (reversed) {
       cardPosition.textContent = DAY_REVERSED_COMMENT[LANG];
       cardPosition.classList.remove("hidden");
-    } else {
-      cardPosition.classList.add("hidden");
     }
 
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- RENDER QUESTION CARD ---------- */
-  function showQuestionCard(cardIndex, reversed) {
-    const card = cardsData[cardIndex];
-    if (!card) return;
+  /* ---------- QUESTION CARD ---------- */
+  function getQuestionCard() {
+    hideAllViews();
+
+    const cardIndex = Math.floor(Math.random() * 22);
+    const reversed = Math.random() < 0.5;
 
     renderImage(cardIndex, reversed);
 
-    cardName.textContent = card.name[LANG];
+    cardName.textContent = cardsData[cardIndex].name[LANG];
     cardMeaning.textContent = reversed
-      ? card.reversed[LANG]
-      : card.upright[LANG];
+      ? cardsData[cardIndex].reversed[LANG]
+      : cardsData[cardIndex].upright[LANG];
 
-    cardPosition.classList.add("hidden");
+    cardMeaning.classList.remove("hidden");
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- IMAGE ---------- */
-  function renderImage(cardIndex, reversed) {
-    const fileIndex = String(cardIndex).padStart(2, "0");
-    cardImage.src = `./images/cards/${fileIndex}.png`;
-    cardImage.classList.remove("hidden");
-    cardImage.style.transform = reversed
-      ? "rotate(180deg)"
-      : "rotate(0deg)";
+  /* ---------- GLOSSARY GRID ---------- */
+  function openGlossary() {
+    hideAllViews();
+
+    cardName.textContent =
+      LANG === "ru" ? "Глоссарий Арканов" : "Arcana Glossary";
+
+    glossaryGrid.innerHTML = "";
+
+    Object.entries(glossaryData).forEach(([index, card]) => {
+      const item = document.createElement("div");
+      item.className = "glossary-card";
+
+      item.innerHTML = `
+        <div class="glossary-card-title">
+          ${card.name[LANG]}
+        </div>
+      `;
+
+      item.addEventListener("click", () => {
+        openGlossaryCard(index);
+      });
+
+      glossaryGrid.appendChild(item);
+    });
+
+    glossaryGrid.classList.remove("hidden");
+    resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- GLOSSARY BUTTON (TEMP) ---------- */
-  glossaryButton.addEventListener("click", () => {
-    alert(
-      LANG === "ru"
-        ? "Глоссарий будет отдельным экраном со списком всех карт."
-        : "Glossary will be a separate screen with a list of all cards."
-    );
-  });
+  /* ---------- GLOSSARY CARD VIEW ---------- */
+  function openGlossaryCard(cardIndex) {
+    hideAllViews();
+
+    const card = glossaryData[cardIndex];
+
+    cardName.textContent = card.name[LANG];
+
+    cardMeaning.innerHTML = `
+      <p>${card.description[LANG]}</p>
+      <p><strong>${LANG === "ru" ? "Прямое значение:" : "Upright meaning:"}</strong><br>
+      ${card.upright[LANG]}</p>
+      <p><strong>${LANG === "ru" ? "Перевёрнутое значение:" : "Reversed meaning:"}</strong><br>
+      ${card.reversed[LANG]}</p>
+    `;
+
+    cardMeaning.classList.remove("hidden");
+    resultBlock.classList.remove("hidden");
+  }
 
   /* ---------- EVENTS ---------- */
   cardButton.addEventListener("click", getCardOfTheDay);
   questionButton.addEventListener("click", getQuestionCard);
+  glossaryButton.addEventListener("click", openGlossary);
 
 });
