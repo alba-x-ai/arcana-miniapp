@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     en: "Reversed"
   };
 
-  const API_URL = "https://arcana-1.onrender.com/card-of-the-day";
+  const API_URL = "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
 
   /* ---------- DOM ---------- */
   const cardButton     = document.getElementById("cardButton");
