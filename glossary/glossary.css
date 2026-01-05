@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  background: #0f1114;
+  color: #e6e6e6;
+  font-family: system-ui, sans-serif;
+}
+
+.glossary-app {
+  padding: 24px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 12px;
+}
+
+.card-grid img {
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.card-grid img:hover {
+  opacity: 1;
+}
+
+.detail {
+  margin-top: 24px;
+}
+
+.hidden {
+  display: none;
+}
