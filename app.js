@@ -1,122 +1,85 @@
 document.addEventListener("DOMContentLoaded", async () => {
-
   const tg = window.Telegram?.WebApp;
   tg?.ready();
 
   const LANG =
-    tg?.initDataUnsafe?.user?.language_code === "en"
-      ? "en"
-      : "ru";
-
-  /* ---------- TEXTS ---------- */
-
-  const BUTTONS = {
-    ru: {
-      day: "Карта дня",
-      question: "Карта вопроса",
-      glossary: "Глоссарий",
-      back: "Назад"
-    },
-    en: {
-      day: "Card of the Day",
-      question: "Question Card",
-      glossary: "Glossary",
-      back: "Back"
-    }
-  };
+    tg?.initDataUnsafe?.user?.language_code === "en" ? "en" : "ru";
 
   /* ---------- DOM ---------- */
+  const cardDayBtn   = document.getElementById("cardDayBtn");
+  const questionBtn  = document.getElementById("questionBtn");
+  const glossaryBtn  = document.getElementById("glossaryBtn");
+  const backBtn      = document.getElementById("backBtn");
 
-  const dayBtn = document.getElementById("dayBtn");
-  const questionBtn = document.getElementById("questionBtn");
-  const glossaryBtn = document.getElementById("glossaryBtn");
-  const backBtn = document.getElementById("backBtn");
+  const mainScreen   = document.getElementById("mainScreen");
+  const resultScreen = document.getElementById("resultScreen");
 
-  const cardView = document.getElementById("cardView");
-  const cardImage = document.getElementById("cardImage");
+  const cardImg  = document.getElementById("cardImage");
   const cardName = document.getElementById("cardName");
   const cardText = document.getElementById("cardText");
 
-  const glossaryGrid = document.getElementById("glossaryGrid");
-
-  dayBtn.textContent = BUTTONS[LANG].day;
-  questionBtn.textContent = BUTTONS[LANG].question;
-  glossaryBtn.textContent = BUTTONS[LANG].glossary;
-  backBtn.textContent = BUTTONS[LANG].back;
-
-  /* ---------- LOAD DATA ---------- */
-
+  /* ---------- DATA ---------- */
   const cards = await fetch("./cards.json").then(r => r.json());
   const dayTexts = await fetch("./texts/day-texts.json").then(r => r.json());
-  const glossary = await fetch("./glossary/glossary.json").then(r => r.json());
 
   /* ---------- HELPERS ---------- */
-
-  function showBack(show) {
-    backBtn.classList.toggle("hidden", !show);
+  function showResult() {
+    mainScreen.classList.add("hidden");
+    resultScreen.classList.remove("hidden");
+    backBtn.classList.remove("hidden");
   }
 
-  function reset() {
-    cardView.classList.add("hidden");
-    glossaryGrid.classList.add("hidden");
-    showBack(false);
+  function showMain() {
+    resultScreen.classList.add("hidden");
+    mainScreen.classList.remove("hidden");
+    backBtn.classList.add("hidden");
   }
 
-  function showCard(index, text) {
+  function renderCard(index, reversed = false) {
     const id = String(index).padStart(2, "0");
-
-    cardImage.src = `./images/cards/${id}.png`;
-    cardName.textContent = cards[index].name[LANG];
-    cardText.textContent = text;
-
-    cardView.classList.remove("hidden");
-    showBack(true);
+    cardImg.src = `./images/cards/${id}.png`;
+    cardImg.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
   }
 
-  /* ---------- CARD OF DAY ---------- */
+  /* ---------- CARD OF THE DAY ---------- */
+  cardDayBtn.onclick = async () => {
+    const index = Math.floor(Math.random() * 22);
+    const reversed = Math.random() < 0.5;
 
-  dayBtn.onclick = () => {
-    reset();
-    const index = new Date().getDate() % 22;
-    showCard(index, dayTexts[index][LANG]);
+    renderCard(index, reversed);
+    cardName.textContent = cards[index].name[LANG];
+
+    let text = dayTexts[index][LANG];
+
+    if (reversed) {
+      text += LANG === "ru"
+        ? "\n\n(Перевёрнутая позиция смещает фокус внутрь.)"
+        : "\n\n(Reversed position shifts the focus inward.)";
+    }
+
+    cardText.textContent = text;
+    showResult();
   };
 
   /* ---------- QUESTION CARD ---------- */
-
   questionBtn.onclick = () => {
-    reset();
     const index = Math.floor(Math.random() * 22);
-    showCard(index, cards[index].upright[LANG]);
+    const reversed = Math.random() < 0.5;
+
+    renderCard(index, reversed);
+    cardName.textContent = cards[index].name[LANG];
+
+    cardText.textContent = reversed
+      ? cards[index].reversed[LANG]
+      : cards[index].upright[LANG];
+
+    showResult();
   };
 
   /* ---------- GLOSSARY ---------- */
-
   glossaryBtn.onclick = () => {
-    reset();
-    glossaryGrid.innerHTML = "";
-
-    glossary.forEach((card, index) => {
-      const el = document.createElement("div");
-      el.className = "glossary-item";
-
-      el.innerHTML = `
-        <img src="./images/cards/${String(index).padStart(2,"0")}.png">
-        <div>${card.name[LANG]}</div>
-      `;
-
-      el.onclick = () => {
-        showCard(index, card.archetype[LANG]);
-      };
-
-      glossaryGrid.appendChild(el);
-    });
-
-    glossaryGrid.classList.remove("hidden");
-    showBack(true);
+    window.open("./glossary/glossary.html", "_self");
   };
 
-  backBtn.onclick = () => {
-    reset();
-  };
-
+  backBtn.onclick = showMain;
 });
