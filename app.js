@@ -8,36 +8,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const LANG = user.language_code === "en" ? "en" : "ru";
 
-  const BUTTON_TEXTS = {
-    ru: {
-      day: "Карта дня",
-      question: "Карта вопроса",
-      glossary: "Глоссарий"
-    },
-    en: {
-      day: "Card of the Day",
-      question: "Question Card",
-      glossary: "Glossary"
-    }
-  };
-
   const API_URL =
     "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
 
-  const cardButton     = document.getElementById("cardButton");
+  const cardButton = document.getElementById("cardButton");
   const questionButton = document.getElementById("questionButton");
   const glossaryButton = document.getElementById("glossaryButton");
+  const backButton = document.getElementById("backButton");
 
-  const cardImage    = document.getElementById("cardImage");
-  const cardName     = document.getElementById("cardName");
-  const cardMeaning  = document.getElementById("cardMeaning");
+  const mainButtons = document.getElementById("mainButtons");
+  const backWrap = document.getElementById("backButtonWrap");
+
+  const cardImage = document.getElementById("cardImage");
+  const cardName = document.getElementById("cardName");
+  const cardMeaning = document.getElementById("cardMeaning");
   const cardPosition = document.getElementById("cardPosition");
+  const result = document.getElementById("result");
   const glossaryGrid = document.getElementById("glossaryGrid");
-  const resultBlock  = document.getElementById("result");
-
-  cardButton.textContent     = BUTTON_TEXTS[LANG].day;
-  questionButton.textContent = BUTTON_TEXTS[LANG].question;
-  glossaryButton.textContent = BUTTON_TEXTS[LANG].glossary;
 
   let cardsData = {};
   let dayTexts = {};
@@ -47,12 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("./texts/day-texts.json").then(r => r.json()).then(d => dayTexts = d);
   fetch("./glossary/glossary.json").then(r => r.json()).then(d => glossaryData = d);
 
-  function reset() {
-    cardImage.classList.add("hidden");
-    cardMeaning.classList.add("hidden");
-    cardPosition.classList.add("hidden");
+  function resetView() {
+    result.classList.add("hidden");
     glossaryGrid.classList.add("hidden");
-    glossaryGrid.innerHTML = "";
+    cardImage.classList.add("hidden");
+    cardPosition.classList.add("hidden");
   }
 
   function renderImage(index, reversed) {
@@ -62,8 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cardImage.classList.remove("hidden");
   }
 
-  async function getCardOfTheDay() {
-    reset();
+  async function cardOfDay() {
+    resetView();
 
     const res = await fetch(API_URL, {
       method: "POST",
@@ -75,17 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderImage(card, reversed);
     cardName.textContent = cardsData[card].name[LANG];
-
-    cardMeaning.textContent =
-      dayTexts[card][LANG] +
-      (reversed ? "\n\n" + dayTexts[card][`reversed_${LANG}`] : "");
-
-    cardMeaning.classList.remove("hidden");
-    resultBlock.classList.remove("hidden");
+    cardMeaning.textContent = dayTexts[card][LANG];
+    result.classList.remove("hidden");
   }
 
-  function getQuestionCard() {
-    reset();
+  function questionCard() {
+    resetView();
 
     const card = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
@@ -96,41 +77,45 @@ document.addEventListener("DOMContentLoaded", () => {
       ? cardsData[card].reversed[LANG]
       : cardsData[card].upright[LANG];
 
-    cardMeaning.classList.remove("hidden");
-    resultBlock.classList.remove("hidden");
+    result.classList.remove("hidden");
   }
 
   function openGlossary() {
-    reset();
-    cardName.textContent = LANG === "ru" ? "Глоссарий Арканов" : "Arcana Glossary";
+    resetView();
+    mainButtons.classList.add("hidden");
+    backWrap.classList.remove("hidden");
+
+    glossaryGrid.innerHTML = "";
 
     Object.entries(glossaryData).forEach(([i, card]) => {
       const el = document.createElement("div");
       el.className = "glossary-card";
       el.innerHTML = `
         <img src="./images/cards/${String(i).padStart(2,"0")}.png">
-        <div class="glossary-card-title">${card.name[LANG]}</div>
+        <div class="glossary-title">${card.name[LANG]}</div>
       `;
       el.onclick = () => {
-        reset();
+        resetView();
         renderImage(i, false);
         cardName.textContent = card.name[LANG];
-        cardMeaning.innerHTML = `
-          <p>${card.archetype[LANG]}</p>
-          <p><strong>Upright:</strong><br>${card.upright[LANG]}</p>
-          <p><strong>Reversed:</strong><br>${card.reversed[LANG]}</p>
-        `;
-        cardMeaning.classList.remove("hidden");
+        cardMeaning.textContent = card.archetype[LANG];
+        result.classList.remove("hidden");
       };
       glossaryGrid.appendChild(el);
     });
 
     glossaryGrid.classList.remove("hidden");
-    resultBlock.classList.remove("hidden");
   }
 
-  cardButton.onclick = getCardOfTheDay;
-  questionButton.onclick = getQuestionCard;
+  function goBack() {
+    resetView();
+    mainButtons.classList.remove("hidden");
+    backWrap.classList.add("hidden");
+  }
+
+  cardButton.onclick = cardOfDay;
+  questionButton.onclick = questionCard;
   glossaryButton.onclick = openGlossary;
+  backButton.onclick = goBack;
 
 });
