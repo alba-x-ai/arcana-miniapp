@@ -4,41 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arcana</title>
-
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="app">
+  <div id="app">
 
-    <h1 class="title">Arcana</h1>
+    <h1 id="title">Arcana</h1>
 
-    <!-- BUTTONS -->
-    <div class="buttons" id="mainButtons">
-      <button id="cardButton">Карта дня</button>
-      <button id="questionButton">Карта вопроса</button>
-      <button id="glossaryButton">Глоссарий</button>
+    <div id="buttons">
+      <button id="dayBtn"></button>
+      <button id="questionBtn"></button>
+      <button id="glossaryBtn"></button>
+      <button id="backBtn" class="hidden"></button>
     </div>
 
-    <!-- BACK BUTTON -->
-    <div class="buttons hidden" id="backButtonWrap">
-      <button id="backButton">Назад</button>
+    <div id="cardView" class="hidden">
+      <img id="cardImage" />
+      <h2 id="cardName"></h2>
+      <div id="cardText"></div>
     </div>
 
-    <!-- RESULT -->
-    <div id="result" class="result hidden">
-      <img id="cardImage" class="card-image hidden" />
-      <div id="cardName" class="card-name"></div>
-      <div id="cardMeaning" class="card-meaning"></div>
-      <div id="cardPosition" class="card-position hidden"></div>
-    </div>
-
-    <!-- GLOSSARY -->
-    <div id="glossaryGrid" class="glossary-grid hidden"></div>
+    <div id="glossaryGrid" class="hidden"></div>
 
   </div>
 
-  <script src="./app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
