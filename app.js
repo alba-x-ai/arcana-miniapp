@@ -1,16 +1,14 @@
 /**********************************************************
- * ARCANA — Card of the Day
- * Backend: Cloudflare Worker
- * URL: https://dawn-glitter-5c15.j4albaai.workers.dev
- * Texts: texts/day-texts.json
+ * ARCANA — Card of the Day (backend) + Question Card (front)
  **********************************************************/
 
 /* ---------- DOM ---------- */
 const homeScreen = document.getElementById("home");
 const dayScreen  = document.getElementById("day");
 
-const btnDay  = document.getElementById("btn-day");
-const btnBack = document.getElementById("btn-back");
+const btnDay      = document.getElementById("btn-day");
+const btnQuestion = document.getElementById("btn-question");
+const btnBack     = document.getElementById("btn-back");
 
 const cardImage = document.getElementById("card-image");
 const cardTitle = document.getElementById("card-title");
@@ -25,7 +23,6 @@ function showScreen(screen) {
   document
     .querySelectorAll(".screen")
     .forEach(s => s.classList.remove("active"));
-
   screen.classList.add("active");
 }
 
@@ -35,25 +32,27 @@ btnDay.addEventListener("click", () => {
   loadDayCard();
 });
 
+btnQuestion.addEventListener("click", () => {
+  showScreen(dayScreen);
+  loadQuestionCard();
+});
+
 btnBack.addEventListener("click", () => {
   showScreen(homeScreen);
 });
 
-/* ---------- CARD OF THE DAY ---------- */
+/* ---------- CARD OF THE DAY (BACKEND) ---------- */
 async function loadDayCard() {
   try {
-    /* --- 1. Получаем user_id из Telegram --- */
     let userId = 1; // fallback для браузера
-
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
-      if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+      if (tg.initDataUnsafe?.user) {
         userId = tg.initDataUnsafe.user.id;
       }
     }
 
-    /* --- 2. Запрос к backend --- */
     const backendResponse = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -66,22 +65,38 @@ async function loadDayCard() {
 
     const { card, reversed } = await backendResponse.json();
 
-    /* --- 3. Загружаем тексты дня --- */
     const textsResponse = await fetch("texts/day-texts.json");
-    if (!textsResponse.ok) {
-      throw new Error("Day texts not found");
-    }
-
     const dayTexts = await textsResponse.json();
-    const position = reversed ? "reversed" : "upright";
-    const text     = dayTexts[card].ru[position];
 
-    /* --- 4. Рендер --- */
+    const position = reversed ? "reversed" : "upright";
+    const text = dayTexts[card].ru[position];
+
     renderCard(card, reversed, text);
 
   } catch (error) {
     console.error(error);
     cardText.textContent = "Ошибка загрузки карты дня.";
+  }
+}
+
+/* ---------- QUESTION CARD (FRONTEND) ---------- */
+async function loadQuestionCard() {
+  try {
+    const cardsRes = await fetch("cards.json");
+    const cards = await cardsRes.json();
+
+    const cardId = Math.floor(Math.random() * 22);
+    const reversed = Math.random() < 0.5;
+
+    const text = reversed
+      ? cards[cardId].reversed.ru
+      : cards[cardId].upright.ru;
+
+    renderCard(cardId, reversed, text);
+
+  } catch (error) {
+    console.error(error);
+    cardText.textContent = "Ошибка загрузки карты вопроса.";
   }
 }
 
@@ -97,11 +112,11 @@ function renderCard(cardId, reversed, text) {
 /* ---------- CARD NAMES ---------- */
 function getCardName(id) {
   const names = [
-    "Шут", "Маг", "Жрица", "Императрица", "Император",
-    "Иерофант", "Влюблённые", "Колесница", "Сила", "Отшельник",
-    "Колесо Фортуны", "Справедливость", "Повешенный", "Смерть",
-    "Умеренность", "Дьявол", "Башня", "Звезда", "Луна",
-    "Солнце", "Суд", "Мир"
+    "Шут","Маг","Жрица","Императрица","Император",
+    "Иерофант","Влюблённые","Колесница","Сила","Отшельник",
+    "Колесо Фортуны","Справедливость","Повешенный","Смерть",
+    "Умеренность","Дьявол","Башня","Звезда","Луна",
+    "Солнце","Суд","Мир"
   ];
   return names[id];
 }
