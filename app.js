@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   /* ---------- DOM ---------- */
   const cardButton     = document.getElementById("cardButton");
   const questionButton = document.getElementById("questionButton");
+  const glossaryButton = document.getElementById("glossaryButton");
   const backButton     = document.getElementById("backButton");
 
   const cardImage   = document.getElementById("cardImage");
@@ -28,9 +29,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cardsRes = await fetch("./cards.json");
     cards = await cardsRes.json();
 
-    // 🔴 ВОТ ОН. ЯВНЫЙ. ЕДИНСТВЕННЫЙ. ПУТЬ.
-    const dayTextsRes = await fetch("./texts/day-texts.json");
-    dayTexts = await dayTextsRes.json();
+    const dayRes = await fetch("./texts/day-texts.json");
+    dayTexts = await dayRes.json();
   } catch (e) {
     console.error("Ошибка загрузки JSON:", e);
     return;
@@ -71,13 +71,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     cardName.textContent = cards[index].name[LANG];
 
-    // 🔴 ТЕКСТ ТОЛЬКО ОТСЮДА
-    cardMeaning.textContent = dayTexts[index][LANG];
+    // 🔒 СТРОГО ПО ТВОЕЙ СТРУКТУРЕ
+    cardMeaning.textContent =
+      dayTexts[index][LANG].upright;
 
-    // комментарий для перевёрнутой (если есть)
-    if (reversed && dayTexts[index].reversed?.[LANG]) {
+    if (reversed) {
       cardMeaning.textContent +=
-        "\n\n" + dayTexts[index].reversed[LANG];
+        "\n\n" + dayTexts[index][LANG].reversed;
     }
 
     backButton.classList.remove("hidden");
@@ -108,5 +108,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   /* ---------- EVENTS ---------- */
   cardButton?.addEventListener("click", showCardOfDay);
   questionButton?.addEventListener("click", showQuestionCard);
+  glossaryButton?.addEventListener("click", () => {
+    window.location.href = "./glossary/glossary.html";
+  });
   backButton?.addEventListener("click", goBack);
 });
