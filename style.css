@@ -1,108 +1,127 @@
+/* ---------- RESET ---------- */
 * {
   box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
   padding: 0;
-}
-
-body {
-  background: url("./images/background.png") center / cover no-repeat fixed;
+  height: 100%;
+  background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #fff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont;
 }
 
-.app {
+/* ---------- APP CONTAINER ---------- */
+#app {
   min-height: 100vh;
+  width: 100%;
+  background-image: url("./images/bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* 🔑 ВОТ ЭТО ГЛАВНОЕ */
-  justify-content: center;
-
-  padding: 24px;
-  gap: 24px;
 }
 
-.title {
-  font-size: 32px;
-  font-weight: 300;
+/* ---------- TITLE ---------- */
+h1 {
+  margin-top: 14vh;
+  margin-bottom: 20px;
+  font-weight: 400;
   letter-spacing: 0.04em;
 }
 
-.buttons {
+/* ---------- CONTROLS (BUTTONS) ---------- */
+.controls {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
 }
 
+/* ---------- BUTTON STYLE ---------- */
 button {
-  background: rgba(255,255,255,0.18);
-  border: 1px solid rgba(255,255,255,0.35);
-  color: #fff;
-  padding: 12px 20px;
+  padding: 14px 26px;
   border-radius: 999px;
-  font-size: 14px;
-  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  font-size: 16px;
   backdrop-filter: blur(6px);
+  cursor: pointer;
 }
 
 button:active {
-  transform: scale(0.97);
+  background: rgba(255,255,255,0.28);
 }
 
-.result {
+/* ---------- RESULT BLOCK ---------- */
+#result {
+  width: 100%;
+  max-width: 420px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  max-width: 420px;
+}
+
+/* ---------- CARD IMAGE ---------- */
+#cardImage {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+/* ---------- TEXT ---------- */
+#cardName {
+  font-size: 20px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
-.card-image {
-  width: 100%;
-  max-width: 320px;
-  border-radius: 12px;
-}
-
-.card-text {
+#cardMeaning {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.5;
   opacity: 0.9;
+  text-align: center;
 }
 
-.card-position {
+#cardPosition {
+  margin-top: 10px;
   font-size: 13px;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 /* ---------- GLOSSARY GRID ---------- */
-
-.glossary-grid {
+#glossaryGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 12px;
   width: 100%;
   max-width: 420px;
+  margin-top: 20px;
 }
 
+/* ---------- GLOSSARY CARD ---------- */
 .glossary-card {
   padding: 14px;
-  text-align: center;
-  border-radius: 12px;
+  border-radius: 14px;
   background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
+  text-align: center;
   cursor: pointer;
+  backdrop-filter: blur(6px);
 }
 
 .glossary-card-title {
   font-size: 14px;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
-/* ---------- UTILS ---------- */
-
+/* ---------- HELPERS ---------- */
 .hidden {
-  display: none;
+  display: none !important;
 }
