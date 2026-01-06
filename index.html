@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arcana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Telegram WebApp -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <link rel="stylesheet" href="style.css" />
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
-  <main class="app">
+  <div class="app">
 
     <h1 class="title">Arcana</h1>
 
     <div class="buttons">
       <button id="cardButton"></button>
       <button id="questionButton"></button>
-      <button id="glossaryButton"></button>
     </div>
 
-    <section id="result" class="result hidden">
+    <div id="result" class="result hidden">
       <img id="cardImage" class="card-image hidden" />
-      <h2 id="cardName"></h2>
-      <div id="cardPosition" class="card-position hidden"></div>
-      <div id="cardMeaning" class="card-text hidden"></div>
-    </section>
+      <div id="cardName" class="card-name"></div>
+      <div id="cardMeaning" class="card-meaning hidden"></div>
+    </div>
 
-    <section id="glossaryGrid" class="glossary-grid hidden"></section>
-
-  </main>
+  </div>
 
   <script src="app.js"></script>
 </body>
