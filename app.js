@@ -1,85 +1,112 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const tg = window.Telegram.WebApp;
-  tg.ready();
+document.addEventListener("DOMContentLoaded", async () => {
+  /* ---------- TELEGRAM ---------- */
+  const tg = window.Telegram?.WebApp;
+  if (tg) tg.ready();
 
-  const mainScreen = document.getElementById("mainScreen");
-  const resultScreen = document.getElementById("resultScreen");
-  const glossaryScreen = document.getElementById("glossaryScreen");
+  const user = tg?.initDataUnsafe?.user;
+  const LANG = user?.language_code === "en" ? "en" : "ru";
 
-  const dayBtn = document.getElementById("dayBtn");
-  const questionBtn = document.getElementById("questionBtn");
-  const glossaryBtn = document.getElementById("glossaryBtn");
-  const backBtn = document.getElementById("backBtn");
-  const glossaryBackBtn = document.getElementById("glossaryBackBtn");
+  /* ---------- API ---------- */
+  const API_URL =
+    "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
 
-  const cardImage = document.getElementById("cardImage");
-  const cardName = document.getElementById("cardName");
-  const cardText = document.getElementById("cardText");
-  const cardNote = document.getElementById("cardNote");
+  /* ---------- DOM ---------- */
+  const cardButton     = document.getElementById("cardButton");
+  const questionButton = document.getElementById("questionButton");
+  const backButton     = document.getElementById("backButton");
 
-  const glossaryGrid = document.getElementById("glossaryGrid");
+  const cardImage   = document.getElementById("cardImage");
+  const cardName    = document.getElementById("cardName");
+  const cardMeaning = document.getElementById("cardMeaning");
 
-  function show(screen) {
-    mainScreen.classList.add("hidden");
-    resultScreen.classList.add("hidden");
-    glossaryScreen.classList.add("hidden");
-    screen.classList.remove("hidden");
+  /* ---------- DATA ---------- */
+  let cards = {};
+  let dayTexts = {};
+
+  /* ---------- LOAD JSON ---------- */
+  try {
+    const cardsRes = await fetch("./cards.json");
+    cards = await cardsRes.json();
+
+    // 🔴 ВОТ ОН. ЯВНЫЙ. ЕДИНСТВЕННЫЙ. ПУТЬ.
+    const dayTextsRes = await fetch("./texts/day-texts.json");
+    dayTexts = await dayTextsRes.json();
+  } catch (e) {
+    console.error("Ошибка загрузки JSON:", e);
+    return;
   }
 
-  /* ===== CARD OF THE DAY ===== */
-  dayBtn.onclick = () => {
-    show(resultScreen);
+  /* ---------- HELPERS ---------- */
+  function clearView() {
+    cardImage.classList.add("hidden");
+    cardName.textContent = "";
+    cardMeaning.textContent = "";
+    backButton.classList.add("hidden");
+  }
 
-    cardImage.src = "./images/cards/00.png";
+  function renderImage(index, reversed) {
+    const imgIndex = String(index).padStart(2, "0");
+    cardImage.src = `./images/cards/${imgIndex}.png`;
+    cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
     cardImage.classList.remove("hidden");
+  }
 
-    cardName.textContent = "Шут";
-    cardText.textContent = "Начало пути, доверие жизни, открытость опыту.";
-    cardNote.textContent = "";
-  };
+  /* ---------- CARD OF THE DAY ---------- */
+  async function showCardOfDay() {
+    clearView();
 
-  /* ===== QUESTION CARD ===== */
-  questionBtn.onclick = () => {
-    show(resultScreen);
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: user?.id || "anon",
+      }),
+    });
 
-    cardImage.src = "./images/cards/07.png";
-    cardImage.classList.remove("hidden");
+    const data = await res.json();
+    const index = data.card;
+    const reversed = data.reversed;
 
-    cardName.textContent = "Колесница";
-    cardText.textContent = "Движение вперёд, воля, преодоление.";
-    cardNote.textContent = "";
-  };
+    renderImage(index, reversed);
 
-  /* ===== GLOSSARY ===== */
-  glossaryBtn.onclick = () => {
-    show(glossaryScreen);
-    glossaryGrid.innerHTML = "";
+    cardName.textContent = cards[index].name[LANG];
 
-    fetch("./glossary/glossary.json")
-      .then(r => r.json())
-      .then(data => {
-        Object.values(data).forEach(card => {
-          const item = document.createElement("div");
-          item.className = "glossary-item";
-          item.innerHTML = `
-            <img src="./images/cards/${card.id}.png">
-            <div class="title">${card.name.ru}</div>
-          `;
+    // 🔴 ТЕКСТ ТОЛЬКО ОТСЮДА
+    cardMeaning.textContent = dayTexts[index][LANG];
 
-          item.onclick = () => {
-            show(resultScreen);
-            cardImage.src = `./images/cards/${card.id}.png`;
-            cardImage.classList.remove("hidden");
-            cardName.textContent = card.name.ru;
-            cardText.textContent = card.upright.ru;
-            cardNote.textContent = "Перевёрнутая позиция смещает фокус внутрь.";
-          };
+    // комментарий для перевёрнутой (если есть)
+    if (reversed && dayTexts[index].reversed?.[LANG]) {
+      cardMeaning.textContent +=
+        "\n\n" + dayTexts[index].reversed[LANG];
+    }
 
-          glossaryGrid.appendChild(item);
-        });
-      });
-  };
+    backButton.classList.remove("hidden");
+  }
 
-  backBtn.onclick = () => show(mainScreen);
-  glossaryBackBtn.onclick = () => show(mainScreen);
+  /* ---------- QUESTION CARD ---------- */
+  function showQuestionCard() {
+    clearView();
+
+    const index = Math.floor(Math.random() * 22);
+    const reversed = Math.random() < 0.5;
+
+    renderImage(index, reversed);
+
+    cardName.textContent = cards[index].name[LANG];
+    cardMeaning.textContent = reversed
+      ? cards[index].reversed[LANG]
+      : cards[index].upright[LANG];
+
+    backButton.classList.remove("hidden");
+  }
+
+  /* ---------- BACK ---------- */
+  function goBack() {
+    clearView();
+  }
+
+  /* ---------- EVENTS ---------- */
+  cardButton?.addEventListener("click", showCardOfDay);
+  questionButton?.addEventListener("click", showQuestionCard);
+  backButton?.addEventListener("click", goBack);
 });
