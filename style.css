@@ -5,87 +5,84 @@
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  min-height: 100%;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #000;
+  color: #fff;
 }
 
-body {
-  font-family: system-ui, sans-serif;
-  color: white;
-
-  background:
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url("./images/background/bg.png");
-
+/* ===== ФОН ===== */
+.background {
+  position: fixed;
+  inset: 0;
+  background-image: url("./images/background/bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  text-align: center;
-  padding: 32px;
+  /* ВАЖНО */
+  z-index: 0;
+  pointer-events: none;
 }
 
+/* ===== ОСНОВНОЕ ПРИЛОЖЕНИЕ ===== */
+.app {
+  position: relative;
+  z-index: 1;
+
+  min-height: 100vh;
+  padding: 48px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+/* ===== ЗАГОЛОВОК ===== */
 .title {
-  font-size: 32px;
+  margin-top: 40px;
   margin-bottom: 24px;
+  font-size: 32px;
+  font-weight: 500;
 }
 
+/* ===== КНОПКИ ===== */
 .buttons {
   display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
+  flex-direction: column;
+  gap: 14px;
 }
 
 button {
-  padding: 14px 26px;
+  min-width: 220px;
+  padding: 14px 20px;
+
   font-size: 16px;
-  color: white;
-  background: rgba(255,255,255,0.25);
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 20px;
+  color: #fff;
+
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 999px;
+
+  backdrop-filter: blur(6px);
   cursor: pointer;
 }
 
 button:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
+/* ===== РЕЗУЛЬТАТ ===== */
 #result {
-  max-width: 320px;
-  margin: 0 auto;
+  margin-top: 24px;
+  text-align: center;
 }
 
 #cardImage {
-  width: 100%;
   max-width: 260px;
-  margin-bottom: 12px;
-}
-
-#cardName {
-  font-size: 22px;
-  margin-bottom: 8px;
-}
-
-#cardMeaning {
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-#glossary {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  max-width: 360px;
-  margin: 0 auto;
-}
-
-.glossary-item {
-  padding: 14px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 14px;
-  cursor: pointer;
+  margin-bottom: 16px;
 }
 
 .hidden {
