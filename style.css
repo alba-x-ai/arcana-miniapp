@@ -4,22 +4,17 @@
   padding: 0;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #fff;
-  background: #000;
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url("./images/background/bg.png") center / cover no-repeat fixed;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-    url("./images/background/bg.png") center / cover no-repeat;
-  z-index: -1;
+body {
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #fff;
 }
 
 /* APP */
@@ -34,7 +29,6 @@ body::before {
 /* TITLE */
 .title {
   font-size: 32px;
-  font-weight: 400;
   margin-bottom: 28px;
 }
 
@@ -91,7 +85,7 @@ button:active {
   opacity: 0.75;
 }
 
-/* GLOSSARY GRID */
+/* GLOSSARY */
 .glossary-grid {
   width: 100%;
   max-width: 520px;
@@ -116,7 +110,6 @@ button:active {
   opacity: 0.9;
 }
 
-/* HELPERS */
 .hidden {
   display: none;
 }
