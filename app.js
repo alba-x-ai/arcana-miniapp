@@ -1,64 +1,69 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  /* ---------- TELEGRAM ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+
   const tg = window.Telegram.WebApp;
   tg.ready();
 
   const user = tg.initDataUnsafe?.user;
   if (!user) return;
 
-  /* ---------- LANGUAGE ---------- */
   const LANG = user.language_code === "en" ? "en" : "ru";
 
-  /* ---------- API ---------- */
+  const BUTTON_TEXTS = {
+    ru: {
+      day: "Карта дня",
+      question: "Карта вопроса",
+      glossary: "Глоссарий"
+    },
+    en: {
+      day: "Card of the Day",
+      question: "Question Card",
+      glossary: "Glossary"
+    }
+  };
+
   const API_URL =
     "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
 
-  /* ---------- DOM ---------- */
-  const cardButton = document.getElementById("cardButton");
+  const cardButton     = document.getElementById("cardButton");
   const questionButton = document.getElementById("questionButton");
   const glossaryButton = document.getElementById("glossaryButton");
 
-  const cardImage = document.getElementById("cardImage");
-  const cardName = document.getElementById("cardName");
-  const cardMeaning = document.getElementById("cardMeaning");
+  const cardImage    = document.getElementById("cardImage");
+  const cardName     = document.getElementById("cardName");
+  const cardMeaning  = document.getElementById("cardMeaning");
   const cardPosition = document.getElementById("cardPosition");
+  const glossaryGrid = document.getElementById("glossaryGrid");
+  const resultBlock  = document.getElementById("result");
 
-  const glossaryContainer = document.getElementById("glossaryContainer");
-  const resultBlock = document.getElementById("result");
+  cardButton.textContent     = BUTTON_TEXTS[LANG].day;
+  questionButton.textContent = BUTTON_TEXTS[LANG].question;
+  glossaryButton.textContent = BUTTON_TEXTS[LANG].glossary;
 
-  /* ---------- DATA ---------- */
   let cardsData = {};
   let dayTexts = {};
+  let glossaryData = {};
 
-  await fetch("./cards.json")
-    .then(r => r.json())
-    .then(d => (cardsData = d));
+  fetch("./cards.json").then(r => r.json()).then(d => cardsData = d);
+  fetch("./texts/day-texts.json").then(r => r.json()).then(d => dayTexts = d);
+  fetch("./glossary/glossary.json").then(r => r.json()).then(d => glossaryData = d);
 
-  await fetch("./texts/day-texts.json")
-    .then(r => r.json())
-    .then(d => (dayTexts = d));
-
-  /* ---------- HELPERS ---------- */
-  function resetView() {
-    resultBlock.classList.add("hidden");
-    glossaryContainer.classList.add("hidden");
-
+  function reset() {
     cardImage.classList.add("hidden");
+    cardMeaning.classList.add("hidden");
     cardPosition.classList.add("hidden");
-
-    cardMeaning.innerHTML = "";
+    glossaryGrid.classList.add("hidden");
+    glossaryGrid.innerHTML = "";
   }
 
   function renderImage(index, reversed) {
-    const fileIndex = String(index).padStart(2, "0");
-    cardImage.src = `./images/cards/${fileIndex}.png`;
+    const id = String(index).padStart(2, "0");
+    cardImage.src = `./images/cards/${id}.png`;
     cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
     cardImage.classList.remove("hidden");
   }
 
-  /* ---------- CARD OF THE DAY ---------- */
   async function getCardOfTheDay() {
-    resetView();
+    reset();
 
     const res = await fetch(API_URL, {
       method: "POST",
@@ -66,63 +71,66 @@ document.addEventListener("DOMContentLoaded", async () => {
       body: JSON.stringify({ user_id: user.id })
     });
 
-    const data = await res.json();
+    const { card, reversed } = await res.json();
 
-    const card = cardsData[data.card];
+    renderImage(card, reversed);
+    cardName.textContent = cardsData[card].name[LANG];
 
-    renderImage(data.card, data.reversed);
+    cardMeaning.textContent =
+      dayTexts[card][LANG] +
+      (reversed ? "\n\n" + dayTexts[card][`reversed_${LANG}`] : "");
 
-    cardName.textContent = card.name[LANG];
-    cardMeaning.textContent = dayTexts[data.card][LANG];
-
-    if (data.reversed) {
-      cardPosition.textContent =
-        LANG === "ru"
-          ? "Перевёрнутая позиция добавляет внутренний оттенок."
-          : "The reversed position adds an inner nuance.";
-      cardPosition.classList.remove("hidden");
-    }
-
+    cardMeaning.classList.remove("hidden");
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- QUESTION CARD ---------- */
   function getQuestionCard() {
-    resetView();
+    reset();
 
-    const index = Math.floor(Math.random() * 22);
+    const card = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
-    const card = cardsData[index];
 
-    renderImage(index, reversed);
-
-    cardName.textContent = card.name[LANG];
+    renderImage(card, reversed);
+    cardName.textContent = cardsData[card].name[LANG];
     cardMeaning.textContent = reversed
-      ? card.reversed[LANG]
-      : card.upright[LANG];
+      ? cardsData[card].reversed[LANG]
+      : cardsData[card].upright[LANG];
 
-    if (reversed) {
-      cardPosition.textContent =
-        LANG === "ru" ? "Перевёрнутая" : "Reversed";
-      cardPosition.classList.remove("hidden");
-    }
-
+    cardMeaning.classList.remove("hidden");
     resultBlock.classList.remove("hidden");
   }
 
-  /* ---------- GLOSSARY ---------- */
-  glossaryButton.addEventListener("click", async () => {
-    resetView();
-    glossaryContainer.classList.remove("hidden");
+  function openGlossary() {
+    reset();
+    cardName.textContent = LANG === "ru" ? "Глоссарий Арканов" : "Arcana Glossary";
 
-    if (!window.renderGlossary) {
-      const script = document.createElement("script");
-      script.src = "./glossary/glossary.js";
-      document.body.appendChild(script);
-    }
-  });
+    Object.entries(glossaryData).forEach(([i, card]) => {
+      const el = document.createElement("div");
+      el.className = "glossary-card";
+      el.innerHTML = `
+        <img src="./images/cards/${String(i).padStart(2,"0")}.png">
+        <div class="glossary-card-title">${card.name[LANG]}</div>
+      `;
+      el.onclick = () => {
+        reset();
+        renderImage(i, false);
+        cardName.textContent = card.name[LANG];
+        cardMeaning.innerHTML = `
+          <p>${card.archetype[LANG]}</p>
+          <p><strong>Upright:</strong><br>${card.upright[LANG]}</p>
+          <p><strong>Reversed:</strong><br>${card.reversed[LANG]}</p>
+        `;
+        cardMeaning.classList.remove("hidden");
+      };
+      glossaryGrid.appendChild(el);
+    });
 
-  /* ---------- EVENTS ---------- */
-  cardButton.addEventListener("click", getCardOfTheDay);
-  questionButton.addEventListener("click", getQuestionCard);
+    glossaryGrid.classList.remove("hidden");
+    resultBlock.classList.remove("hidden");
+  }
+
+  cardButton.onclick = getCardOfTheDay;
+  questionButton.onclick = getQuestionCard;
+  glossaryButton.onclick = openGlossary;
+
 });
