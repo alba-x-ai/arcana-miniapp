@@ -1,31 +1,22 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>Arcana</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Arcana Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
-  <div class="app">
+<body style="background:black;color:white;display:flex;align-items:center;justify-content:center;height:100vh;">
 
-    <h1 class="title">Arcana</h1>
+  <button id="testBtn" style="font-size:20px;padding:20px;">
+    НАЖМИ МЕНЯ
+  </button>
 
-    <div class="buttons">
-      <button id="cardButton">Карта дня</button>
-      <button id="questionButton">Карта вопроса</button>
-    </div>
+  <script>
+    document.getElementById("testBtn").onclick = () => {
+      alert("КЛИК РАБОТАЕТ");
+    };
+  </script>
 
-    <div id="result" class="hidden">
-      <img id="cardImage" />
-      <div id="cardName"></div>
-      <div id="cardMeaning"></div>
-    </div>
-
-  </div>
-
-  <script src="app.js"></script>
 </body>
 </html>
