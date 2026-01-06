@@ -1,7 +1,3 @@
-/* =========================
-   RESET & BASE
-========================= */
-
 * {
   box-sizing: border-box;
 }
@@ -11,196 +7,86 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #000;
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow-x: hidden;
-  color: #fff;
-}
-
-
-/* =========================
-   APP CONTAINER
-========================= */
-
-.app {
-  min-height: 100svh; /* критично для Telegram + desktop */
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;   /* ВЕРТИКАЛЬНЫЙ ЦЕНТР */
-  align-items: center;       /* ГОРИЗОНТАЛЬНЫЙ ЦЕНТР */
-
-  gap: 22px;
-  padding: 24px 16px 40px;
-
-  background-image: url("./images/bg.png"); /* PNG */
+  background-image: url("./images/background/bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  color: #ffffff;
 }
 
+/* ---------- APP ---------- */
 
-/* =========================
-   TITLE
-========================= */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+}
+
+/* ---------- TITLE ---------- */
 
 .title {
-  font-size: 28px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-align: center;
-  margin: 0;
+  font-size: 32px;
+  margin-bottom: 28px;
 }
 
-
-/* =========================
-   BUTTONS
-========================= */
+/* ---------- BUTTONS ---------- */
 
 .buttons {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 32px;
 }
 
 button {
   padding: 14px 26px;
-  font-size: 15px;
-  font-weight: 400;
-  color: #fff;
-
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.35);
-
+  font-size: 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.4);
   background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
+  color: #ffffff;
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease;
+  backdrop-filter: blur(6px);
 }
 
 button:active {
   transform: scale(0.97);
 }
 
-button:hover {
-  background: rgba(255,255,255,0.25);
+/* ---------- RESULT ---------- */
+
+.result {
+  max-width: 320px;
 }
-
-
-/* =========================
-   RESULT BLOCK
-========================= */
-
-#result {
-  width: 100%;
-  max-width: 420px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 14px;
-  margin-top: 16px;
-}
-
-
-/* =========================
-   CARD IMAGE
-========================= */
-
-#cardImage {
-  width: 100%;
-  max-width: 280px;
-  border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-
-
-/* =========================
-   TEXT BLOCKS
-========================= */
-
-#cardName {
-  font-size: 20px;
-  font-weight: 500;
-  text-align: center;
-}
-
-#cardMeaning {
-  font-size: 15px;
-  line-height: 1.6;
-  text-align: center;
-  opacity: 0.95;
-}
-
-#cardPosition {
-  font-size: 14px;
-  opacity: 0.7;
-  text-align: center;
-}
-
-
-/* =========================
-   GLOSSARY GRID
-========================= */
-
-#glossaryGrid {
-  width: 100%;
-  max-width: 420px;
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.glossary-card {
-  padding: 14px 10px;
-  text-align: center;
-
-  border-radius: 14px;
-  font-size: 14px;
-
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  cursor: pointer;
-}
-
-.glossary-card:hover {
-  background: rgba(255,255,255,0.22);
-}
-
-
-/* =========================
-   HELPERS
-========================= */
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 
+/* ---------- CARD ---------- */
 
-/* =========================
-   MOBILE TWEAKS
-========================= */
+.card-image {
+  width: 100%;
+  max-width: 260px;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease;
+}
 
-@media (max-width: 480px) {
-  .title {
-    font-size: 26px;
-  }
+.card-name {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
 
-  #glossaryGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.card-meaning {
+  font-size: 16px;
+  opacity: 0.9;
 }
