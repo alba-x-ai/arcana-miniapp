@@ -1,108 +1,192 @@
-/* ---------- RESET ---------- */
+/* ===== RESET ===== */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* ---------- BODY ---------- */
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
   color: #ffffff;
+  background: #000;
+  overflow-x: hidden;
 }
 
-/* ---------- APP ---------- */
-#app {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background: url("./images/background/bg.png") center / cover no-repeat;
-  overflow: hidden;
-}
-
-/* затемнение */
-#app::before {
+/* ===== BACKGROUND ===== */
+body::before {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  z-index: 0;
+  background: url("./images/background/bg.png") center / cover no-repeat;
+  z-index: -2;
 }
 
-/* ---------- SCREENS ---------- */
-.screen {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35); /* затемнение */
+  z-index: -1;
 }
 
+/* ===== COMMON ===== */
 .hidden {
   display: none !important;
 }
 
-/* ---------- TITLE ---------- */
-h1 {
-  font-size: 32px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  margin-bottom: 32px;
+h1,
+h2,
+h3 {
+  font-weight: 500;
   text-align: center;
-}
-
-/* ---------- BUTTONS ---------- */
-.buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-  max-width: 320px;
-}
-
-button {
-  appearance: none;
-  border: 1px solid rgba(255,255,255,0.35);
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(12px);
-  color: #ffffff;
-  padding: 14px 18px;
-  border-radius: 999px;
-  font-size: 16px;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-/* ---------- RESULT ---------- */
-#resultScreen img {
-  width: 80%;
-  max-width: 340px;
-  margin-bottom: 16px;
-  border-radius: 18px;
-}
-
-#cardName {
-  font-size: 20px;
   margin-bottom: 12px;
 }
 
-#cardText {
+/* ===== MAIN SCREEN ===== */
+.main-screen {
+  min-height: 100vh;
+  padding: 28px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.main-title {
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+/* ===== BUTTONS ===== */
+.button {
+  width: 100%;
+  max-width: 320px;
+  padding: 14px 20px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.button:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* ===== RESULT SCREEN ===== */
+.result-screen {
+  min-height: 100vh;
+  padding: 24px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.card-image {
+  max-width: 90vw;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 18px;
+  display: block;
+  margin: 0 auto;
+}
+
+.card-name {
+  font-size: 22px;
+  margin-top: 6px;
+}
+
+.card-text {
+  font-size: 16px;
+  line-height: 1.45;
   text-align: center;
-  line-height: 1.5;
+  max-width: 420px;
+  opacity: 0.95;
+}
+
+.card-note {
+  font-size: 14px;
+  opacity: 0.7;
+  text-align: center;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-button {
+  margin-top: 18px;
+  width: 200px;
+}
+
+/* ===== GLOSSARY ===== */
+.glossary-screen {
+  min-height: 100vh;
+  padding: 20px 12px 40px;
+}
+
+.glossary-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+/* GRID */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 14px;
+}
+
+/* CARD */
+.glossary-item {
+  cursor: pointer;
+  text-align: center;
+}
+
+.glossary-item img {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
+}
+
+.glossary-item .title {
+  margin-top: 6px;
+  font-size: 13px;
   opacity: 0.9;
 }
 
-/* ---------- BACK BUTTON ---------- */
-#backBtn {
-  margin-top: 24px;
+/* ===== GLOSSARY DETAIL ===== */
+.glossary-detail {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.glossary-detail p {
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+
+/* ===== DESKTOP FIX ===== */
+@media (min-width: 768px) {
+  .main-title {
+    font-size: 36px;
+  }
+
+  .card-text {
+    font-size: 17px;
+  }
 }
