@@ -1,86 +1,97 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const tg = window.Telegram.WebApp;
-  tg.ready();
+document.addEventListener("DOMContentLoaded", async () => {
+  /* ---------- TELEGRAM ---------- */
+  const tg = window.Telegram?.WebApp;
+  tg?.ready();
 
-  const user = tg.initDataUnsafe?.user;
+  const user = tg?.initDataUnsafe?.user;
   const LANG = user?.language_code === "en" ? "en" : "ru";
 
-  /* ---------- DOM ---------- */
-  const mainScreen = document.getElementById("mainScreen");
-  const resultScreen = document.getElementById("resultScreen");
-  const glossaryScreen = document.getElementById("glossaryScreen");
+  /* ---------- API ---------- */
+  const API_URL =
+    "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
 
-  const cardDayBtn = document.getElementById("cardDayBtn");
+  /* ---------- DOM ---------- */
+  const cardDayBtn  = document.getElementById("cardDayBtn");
   const questionBtn = document.getElementById("questionBtn");
   const glossaryBtn = document.getElementById("glossaryBtn");
+  const backBtn     = document.getElementById("backBtn");
 
-  const backBtn = document.getElementById("backBtn");
-  const backFromGlossaryBtn = document.getElementById("backFromGlossaryBtn");
+  const mainScreen   = document.getElementById("mainScreen");
+  const resultScreen = document.getElementById("resultScreen");
 
   const cardImage = document.getElementById("cardImage");
-  const cardName = document.getElementById("cardName");
-  const cardText = document.getElementById("cardText");
-  const glossaryGrid = document.getElementById("glossaryGrid");
+  const cardName  = document.getElementById("cardName");
+  const cardText  = document.getElementById("cardText");
 
   /* ---------- DATA ---------- */
   let cards = {};
   let dayTexts = {};
-  let glossary = {};
 
-  Promise.all([
-    fetch("./cards.json").then(r => r.json()),
-    fetch("./texts/day-texts.json").then(r => r.json()),
-    fetch("./glossary/glossary.json").then(r => r.json())
-  ]).then(([cardsData, dayData, glossaryData]) => {
-    cards = cardsData;
-    dayTexts = dayData;
-    glossary = glossaryData;
-  });
-
-  /* ---------- HELPERS ---------- */
-  function show(screen) {
-    [mainScreen, resultScreen, glossaryScreen].forEach(s =>
-      s.classList.add("hidden")
-    );
-    screen.classList.remove("hidden");
+  try {
+    [cards, dayTexts] = await Promise.all([
+      fetch("./cards.json").then(r => r.json()),
+      fetch("./texts/day-texts.json").then(r => r.json())
+    ]);
+  } catch (e) {
+    console.error("Ошибка загрузки данных:", e);
+    return;
   }
 
-  function renderCard(index, reversed) {
-    const imgIndex = String(index).padStart(2, "0");
-    cardImage.src = `./images/cards/${imgIndex}.png`;
+  /* ---------- HELPERS ---------- */
+  function showMain() {
+    mainScreen.classList.remove("hidden");
+    resultScreen.classList.add("hidden");
+  }
+
+  function showResult() {
+    mainScreen.classList.add("hidden");
+    resultScreen.classList.remove("hidden");
+  }
+
+  function renderCard(index, reversed = false) {
+    const id = String(index).padStart(2, "0");
+    cardImage.src = `./images/cards/${id}.png`;
     cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
     cardName.textContent = cards[index].name[LANG];
   }
 
   /* ---------- CARD OF THE DAY ---------- */
-  async function cardOfDay() {
-    const res = await fetch(
-      "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day",
-      {
+  async function showCardOfDay() {
+    if (!user) return;
+
+    let data;
+    try {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user.id })
-      }
-    );
+      });
+      data = await res.json();
+    } catch (e) {
+      console.error("Ошибка получения карты дня:", e);
+      return;
+    }
 
-    const { card, reversed } = await res.json();
+    const { card, reversed } = data;
 
     renderCard(card, reversed);
 
+    // 🔴 ВАЖНОЕ МЕСТО — ТОЛЬКО С [LANG]
     let text = dayTexts[card][LANG];
+
     if (reversed) {
       text +=
         LANG === "ru"
-          ? " Перевёрнутая позиция смещает фокус внутрь."
-          : " The reversed position shifts the focus inward.";
+          ? "\n\nПеревёрнутая позиция смещает внимание внутрь."
+          : "\n\nThe reversed position shifts attention inward.";
     }
 
     cardText.textContent = text;
-    show(resultScreen);
+    showResult();
   }
 
   /* ---------- QUESTION CARD ---------- */
-  function questionCard() {
+  function showQuestionCard() {
     const index = Math.floor(Math.random() * 22);
     const reversed = Math.random() < 0.5;
 
@@ -90,47 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
       ? cards[index].reversed[LANG]
       : cards[index].upright[LANG];
 
-    show(resultScreen);
-  }
-
-  /* ---------- GLOSSARY ---------- */
-  function openGlossary() {
-    glossaryGrid.innerHTML = "";
-
-    Object.keys(glossary).forEach(index => {
-      const card = glossary[index];
-
-      const item = document.createElement("div");
-      item.className = "glossary-item";
-
-      item.innerHTML = `
-        <img src="./images/cards/${String(index).padStart(2, "0")}.png" />
-        <div>${card.name[LANG]}</div>
-      `;
-
-      item.addEventListener("click", () => {
-        renderCard(index, false);
-
-        cardText.innerHTML = `
-          <p>${card.archetype[LANG]}</p>
-          <p><strong>${LANG === "ru" ? "Прямо:" : "Upright:"}</strong> ${card.upright[LANG]}</p>
-          <p><strong>${LANG === "ru" ? "Перевёрнуто:" : "Reversed:"}</strong> ${card.reversed[LANG]}</p>
-        `;
-
-        show(resultScreen);
-      });
-
-      glossaryGrid.appendChild(item);
-    });
-
-    show(glossaryScreen);
+    showResult();
   }
 
   /* ---------- EVENTS ---------- */
-  cardDayBtn.onclick = cardOfDay;
-  questionBtn.onclick = questionCard;
-  glossaryBtn.onclick = openGlossary;
-
-  backBtn.onclick = () => show(mainScreen);
-  backFromGlossaryBtn.onclick = () => show(mainScreen);
+  cardDayBtn?.addEventListener("click", showCardOfDay);
+  questionBtn?.addEventListener("click", showQuestionCard);
+  glossaryBtn?.addEventListener("click", () => {
+    window.location.href = "./glossary/glossary.html";
+  });
+  backBtn?.addEventListener("click", showMain);
 });
