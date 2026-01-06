@@ -1,65 +1,58 @@
-const homeScreen = document.getElementById("home-screen");
-const dayScreen = document.getElementById("day-screen");
+const home = document.getElementById("home");
+const day = document.getElementById("day");
 
 const btnDay = document.getElementById("btn-day");
-const btnBackFromDay = document.getElementById("btn-back-from-day");
+const btnBack = document.getElementById("btn-back");
 
-const cardImage = document.getElementById("day-card-image");
-const cardTitle = document.getElementById("day-card-title");
-const cardText = document.getElementById("day-card-text");
+const cardImage = document.getElementById("card-image");
+const cardTitle = document.getElementById("card-title");
+const cardText  = document.getElementById("card-text");
 
-// === НАВИГАЦИЯ ===
-function showScreen(screen) {
+// навигация
+function show(screen) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   screen.classList.add("active");
 }
 
-// === КАРТА ДНЯ ===
-btnDay.addEventListener("click", async () => {
-  showScreen(dayScreen);
-  await showDayCard();
+// события
+btnDay.addEventListener("click", () => {
+  show(day);
+  loadDayCard();
 });
 
-btnBackFromDay.addEventListener("click", () => {
-  showScreen(homeScreen);
+btnBack.addEventListener("click", () => {
+  show(home);
 });
 
-// === ЛОГИКА КАРТЫ ДНЯ ===
-async function showDayCard() {
+// карта дня
+async function loadDayCard() {
   try {
-    const response = await fetch("texts/day-texts.json");
-    const dayTexts = await response.json();
+    const res = await fetch("texts/day-texts.json");
+    const texts = await res.json();
 
-    // случайная карта 0–21
-    const cardId = Math.floor(Math.random() * 22);
+    const id = Math.floor(Math.random() * 22);
+    const reversed = Math.random() < 0.5;
+    const pos = reversed ? "reversed" : "upright";
 
-    // случайная ориентация
-    const isReversed = Math.random() < 0.5;
-    const position = isReversed ? "reversed" : "upright";
+    cardImage.src = `images/cards/${String(id).padStart(2,"0")}.png`;
+    cardImage.style.transform = reversed ? "rotate(180deg)" : "none";
 
-    const textObj = dayTexts[cardId];
-    const text = textObj.ru[position];
+    cardTitle.textContent = getName(id);
+    cardText.textContent = texts[id].ru[pos];
 
-    cardImage.src = `images/cards/${String(cardId).padStart(2, "0")}.png`;
-    cardImage.style.transform = isReversed ? "rotate(180deg)" : "none";
-
-    cardTitle.textContent = getCardName(cardId);
-    cardText.textContent = text;
-
-  } catch (err) {
-    cardText.textContent = "Ошибка загрузки текста карты.";
-    console.error(err);
+  } catch (e) {
+    cardText.textContent = "Ошибка загрузки карты дня.";
+    console.error(e);
   }
 }
 
-// === НАЗВАНИЯ КАРТ ===
-function getCardName(id) {
-  const names = [
-    "Шут", "Маг", "Жрица", "Императрица", "Император",
-    "Иерофант", "Влюблённые", "Колесница", "Сила", "Отшельник",
-    "Колесо Фортуны", "Справедливость", "Повешенный", "Смерть",
-    "Умеренность", "Дьявол", "Башня", "Звезда", "Луна",
-    "Солнце", "Суд", "Мир"
-  ];
-  return names[id];
+// имена
+function getName(id) {
+  return [
+    "Шут","Маг","Жрица","Императрица","Император",
+    "Иерофант","Влюблённые","Колесница","Сила","Отшельник",
+    "Колесо Фортуны","Справедливость","Повешенный","Смерть",
+    "Умеренность","Дьявол","Башня","Звезда","Луна",
+    "Солнце","Суд","Мир"
+  ][id];
 }
