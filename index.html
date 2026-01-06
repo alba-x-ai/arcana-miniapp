@@ -2,33 +2,52 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Arcana</title>
+
+  <!-- Telegram -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
+<body>
   <div id="app">
 
-    <h1 id="title">Arcana</h1>
+    <!-- MAIN SCREEN -->
+    <div id="mainScreen" class="screen">
+      <h1>Arcana</h1>
 
-    <div id="buttons">
-      <button id="dayBtn"></button>
-      <button id="questionBtn"></button>
-      <button id="glossaryBtn"></button>
-      <button id="backBtn" class="hidden"></button>
+      <div class="buttons">
+        <button id="cardDayBtn">Карта дня</button>
+        <button id="questionBtn">Карта вопроса</button>
+        <button id="glossaryBtn">Глоссарий</button>
+      </div>
     </div>
 
-    <div id="cardView" class="hidden">
-      <img id="cardImage" />
-      <h2 id="cardName"></h2>
+    <!-- RESULT SCREEN -->
+    <div id="resultScreen" class="screen hidden">
+      <img id="cardImage" alt="Card" />
+
+      <div id="cardName"></div>
       <div id="cardText"></div>
+
+      <button id="backBtn">Назад</button>
     </div>
 
-    <div id="glossaryGrid" class="hidden"></div>
+    <!-- GLOSSARY SCREEN -->
+    <div id="glossaryScreen" class="screen hidden">
+      <h1>Глоссарий</h1>
+
+      <div id="glossaryGrid"></div>
+
+      <button id="backFromGlossaryBtn">Назад</button>
+    </div>
 
   </div>
 
+  <!-- App logic -->
   <script src="app.js"></script>
 </body>
 </html>
