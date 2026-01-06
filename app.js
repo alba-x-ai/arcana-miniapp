@@ -1,109 +1,83 @@
-document.addEventListener("DOMContentLoaded", async () => {
+const tg = window.Telegram?.WebApp;
+tg?.ready();
 
-  const tg = window.Telegram.WebApp;
-  tg.ready();
+const LANG =
+  tg?.initDataUnsafe?.user?.language_code === "en" ? "en" : "ru";
 
-  const user = tg.initDataUnsafe?.user;
-  if (!user) return;
+const API_URL =
+  "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
 
-  const LANG = user.language_code === "en" ? "en" : "ru";
+let cards = {};
+let dayTexts = {};
+let glossaryData = {};
 
-  const API_URL =
-    "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
+fetch("./cards.json").then(r => r.json()).then(d => cards = d);
+fetch("./texts/day-texts.json").then(r => r.json()).then(d => dayTexts = d);
+fetch("./glossary/cards.json").then(r => r.json()).then(d => glossaryData = d);
 
-  const cards = await fetch("./cards.json").then(r => r.json());
-  const dayTexts = await fetch("./texts/day-texts.json").then(r => r.json());
-  const glossaryData = await fetch("./glossary/cards.json").then(r => r.json());
+const result = document.getElementById("result");
+const glossary = document.getElementById("glossary");
+const cardImage = document.getElementById("cardImage");
+const cardName = document.getElementById("cardName");
+const cardMeaning = document.getElementById("cardMeaning");
 
-  const cardButton = document.getElementById("cardButton");
-  const questionButton = document.getElementById("questionButton");
-  const glossaryButton = document.getElementById("glossaryButton");
-  const backButton = document.getElementById("backButton");
+function hideAll() {
+  result.classList.add("hidden");
+  glossary.classList.add("hidden");
+}
 
-  const mainButtons = document.getElementById("mainButtons");
-  const result = document.getElementById("result");
-  const glossary = document.getElementById("glossary");
+function showCard(index, reversed, text) {
+  const file = String(index).padStart(2, "0");
+  cardImage.src = `./images/cards/${file}.png`;
+  cardImage.style.transform = reversed ? "rotate(180deg)" : "none";
+  cardName.textContent = cards[index].name[LANG];
+  cardMeaning.textContent = text;
+  hideAll();
+  result.classList.remove("hidden");
+}
 
-  const cardImage = document.getElementById("cardImage");
-  const cardName = document.getElementById("cardName");
-  const cardMeaning = document.getElementById("cardMeaning");
+window.onDay = async () => {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user_id: tg?.initDataUnsafe?.user?.id || 0
+    })
+  });
 
-  function hideAll() {
-    mainButtons.classList.add("hidden");
-    result.classList.add("hidden");
-    glossary.classList.add("hidden");
-  }
+  const data = await res.json();
+  const text = data.reversed
+    ? dayTexts[data.card][LANG].reversed
+    : dayTexts[data.card][LANG].upright;
 
-  function showMain() {
-    hideAll();
-    mainButtons.classList.remove("hidden");
-  }
+  showCard(data.card, data.reversed, text);
+};
 
-  function showCard(index, reversed, text) {
-    const file = String(index).padStart(2, "0");
-    cardImage.src = `./images/cards/${file}.png`;
-    cardImage.style.transform = reversed ? "rotate(180deg)" : "none";
+window.onQuestion = () => {
+  const i = Math.floor(Math.random() * 22);
+  const r = Math.random() < 0.5;
+  const text = r ? cards[i].reversed[LANG] : cards[i].upright[LANG];
+  showCard(i, r, text);
+};
 
-    cardName.textContent = cards[index].name[LANG];
-    cardMeaning.textContent = text;
+window.onGlossary = () => {
+  glossary.innerHTML = "";
+  hideAll();
 
-    hideAll();
-    result.classList.remove("hidden");
-  }
+  Object.keys(glossaryData).forEach(i => {
+    const div = document.createElement("div");
+    div.className = "glossary-item";
+    div.textContent = glossaryData[i].name[LANG];
+    div.onclick = () => {
+      const c = glossaryData[i];
+      showCard(i, false, `${c.upright[LANG]}\n\n${c.reversed[LANG]}`);
+    };
+    glossary.appendChild(div);
+  });
 
-  // КАРТА ДНЯ
-  cardButton.onclick = async () => {
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user_id: user.id })
-    });
+  glossary.classList.remove("hidden");
+};
 
-    const data = await res.json();
-
-    const text = data.reversed
-      ? dayTexts[data.card][LANG].reversed
-      : dayTexts[data.card][LANG].upright;
-
-    showCard(data.card, data.reversed, text);
-  };
-
-  // КАРТА ВОПРОСА
-  questionButton.onclick = () => {
-    const index = Math.floor(Math.random() * 22);
-    const reversed = Math.random() < 0.5;
-
-    const text = reversed
-      ? cards[index].reversed[LANG]
-      : cards[index].upright[LANG];
-
-    showCard(index, reversed, text);
-  };
-
-  // ГЛОССАРИЙ
-  glossaryButton.onclick = () => {
-    glossary.innerHTML = "";
-    hideAll();
-
-    Object.keys(glossaryData).forEach(key => {
-      const item = document.createElement("div");
-      item.className = "glossary-item";
-      item.textContent = glossaryData[key].name[LANG];
-
-      item.onclick = () => {
-        const card = glossaryData[key];
-        const text =
-          `${card.upright[LANG]}\n\n${card.reversed[LANG]}`;
-
-        showCard(key, false, text);
-      };
-
-      glossary.appendChild(item);
-    });
-
-    glossary.classList.remove("hidden");
-  };
-
-  backButton.onclick = showMain;
-
-});
+window.onBack = () => {
+  hideAll();
+};
