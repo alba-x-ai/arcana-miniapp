@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
   const tg = window.Telegram.WebApp;
   tg.ready();
@@ -22,26 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardImage = document.getElementById("cardImage");
   const cardName = document.getElementById("cardName");
   const cardMeaning = document.getElementById("cardMeaning");
-  const cardPosition = document.getElementById("cardPosition");
   const result = document.getElementById("result");
   const glossaryGrid = document.getElementById("glossaryGrid");
 
-  let cardsData = {};
-  let dayTexts = {};
-  let glossaryData = {};
-
-  fetch("./cards.json").then(r => r.json()).then(d => cardsData = d);
-  fetch("./texts/day-texts.json").then(r => r.json()).then(d => dayTexts = d);
-  fetch("./glossary/glossary.json").then(r => r.json()).then(d => glossaryData = d);
+  /* LOAD DATA — ДО кликов */
+  const cardsData = await fetch("./cards.json").then(r => r.json());
+  const dayTexts  = await fetch("./texts/day-texts.json").then(r => r.json());
+  const glossary  = await fetch("./glossary/glossary.json").then(r => r.json());
 
   function resetView() {
     result.classList.add("hidden");
     glossaryGrid.classList.add("hidden");
     cardImage.classList.add("hidden");
-    cardPosition.classList.add("hidden");
   }
 
-  function renderImage(index, reversed) {
+  function renderImage(index, reversed = false) {
     const id = String(index).padStart(2, "0");
     cardImage.src = `./images/cards/${id}.png`;
     cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
@@ -87,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     glossaryGrid.innerHTML = "";
 
-    Object.entries(glossaryData).forEach(([i, card]) => {
+    Object.entries(glossary).forEach(([i, card]) => {
       const el = document.createElement("div");
       el.className = "glossary-card";
       el.innerHTML = `
@@ -96,9 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       el.onclick = () => {
         resetView();
-        renderImage(i, false);
+        renderImage(i);
         cardName.textContent = card.name[LANG];
-        cardMeaning.textContent = card.archetype[LANG];
+        cardMeaning.textContent =
+          card.archetype[LANG] + "\n\n" +
+          card.upright[LANG] + "\n\n" +
+          card.reversed[LANG];
         result.classList.remove("hidden");
       };
       glossaryGrid.appendChild(el);
