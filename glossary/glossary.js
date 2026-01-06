@@ -1,47 +1,47 @@
-(async () => {
-  const LANG =
-    window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code === "en"
-      ? "en"
-      : "ru";
+document.addEventListener("DOMContentLoaded", async () => {
+  const LANG = "ru"; // можно позже синхронизировать с app.js
 
-  const container = document.getElementById("glossaryContainer");
-  if (!container) return;
+  const grid = document.getElementById("glossaryGrid");
+  const view = document.getElementById("cardView");
 
-  const data = await fetch("./glossary/glossary.json").then(r => r.json());
+  const cardImg  = document.getElementById("cardImage");
+  const cardName = document.getElementById("cardName");
+  const cardText = document.getElementById("cardText");
+  const backBtn  = document.getElementById("backBtn");
 
-  container.innerHTML = "";
+  const data = await fetch("./glossary.json").then(r => r.json());
 
+  /* ---------- GRID ---------- */
   Object.entries(data).forEach(([index, card]) => {
-    const item = document.createElement("div");
-    item.className = "glossary-card";
+    const el = document.createElement("div");
+    el.className = "glossary-item";
 
-    item.innerHTML = `
-      <img src="./images/cards/${String(index).padStart(2, "0")}.png" />
-      <div class="glossary-title">${card.name[LANG]}</div>
+    const id = String(index).padStart(2, "0");
+    el.innerHTML = `
+      <img src="../images/cards/${id}.png">
+      <span>${card.name[LANG]}</span>
     `;
 
-    item.addEventListener("click", () => {
-      const result = document.getElementById("result");
+    el.onclick = () => {
+      grid.classList.add("hidden");
+      view.classList.remove("hidden");
 
-      result.classList.remove("hidden");
+      cardImg.src = `../images/cards/${id}.png`;
+      cardName.textContent = card.name[LANG];
 
-      document.getElementById("cardImage").src =
-        `./images/cards/${String(index).padStart(2, "0")}.png`;
-
-      document.getElementById("cardName").textContent =
-        card.name[LANG];
-
-      document.getElementById("cardMeaning").innerHTML = `
-        <p>${card.description[LANG]}</p>
-        <p><strong>${LANG === "ru" ? "Прямое значение" : "Upright"}:</strong><br>
-        ${card.upright[LANG]}</p>
-        <p><strong>${LANG === "ru" ? "Перевёрнутое значение" : "Reversed"}:</strong><br>
-        ${card.reversed[LANG]}</p>
+      cardText.innerHTML = `
+        <p><em>${card.archetype[LANG]}</em></p>
+        <p><strong>Прямое значение:</strong><br>${card.upright[LANG]}</p>
+        <p><strong>Перевёрнутое значение:</strong><br>${card.reversed[LANG]}</p>
       `;
+    };
 
-      container.classList.add("hidden");
-    });
-
-    container.appendChild(item);
+    grid.appendChild(el);
   });
-})();
+
+  /* ---------- BACK ---------- */
+  backBtn.onclick = () => {
+    view.classList.add("hidden");
+    grid.classList.remove("hidden");
+  };
+});
