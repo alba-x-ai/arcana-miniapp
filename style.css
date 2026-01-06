@@ -1,127 +1,206 @@
-/* ---------- RESET ---------- */
+/* =========================
+   RESET & BASE
+========================= */
+
 * {
   box-sizing: border-box;
 }
 
 html, body {
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
-  height: 100%;
   background: #000;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
   color: #fff;
 }
 
-/* ---------- APP CONTAINER ---------- */
-#app {
-  min-height: 100vh;
+
+/* =========================
+   APP CONTAINER
+========================= */
+
+.app {
+  min-height: 100svh; /* критично для Telegram + desktop */
   width: 100%;
-  background-image: url("./images/bg.png");
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* ВЕРТИКАЛЬНЫЙ ЦЕНТР */
+  align-items: center;       /* ГОРИЗОНТАЛЬНЫЙ ЦЕНТР */
+
+  gap: 22px;
+  padding: 24px 16px 40px;
+
+  background-image: url("./images/bg.png"); /* PNG */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
 
+
+/* =========================
+   TITLE
+========================= */
+
+.title {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin: 0;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons {
   display: flex;
   flex-direction: column;
+  gap: 12px;
   align-items: center;
 }
 
-/* ---------- TITLE ---------- */
-h1 {
-  margin-top: 14vh;
-  margin-bottom: 20px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-}
-
-/* ---------- CONTROLS (BUTTONS) ---------- */
-.controls {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-bottom: 32px;
-}
-
-/* ---------- BUTTON STYLE ---------- */
 button {
   padding: 14px 26px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.18);
+  font-size: 15px;
+  font-weight: 400;
   color: #fff;
-  font-size: 16px;
-  backdrop-filter: blur(6px);
+
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.35);
+
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
   cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
 button:active {
-  background: rgba(255,255,255,0.28);
+  transform: scale(0.97);
 }
 
-/* ---------- RESULT BLOCK ---------- */
+button:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+
+/* =========================
+   RESULT BLOCK
+========================= */
+
 #result {
   width: 100%;
   max-width: 420px;
-  padding: 16px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  gap: 14px;
+  margin-top: 16px;
 }
 
-/* ---------- CARD IMAGE ---------- */
+
+/* =========================
+   CARD IMAGE
+========================= */
+
 #cardImage {
   width: 100%;
-  max-width: 320px;
+  max-width: 280px;
   border-radius: 14px;
-  margin-bottom: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-/* ---------- TEXT ---------- */
+
+/* =========================
+   TEXT BLOCKS
+========================= */
+
 #cardName {
   font-size: 20px;
-  margin-bottom: 10px;
+  font-weight: 500;
   text-align: center;
 }
 
 #cardMeaning {
   font-size: 15px;
-  line-height: 1.5;
-  opacity: 0.9;
+  line-height: 1.6;
   text-align: center;
-}
-
-#cardPosition {
-  margin-top: 10px;
-  font-size: 13px;
-  opacity: 0.75;
-}
-
-/* ---------- GLOSSARY GRID ---------- */
-#glossaryGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 12px;
-  width: 100%;
-  max-width: 420px;
-  margin-top: 20px;
-}
-
-/* ---------- GLOSSARY CARD ---------- */
-.glossary-card {
-  padding: 14px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.12);
-  text-align: center;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-}
-
-.glossary-card-title {
-  font-size: 14px;
   opacity: 0.95;
 }
 
-/* ---------- HELPERS ---------- */
+#cardPosition {
+  font-size: 14px;
+  opacity: 0.7;
+  text-align: center;
+}
+
+
+/* =========================
+   GLOSSARY GRID
+========================= */
+
+#glossaryGrid {
+  width: 100%;
+  max-width: 420px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.glossary-card {
+  padding: 14px 10px;
+  text-align: center;
+
+  border-radius: 14px;
+  font-size: 14px;
+
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  cursor: pointer;
+}
+
+.glossary-card:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
 .hidden {
   display: none !important;
+}
+
+
+/* =========================
+   MOBILE TWEAKS
+========================= */
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 26px;
+  }
+
+  #glossaryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
