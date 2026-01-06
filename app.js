@@ -1,119 +1,122 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const tg = window.Telegram.WebApp;
-  tg.ready();
+  const tg = window.Telegram?.WebApp;
+  tg?.ready();
 
-  const user = tg.initDataUnsafe?.user;
-  if (!user) return;
+  const LANG =
+    tg?.initDataUnsafe?.user?.language_code === "en"
+      ? "en"
+      : "ru";
 
-  const LANG = user.language_code === "en" ? "en" : "ru";
+  /* ---------- TEXTS ---------- */
 
-  const API_URL =
-    "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
+  const BUTTONS = {
+    ru: {
+      day: "Карта дня",
+      question: "Карта вопроса",
+      glossary: "Глоссарий",
+      back: "Назад"
+    },
+    en: {
+      day: "Card of the Day",
+      question: "Question Card",
+      glossary: "Glossary",
+      back: "Back"
+    }
+  };
 
-  const cardButton = document.getElementById("cardButton");
-  const questionButton = document.getElementById("questionButton");
-  const glossaryButton = document.getElementById("glossaryButton");
-  const backButton = document.getElementById("backButton");
+  /* ---------- DOM ---------- */
 
-  const mainButtons = document.getElementById("mainButtons");
-  const backWrap = document.getElementById("backButtonWrap");
+  const dayBtn = document.getElementById("dayBtn");
+  const questionBtn = document.getElementById("questionBtn");
+  const glossaryBtn = document.getElementById("glossaryBtn");
+  const backBtn = document.getElementById("backBtn");
 
+  const cardView = document.getElementById("cardView");
   const cardImage = document.getElementById("cardImage");
   const cardName = document.getElementById("cardName");
-  const cardMeaning = document.getElementById("cardMeaning");
-  const result = document.getElementById("result");
+  const cardText = document.getElementById("cardText");
+
   const glossaryGrid = document.getElementById("glossaryGrid");
 
-  /* LOAD DATA — ДО кликов */
-  const cardsData = await fetch("./cards.json").then(r => r.json());
-  const dayTexts  = await fetch("./texts/day-texts.json").then(r => r.json());
-  const glossary  = await fetch("./glossary/glossary.json").then(r => r.json());
+  dayBtn.textContent = BUTTONS[LANG].day;
+  questionBtn.textContent = BUTTONS[LANG].question;
+  glossaryBtn.textContent = BUTTONS[LANG].glossary;
+  backBtn.textContent = BUTTONS[LANG].back;
 
-  function resetView() {
-    result.classList.add("hidden");
+  /* ---------- LOAD DATA ---------- */
+
+  const cards = await fetch("./cards.json").then(r => r.json());
+  const dayTexts = await fetch("./texts/day-texts.json").then(r => r.json());
+  const glossary = await fetch("./glossary/glossary.json").then(r => r.json());
+
+  /* ---------- HELPERS ---------- */
+
+  function showBack(show) {
+    backBtn.classList.toggle("hidden", !show);
+  }
+
+  function reset() {
+    cardView.classList.add("hidden");
     glossaryGrid.classList.add("hidden");
-    cardImage.classList.add("hidden");
+    showBack(false);
   }
 
-  function renderImage(index, reversed = false) {
+  function showCard(index, text) {
     const id = String(index).padStart(2, "0");
+
     cardImage.src = `./images/cards/${id}.png`;
-    cardImage.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
-    cardImage.classList.remove("hidden");
+    cardName.textContent = cards[index].name[LANG];
+    cardText.textContent = text;
+
+    cardView.classList.remove("hidden");
+    showBack(true);
   }
 
-  async function cardOfDay() {
-    resetView();
+  /* ---------- CARD OF DAY ---------- */
 
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user_id: user.id })
-    });
+  dayBtn.onclick = () => {
+    reset();
+    const index = new Date().getDate() % 22;
+    showCard(index, dayTexts[index][LANG]);
+  };
 
-    const { card, reversed } = await res.json();
+  /* ---------- QUESTION CARD ---------- */
 
-    renderImage(card, reversed);
-    cardName.textContent = cardsData[card].name[LANG];
-    cardMeaning.textContent = dayTexts[card][LANG];
-    result.classList.remove("hidden");
-  }
+  questionBtn.onclick = () => {
+    reset();
+    const index = Math.floor(Math.random() * 22);
+    showCard(index, cards[index].upright[LANG]);
+  };
 
-  function questionCard() {
-    resetView();
+  /* ---------- GLOSSARY ---------- */
 
-    const card = Math.floor(Math.random() * 22);
-    const reversed = Math.random() < 0.5;
-
-    renderImage(card, reversed);
-    cardName.textContent = cardsData[card].name[LANG];
-    cardMeaning.textContent = reversed
-      ? cardsData[card].reversed[LANG]
-      : cardsData[card].upright[LANG];
-
-    result.classList.remove("hidden");
-  }
-
-  function openGlossary() {
-    resetView();
-    mainButtons.classList.add("hidden");
-    backWrap.classList.remove("hidden");
-
+  glossaryBtn.onclick = () => {
+    reset();
     glossaryGrid.innerHTML = "";
 
-    Object.entries(glossary).forEach(([i, card]) => {
+    glossary.forEach((card, index) => {
       const el = document.createElement("div");
-      el.className = "glossary-card";
+      el.className = "glossary-item";
+
       el.innerHTML = `
-        <img src="./images/cards/${String(i).padStart(2,"0")}.png">
-        <div class="glossary-title">${card.name[LANG]}</div>
+        <img src="./images/cards/${String(index).padStart(2,"0")}.png">
+        <div>${card.name[LANG]}</div>
       `;
+
       el.onclick = () => {
-        resetView();
-        renderImage(i);
-        cardName.textContent = card.name[LANG];
-        cardMeaning.textContent =
-          card.archetype[LANG] + "\n\n" +
-          card.upright[LANG] + "\n\n" +
-          card.reversed[LANG];
-        result.classList.remove("hidden");
+        showCard(index, card.archetype[LANG]);
       };
+
       glossaryGrid.appendChild(el);
     });
 
     glossaryGrid.classList.remove("hidden");
-  }
+    showBack(true);
+  };
 
-  function goBack() {
-    resetView();
-    mainButtons.classList.remove("hidden");
-    backWrap.classList.add("hidden");
-  }
-
-  cardButton.onclick = cardOfDay;
-  questionButton.onclick = questionCard;
-  glossaryButton.onclick = openGlossary;
-  backButton.onclick = goBack;
+  backBtn.onclick = () => {
+    reset();
+  };
 
 });
