@@ -9,14 +9,12 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: #ffffff;
   background: #000;
-  overflow-x: hidden;
 }
 
-/* ===== BACKGROUND ===== */
+/* ===== BACKGROUND IMAGE ===== */
 body::before {
   content: "";
   position: fixed;
@@ -25,168 +23,118 @@ body::before {
   z-index: -2;
 }
 
+/* ===== SOFT DARK OVERLAY ===== */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35); /* затемнение */
+  background: rgba(0, 0, 0, 0.35);
   z-index: -1;
 }
 
-/* ===== COMMON ===== */
-.hidden {
-  display: none !important;
-}
-
-h1,
-h2,
-h3 {
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-/* ===== MAIN SCREEN ===== */
-.main-screen {
+/* ===== APP CONTAINER ===== */
+#app {
   min-height: 100vh;
-  padding: 28px 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== SCREENS ===== */
+.screen {
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  padding: 32px 16px 40px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 18px;
+
+  text-align: center;
 }
 
-.main-title {
+.hidden {
+  display: none !important;
+}
+
+/* ===== TITLES ===== */
+h1 {
   font-size: 32px;
+  font-weight: 500;
   letter-spacing: 0.04em;
   margin-bottom: 8px;
 }
 
-/* ===== BUTTONS ===== */
-.button {
-  width: 100%;
-  max-width: 320px;
-  padding: 14px 20px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(10px);
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.25s ease, transform 0.15s ease;
-}
-
-.button:active {
-  transform: scale(0.97);
-}
-
-.button:hover {
-  background: rgba(255, 255, 255, 0.28);
-}
-
-/* ===== RESULT SCREEN ===== */
-.result-screen {
-  min-height: 100vh;
-  padding: 24px 16px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-
-.card-image {
-  max-width: 90vw;
-  max-height: 70vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 18px;
-  display: block;
-  margin: 0 auto;
-}
-
-.card-name {
+#cardName {
   font-size: 22px;
   margin-top: 6px;
 }
 
-.card-text {
-  font-size: 16px;
-  line-height: 1.45;
-  text-align: center;
-  max-width: 420px;
-  opacity: 0.95;
-}
-
-.card-note {
-  font-size: 14px;
-  opacity: 0.7;
-  text-align: center;
-}
-
-/* ===== BACK BUTTON ===== */
-.back-button {
-  margin-top: 18px;
-  width: 200px;
-}
-
-/* ===== GLOSSARY ===== */
-.glossary-screen {
-  min-height: 100vh;
-  padding: 20px 12px 40px;
-}
-
-.glossary-title {
-  font-size: 26px;
-  margin-bottom: 20px;
-}
-
-/* GRID */
-.glossary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: 14px;
-}
-
-/* CARD */
-.glossary-item {
-  cursor: pointer;
-  text-align: center;
-}
-
-.glossary-item img {
+/* ===== BUTTONS ===== */
+button {
   width: 100%;
-  border-radius: 14px;
+  max-width: 320px;
+
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* ===== CARD IMAGE ===== */
+#cardImage {
+  max-width: 90vw;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+  border-radius: 18px;
+
+  margin: 12px auto 6px;
   display: block;
 }
 
-.glossary-item .title {
-  margin-top: 6px;
-  font-size: 13px;
-  opacity: 0.9;
+/* ===== CARD TEXT ===== */
+#cardMeaning {
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 420px;
+  opacity: 0.95;
+  white-space: pre-line;
 }
 
-/* ===== GLOSSARY DETAIL ===== */
-.glossary-detail {
-  max-width: 480px;
-  margin: 0 auto;
-  text-align: center;
+/* ===== BACK BUTTON ===== */
+#backButton {
+  margin-top: 16px;
 }
 
-.glossary-detail p {
-  margin-bottom: 10px;
-  line-height: 1.45;
-}
-
-/* ===== DESKTOP FIX ===== */
+/* ===== DESKTOP REFINEMENT ===== */
 @media (min-width: 768px) {
-  .main-title {
+  h1 {
     font-size: 36px;
   }
 
-  .card-text {
+  #cardMeaning {
     font-size: 17px;
   }
 }
