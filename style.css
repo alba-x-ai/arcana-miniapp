@@ -1,115 +1,92 @@
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  min-height: 100%;
-  background:
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-    url("./images/background/bg.png") center / cover no-repeat fixed;
 }
 
 body {
+  margin: 0;
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: url("./images/background/bg.png") center / cover no-repeat fixed;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: #fff;
 }
 
-/* APP */
-.app {
+#app {
   min-height: 100vh;
-  padding: 32px 16px 48px;
+  padding: 32px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  backdrop-filter: brightness(0.85);
 }
 
-/* TITLE */
-.title {
-  font-size: 32px;
-  margin-bottom: 28px;
+h1 {
+  margin: 0 0 24px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
-/* BUTTONS */
-.buttons {
+#buttons {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 24px;
 }
 
 button {
-  min-width: 220px;
-  padding: 14px 26px;
-  font-size: 16px;
-  color: #fff;
-  background: rgba(255,255,255,0.18);
-  border: 1px solid rgba(255,255,255,0.35);
+  padding: 14px 20px;
   border-radius: 999px;
-  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 16px;
   cursor: pointer;
 }
 
 button:active {
-  background: rgba(255,255,255,0.28);
-}
-
-/* RESULT */
-.result {
-  max-width: 420px;
-  text-align: center;
-}
-
-.card-image {
-  width: 100%;
-  max-width: 340px;
-  margin: 0 auto 18px;
-  border-radius: 12px;
-}
-
-.card-name {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-.card-meaning {
-  font-size: 16px;
-  line-height: 1.55;
-}
-
-.card-position {
-  margin-top: 10px;
-  font-size: 14px;
-  opacity: 0.75;
-}
-
-/* GLOSSARY */
-.glossary-grid {
-  width: 100%;
-  max-width: 520px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: 14px;
-}
-
-.glossary-card {
-  cursor: pointer;
-  text-align: center;
-}
-
-.glossary-card img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.glossary-title {
-  margin-top: 6px;
-  font-size: 13px;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .hidden {
   display: none;
+}
+
+#cardView {
+  max-width: 420px;
+  text-align: center;
+}
+
+#cardImage {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+#cardName {
+  margin: 8px 0;
+  font-weight: 400;
+}
+
+#cardText {
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+#glossaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 420px;
+}
+
+.glossary-item img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.glossary-item {
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
 }
