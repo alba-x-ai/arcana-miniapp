@@ -2,42 +2,61 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
   <title>Arcana</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- Telegram WebApp -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- MAIN -->
-  <section id="mainScreen" class="main-screen">
-    <h1 class="main-title">Arcana</h1>
+  <div id="app">
 
-    <button class="button" id="dayBtn">Карта дня</button>
-    <button class="button" id="questionBtn">Карта вопроса</button>
-    <button class="button" id="glossaryBtn">Глоссарий</button>
-  </section>
+    <!-- ================= MAIN SCREEN ================= -->
+    <div id="mainScreen" class="screen">
+      <h1>Arcana</h1>
 
-  <!-- RESULT -->
-  <section id="resultScreen" class="result-screen hidden">
-    <img id="cardImage" class="card-image hidden" />
-    <div id="cardName" class="card-name"></div>
-    <div id="cardText" class="card-text"></div>
-    <div id="cardNote" class="card-note"></div>
+      <button id="cardButton">
+        Карта дня
+      </button>
 
-    <button class="button back-button" id="backBtn">Назад</button>
-  </section>
+      <button id="questionButton">
+        Карта вопроса
+      </button>
 
-  <!-- GLOSSARY -->
-  <section id="glossaryScreen" class="glossary-screen hidden">
-    <h2 class="glossary-title">Глоссарий</h2>
-    <div id="glossaryGrid" class="glossary-grid"></div>
+      <button id="glossaryButton">
+        Глоссарий
+      </button>
+    </div>
 
-    <button class="button back-button" id="glossaryBackBtn">Назад</button>
-  </section>
+    <!-- ================= RESULT SCREEN ================= -->
+    <div id="resultScreen" class="screen hidden">
 
+      <img
+        id="cardImage"
+        alt="Tarot card"
+        class="hidden"
+      />
+
+      <div id="cardName"></div>
+
+      <div id="cardMeaning"></div>
+
+      <button id="backButton">
+        Назад
+      </button>
+    </div>
+
+  </div>
+
+  <!-- App logic -->
   <script src="app.js"></script>
 </body>
 </html>
