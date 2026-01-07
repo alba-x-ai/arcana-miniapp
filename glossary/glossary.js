@@ -1,60 +1,63 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const grid = document.getElementById("glossaryGrid");
-  const detail = document.getElementById("glossaryDetail");
-  const backBtn = document.getElementById("backBtn");
+const screens = document.querySelectorAll(".screen");
 
-  const LANG =
-    window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code === "en"
-      ? "en"
-      : "ru";
+function show(id) {
+  screens.forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
 
-  let glossary = {};
+/* ===== DOM ===== */
 
-  try {
-    glossary = await fetch("./glossary.json").then(r => r.json());
-  } catch (e) {
-    console.error("Glossary load error", e);
-    return;
-  }
+const grid = document.getElementById("glossary-grid");
+const img  = document.getElementById("glossary-image");
 
-  Object.entries(glossary).forEach(([id, card]) => {
-    const item = document.createElement("div");
-    item.className = "glossary-item";
-    item.dataset.id = id;
+const title = document.getElementById("glossary-title");
+const archetype = document.getElementById("glossary-archetype");
+const description = document.getElementById("glossary-description");
+const upright = document.getElementById("glossary-upright");
+const reversed = document.getElementById("glossary-reversed");
 
-    item.innerHTML = `
-      <img src="../images/cards/${id.padStart(2, "0")}.png" />
-      <div class="title">${card.name[LANG]}</div>
-    `;
+const btnBackHome = document.getElementById("btn-back-home");
+const btnBackList = document.getElementById("btn-back-list");
 
-    item.addEventListener("click", () => {
-      openCard(id);
-    });
+btnBackHome.onclick = () => window.history.back();
+btnBackList.onclick = () => show("glossary-list");
 
-    grid.appendChild(item);
+/* ===== DATA ===== */
+
+let data = null;
+
+fetch("glossary.json")
+  .then(r => r.json())
+  .then(json => {
+    data = json;
+    renderList();
   });
 
-  function openCard(id) {
-    const card = glossary[id];
+/* ===== LIST ===== */
 
-    grid.classList.add("hidden");
-    detail.classList.remove("hidden");
+function renderList() {
+  grid.innerHTML = "";
 
-    detail.innerHTML = `
-      <h2>${card.name[LANG]}</h2>
-      <p>${card.archetype[LANG]}</p>
-      <p><strong>${LANG === "ru" ? "Прямо:" : "Upright:"}</strong><br>${card.upright[LANG]}</p>
-      <p><strong>${LANG === "ru" ? "Перевёрнуто:" : "Reversed:"}</strong><br>${card.reversed[LANG]}</p>
-      <button id="backInner">Назад</button>
-    `;
-
-    document.getElementById("backInner").onclick = () => {
-      detail.classList.add("hidden");
-      grid.classList.remove("hidden");
-    };
-  }
-
-  backBtn?.addEventListener("click", () => {
-    window.location.href = "../index.html";
+  Object.keys(data).forEach(id => {
+    const div = document.createElement("div");
+    div.textContent = data[id].name.ru;
+    div.onclick = () => openCard(id);
+    grid.appendChild(div);
   });
-});
+}
+
+/* ===== CARD ===== */
+
+function openCard(id) {
+  const c = data[id];
+
+  img.src = `../images/cards/${String(id).padStart(2, "0")}.png`;
+
+  title.textContent = c.name.ru;
+  archetype.textContent = c.archetype.ru;
+  description.textContent = c.description.ru;
+  upright.textContent = c.upright.ru;
+  reversed.textContent = c.reversed.ru;
+
+  show("glossary-card");
+}
