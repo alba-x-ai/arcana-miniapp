@@ -1,62 +1,64 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Arcana</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Telegram WebApp -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-<div id="app">
 
-  <!-- HOME -->
+  <!-- ===== HOME SCREEN ===== -->
   <section id="home" class="screen active">
     <h1 class="title">Arcana</h1>
 
     <div class="buttons">
-      <button id="btn-day" class="btn">Карта дня</button>
-      <button id="btn-question" class="btn">Карта вопроса</button>
-      <button id="btn-glossary" class="btn">Глоссарий</button>
+      <button id="btn-day">Карта дня</button>
+      <button id="btn-question">Карта вопроса</button>
+      <button id="btn-glossary">Глоссарий</button>
     </div>
   </section>
 
-  <!-- DAY / QUESTION CARD -->
+  <!-- ===== CARD SCREEN ===== -->
   <section id="card-screen" class="screen">
-    <div class="card">
-      <img id="card-image" src="" alt="">
-    </div>
+    <img id="card-image" class="card-image hidden" />
 
-    <h2 id="card-title"></h2>
-    <p id="card-text"></p>
+    <h2 id="card-title" class="card-title"></h2>
+    <p id="card-text" class="card-text"></p>
 
-    <button id="btn-back" class="btn">Назад</button>
+    <button id="btn-back" class="back-btn">← Назад</button>
   </section>
 
-  <!-- GLOSSARY LIST -->
+  <!-- ===== GLOSSARY SCREEN ===== -->
   <section id="glossary" class="screen">
-    <h1 class="title">Глоссарий</h1>
-    <div id="glossary-grid" class="glossary-grid"></div>
-    <button id="btn-back-from-glossary" class="btn">Назад</button>
+    <h2 class="title">Глоссарий</h2>
+
+    <div id="glossary-grid"></div>
+
+    <button id="btn-back-from-glossary" class="back-btn">← Назад</button>
   </section>
 
-  <!-- GLOSSARY CARD -->
+  <!-- ===== GLOSSARY CARD ===== -->
   <section id="glossary-card" class="screen">
-    <h2 id="glossary-title"></h2>
-    <p id="glossary-archetype"></p>
-    <p id="glossary-description"></p>
+    <img id="glossary-image" class="card-image" />
 
-    <h4>Прямое значение</h4>
-    <p id="glossary-upright"></p>
+    <h2 id="glossary-title" class="card-title"></h2>
+    <p id="glossary-archetype" class="archetype"></p>
+    <p id="glossary-description" class="card-text"></p>
 
-    <h4>Перевёрнутое значение</h4>
-    <p id="glossary-reversed"></p>
+    <p class="sub">Прямое положение</p>
+    <p id="glossary-upright" class="card-text"></p>
 
-    <button id="btn-back-to-glossary" class="btn">Назад</button>
+    <p class="sub">Перевёрнутое положение</p>
+    <p id="glossary-reversed" class="card-text"></p>
+
+    <button id="btn-back-to-glossary" class="back-btn">← К списку</button>
   </section>
 
-</div>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
