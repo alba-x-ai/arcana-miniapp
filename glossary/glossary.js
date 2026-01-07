@@ -1,87 +1,137 @@
-/* ================= LANGUAGE ================= */
+/* =====================================================
+   LANGUAGE
+   Default: EN
+   RU only if Telegram language === "ru"
+===================================================== */
 
-let LANG = "en";
-const tgLang =
-  window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code || "";
+const lang =
+  window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code === "ru"
+    ? "ru"
+    : "en";
 
-if (tgLang.toLowerCase().startsWith("ru")) {
-  LANG = "ru";
-}
+/* =====================================================
+   UI TEXT
+===================================================== */
 
-/* ================= SCREENS ================= */
+const UI = {
+  title: {
+    ru: "Глоссарий",
+    en: "Glossary"
+  },
+  upright: {
+    ru: "Прямое значение",
+    en: "Upright meaning"
+  },
+  reversed: {
+    ru: "Перевёрнутое значение",
+    en: "Reversed meaning"
+  },
+  back: {
+    ru: "← Назад",
+    en: "← Back"
+  }
+};
+
+/* =====================================================
+   SCREENS
+===================================================== */
 
 const screens = document.querySelectorAll(".screen");
 
-function show(id) {
+function showScreen(id) {
   screens.forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
-/* ================= DOM ================= */
+/* =====================================================
+   DOM
+===================================================== */
 
 const grid = document.getElementById("glossary-grid");
 
-const btnBackHome = document.getElementById("btn-back-home");
-const btnBackList = document.getElementById("btn-back-list");
+const titleEl = document.querySelector("#glossary-list .title");
 
 const img = document.getElementById("glossary-image");
 const title = document.getElementById("glossary-title");
+const archetype = document.getElementById("glossary-archetype");
 const description = document.getElementById("glossary-description");
 const upright = document.getElementById("glossary-upright");
 const reversed = document.getElementById("glossary-reversed");
 
-/* ================= BUTTON TEXT ================= */
+const btnBackHome = document.getElementById("btn-back-home");
+const btnBackList = document.getElementById("btn-back-list");
 
-btnBackHome.textContent = LANG === "ru" ? "← Назад" : "← Back";
-btnBackList.textContent = LANG === "ru" ? "← К списку" : "← Back";
+/* =====================================================
+   APPLY UI LANGUAGE
+===================================================== */
 
-/* ================= DATA ================= */
+titleEl.textContent = UI.title[lang];
+btnBackHome.textContent = UI.back[lang];
+btnBackList.textContent = UI.back[lang];
+
+document.querySelectorAll(".meanings strong")[0].textContent =
+  UI.upright[lang];
+
+document.querySelectorAll(".meanings strong")[1].textContent =
+  UI.reversed[lang];
+
+/* =====================================================
+   DATA
+===================================================== */
 
 let glossaryData = null;
 
-/* ================= LOAD LIST ================= */
+/* =====================================================
+   LOAD LIST
+===================================================== */
 
 async function loadGlossary() {
-  glossaryData = await (await fetch("glossary.json")).json();
+  if (!glossaryData) {
+    glossaryData = await fetch("glossary/glossary.json").then(r => r.json());
+  }
+
   grid.innerHTML = "";
 
   Object.keys(glossaryData).forEach(id => {
     const card = glossaryData[id];
 
     const item = document.createElement("div");
-    item.textContent = card.name[LANG];
+    item.textContent = card.name[lang];
     item.onclick = () => openCard(id);
 
     grid.appendChild(item);
   });
 }
 
-/* ================= OPEN CARD ================= */
+/* =====================================================
+   OPEN CARD
+===================================================== */
 
 function openCard(id) {
-  const c = glossaryData[id];
+  const card = glossaryData[id];
 
-  img.src = `../images/cards/${String(id).padStart(2, "0")}.png`;
+  showScreen("glossary-card");
 
-  title.textContent = c.name[LANG];
-  description.textContent = c.description[LANG];
-  upright.textContent = c.upright[LANG];
-  reversed.textContent = c.reversed[LANG];
+  img.src = `images/cards/${String(id).padStart(2, "0")}.png`;
+  img.alt = card.name[lang];
 
-  show("glossary-card");
+  title.textContent = card.name[lang];
+  archetype.textContent = card.archetype?.[lang] || "";
+  description.textContent = card.description?.[lang] || "";
+
+  upright.textContent = card.upright[lang];
+  reversed.textContent = card.reversed[lang];
 }
 
-/* ================= EVENTS ================= */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-btnBackHome.onclick = () => {
-  window.location.href = "../index.html";
-};
+btnBackHome.onclick = () => showScreen("glossary-list");
+btnBackList.onclick = () => showScreen("glossary-list");
 
-btnBackList.onclick = () => {
-  show("glossary-list");
-};
+/* =====================================================
+   INIT
+===================================================== */
 
-/* ================= INIT ================= */
-
-show("glossary-list");
 loadGlossary();
