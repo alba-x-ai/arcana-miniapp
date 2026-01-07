@@ -1,6 +1,6 @@
 /* ---------- LANGUAGE ---------- */
 
-let LANG = "en"; // default
+let LANG = "en";
 
 if (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code === "ru") {
   LANG = "ru";
@@ -46,6 +46,7 @@ function show(id) {
 const btnDay = document.getElementById("btn-day");
 const btnQuestion = document.getElementById("btn-question");
 const btnGlossary = document.getElementById("btn-glossary");
+
 const btnBack = document.getElementById("btn-back");
 const btnBackFromGlossary = document.getElementById("btn-back-from-glossary");
 const btnBackToGlossary = document.getElementById("btn-back-to-glossary");
@@ -61,14 +62,14 @@ const API_URL =
 
 /* ---------- EVENTS ---------- */
 
-btnDay.onclick = () => {
+btnDay.onclick = async () => {
   show("card-screen");
-  loadDayCard();
+  await loadDayCard();
 };
 
-btnQuestion.onclick = () => {
+btnQuestion.onclick = async () => {
   show("card-screen");
-  loadQuestionCard();
+  await loadQuestionCard();
 };
 
 btnGlossary.onclick = () => {
@@ -80,14 +81,19 @@ btnBack.onclick = () => show("home");
 btnBackFromGlossary.onclick = () => show("home");
 btnBackToGlossary.onclick = () => show("glossary");
 
-/* ---------- CARD DAY ---------- */
+/* ---------- HELPERS ---------- */
+
+function getUserId() {
+  if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+    return Telegram.WebApp.initDataUnsafe.user.id;
+  }
+  return 1;
+}
+
+/* ---------- CARD OF THE DAY (FIXED) ---------- */
 
 async function loadDayCard() {
-  let userId = 1;
-
-  if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
-    userId = Telegram.WebApp.initDataUnsafe.user.id;
-  }
+  const userId = getUserId();
 
   const res = await fetch(API_URL, {
     method: "POST",
@@ -95,7 +101,7 @@ async function loadDayCard() {
     body: JSON.stringify({ user_id: userId })
   });
 
-  const { card, reversed } = await res.json();
+  const { card, reversed, date } = await res.json();
 
   const texts = await (await fetch("texts/day-texts.json")).json();
   const pos = reversed ? "reversed" : "upright";
@@ -103,7 +109,14 @@ async function loadDayCard() {
   render(card, reversed, texts[card][LANG][pos]);
 }
 
-/* ---------- QUESTION CARD ---------- */
+/*
+  ВАЖНО:
+  ─ backend возвращает ОДНУ карту на дату + user_id
+  ─ пока не сменился день — карта всегда одна и та же
+  ─ фронт ничего не кэширует, доверяет API
+*/
+
+/* ---------- QUESTION CARD (FREE) ---------- */
 
 async function loadQuestionCard() {
   const cards = await (await fetch("cards.json")).json();
