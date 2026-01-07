@@ -27,18 +27,26 @@ body::before {
 #app {
   position: relative;
   z-index: 1;
+  min-height: 100vh;
 }
 
-/* SCREENS */
+/* ---------- SCREENS ---------- */
 
 .screen {
   display: none;
+  min-height: 100vh;
+
   padding: 32px 20px;
   text-align: center;
+
+  /* ключевое */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .screen.active {
-  display: block;
+  display: flex;
 }
 
 .title {
@@ -46,30 +54,33 @@ body::before {
   margin-bottom: 32px;
 }
 
-/* BUTTONS */
+/* ---------- BUTTONS ---------- */
 
 .buttons {
   display: flex;
   flex-direction: column;
-  align-items: center;   /* центрируем кнопки */
+  align-items: center;
   gap: 16px;
+
   max-width: 320px;
   margin: 0 auto;
 }
 
 .btn {
-  width: 100%;           /* одинаковая ширина */
+  width: 100%;
   padding: 14px 18px;
+
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.4);
   background: rgba(255,255,255,0.15);
   color: #fff;
+
   cursor: pointer;
   backdrop-filter: blur(8px);
-  text-align: center;    /* центр текста */
+  text-align: center;
 }
 
-/* CARD */
+/* ---------- CARD ---------- */
 
 .card {
   max-width: 320px;
@@ -86,12 +97,13 @@ body::before {
   line-height: 1.5;
 }
 
-/* GLOSSARY */
+/* ---------- GLOSSARY ---------- */
 
 .glossary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 12px;
+
   max-width: 420px;
   margin: 0 auto 24px;
 }
@@ -99,7 +111,9 @@ body::before {
 .glossary-grid div {
   padding: 12px;
   border-radius: 12px;
+
   background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.3);
+
   cursor: pointer;
 }
