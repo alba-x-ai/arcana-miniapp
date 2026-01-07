@@ -5,12 +5,30 @@ function show(id) {
 }
 
 /* ---------- LANGUAGE ---------- */
-let LANG = "ru";
+// default language: EN
+let LANG = "en";
 
+// switch to RU only if Telegram language is ru
 if (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code) {
-  const tgLang = Telegram.WebApp.initDataUnsafe.user.language_code;
-  LANG = tgLang.startsWith("en") ? "en" : "ru";
+  const code = Telegram.WebApp.initDataUnsafe.user.language_code;
+  if (code.startsWith("ru")) LANG = "ru";
 }
+
+/* ---------- UI TEXTS ---------- */
+const UI = {
+  ru: {
+    day: "Карта дня",
+    question: "Карта вопроса",
+    glossary: "Глоссарий",
+    back: "← Назад"
+  },
+  en: {
+    day: "Card of the Day",
+    question: "Question Card",
+    glossary: "Glossary",
+    back: "← Back"
+  }
+};
 
 /* ---------- DOM ---------- */
 const btnDay = document.getElementById("btn-day");
@@ -24,13 +42,14 @@ const cardImage = document.getElementById("card-image");
 const cardTitle = document.getElementById("card-title");
 const cardText  = document.getElementById("card-text");
 
-/* --- glossary DOM --- */
-const glossaryImage = document.getElementById("glossary-card-image");
-const glossaryTitle = document.getElementById("glossary-title");
-const glossaryArchetype = document.getElementById("glossary-archetype");
-const glossaryDescription = document.getElementById("glossary-description");
-const glossaryUpright = document.getElementById("glossary-upright");
-const glossaryReversed = document.getElementById("glossary-reversed");
+/* ---------- APPLY UI TEXTS ---------- */
+btnDay.textContent = UI[LANG].day;
+btnQuestion.textContent = UI[LANG].question;
+btnGlossary.textContent = UI[LANG].glossary;
+
+if (btnBack) btnBack.textContent = UI[LANG].back;
+if (btnBackFromGlossary) btnBackFromGlossary.textContent = UI[LANG].back;
+if (btnBackToGlossary) btnBackToGlossary.textContent = UI[LANG].back;
 
 /* ---------- BACKEND ---------- */
 const API_URL =
@@ -93,6 +112,7 @@ async function loadQuestionCard() {
 function render(id, reversed, text) {
   cardImage.src = `images/cards/${String(id).padStart(2,"0")}.png`;
   cardImage.style.transform = reversed ? "rotate(180deg)" : "none";
+
   cardTitle.textContent = getName(id);
   cardText.textContent = text;
 }
@@ -150,12 +170,16 @@ function openGlossaryCard(id) {
   const c = glossaryData[id];
   show("glossary-card");
 
-  glossaryImage.src =
+  document.getElementById("glossary-card-image").src =
     `images/cards/${String(id).padStart(2,"0")}.png`;
 
-  glossaryTitle.textContent = c.name[LANG];
-  glossaryArchetype.textContent = c.archetype?.[LANG] || "";
-  glossaryDescription.textContent = c.description[LANG];
-  glossaryUpright.textContent = c.upright[LANG];
-  glossaryReversed.textContent = c.reversed[LANG];
+  document.getElementById("glossary-title").textContent = c.name[LANG];
+  document.getElementById("glossary-archetype").textContent =
+    c.archetype?.[LANG] || "";
+  document.getElementById("glossary-description").textContent =
+    c.description[LANG];
+  document.getElementById("glossary-upright").textContent =
+    c.upright[LANG];
+  document.getElementById("glossary-reversed").textContent =
+    c.reversed[LANG];
 }
