@@ -11,32 +11,22 @@ html, body {
 }
 
 body {
-  background: url("images/background/bg.png") center / cover no-repeat;
+  min-height: 100vh;
   color: #fff;
+
+  /* ФОН + ЗАТЕМНЕНИЕ БЕЗ OVERLAY */
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.45),
+      rgba(0,0,0,0.45)
+    ),
+    url("images/background/bg.png") center / cover no-repeat;
 }
 
-/* ---------- APP WRAPPER ---------- */
+/* ---------- APP ---------- */
 
 #app {
-  position: relative;
   min-height: 100vh;
-  z-index: 0;
-}
-
-/* затемнение — ТОЛЬКО здесь, НЕ на body */
-#app::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 0;
-  pointer-events: none; /* теперь работает гарантированно */
-}
-
-/* весь UI выше затемнения */
-#app > * {
-  position: relative;
-  z-index: 1;
 }
 
 /* ---------- SCREENS ---------- */
