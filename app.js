@@ -1,12 +1,16 @@
-/* ---------- LANGUAGE ---------- */
+/* ===============================
+   LANGUAGE
+================================ */
 
-let LANG = "en";
+let LANG = "en"; // default
 
 if (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code === "ru") {
   LANG = "ru";
 }
 
-/* ---------- UI TEXTS ---------- */
+/* ===============================
+   UI TEXTS
+================================ */
 
 let UI = null;
 
@@ -32,7 +36,9 @@ function applyUI() {
   }
 }
 
-/* ---------- SCREENS ---------- */
+/* ===============================
+   SCREENS
+================================ */
 
 const screens = document.querySelectorAll(".screen");
 
@@ -41,7 +47,9 @@ function show(id) {
   document.getElementById(id).classList.add("active");
 }
 
-/* ---------- DOM ---------- */
+/* ===============================
+   DOM
+================================ */
 
 const btnDay = document.getElementById("btn-day");
 const btnQuestion = document.getElementById("btn-question");
@@ -55,12 +63,16 @@ const cardImage = document.getElementById("card-image");
 const cardTitle = document.getElementById("card-title");
 const cardText  = document.getElementById("card-text");
 
-/* ---------- BACKEND ---------- */
+/* ===============================
+   BACKEND
+================================ */
 
 const API_URL =
   "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
 
-/* ---------- EVENTS ---------- */
+/* ===============================
+   EVENTS
+================================ */
 
 btnDay.onclick = async () => {
   show("card-screen");
@@ -81,7 +93,9 @@ btnBack.onclick = () => show("home");
 btnBackFromGlossary.onclick = () => show("home");
 btnBackToGlossary.onclick = () => show("glossary");
 
-/* ---------- HELPERS ---------- */
+/* ===============================
+   HELPERS
+================================ */
 
 function getUserId() {
   if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
@@ -90,7 +104,9 @@ function getUserId() {
   return 1;
 }
 
-/* ---------- CARD OF THE DAY (FIXED) ---------- */
+/* ===============================
+   CARD OF THE DAY (FIXED)
+================================ */
 
 async function loadDayCard() {
   const userId = getUserId();
@@ -101,7 +117,7 @@ async function loadDayCard() {
     body: JSON.stringify({ user_id: userId })
   });
 
-  const { card, reversed, date } = await res.json();
+  const { card, reversed } = await res.json();
 
   const texts = await (await fetch("texts/day-texts.json")).json();
   const pos = reversed ? "reversed" : "upright";
@@ -109,14 +125,9 @@ async function loadDayCard() {
   render(card, reversed, texts[card][LANG][pos]);
 }
 
-/*
-  ВАЖНО:
-  ─ backend возвращает ОДНУ карту на дату + user_id
-  ─ пока не сменился день — карта всегда одна и та же
-  ─ фронт ничего не кэширует, доверяет API
-*/
-
-/* ---------- QUESTION CARD (FREE) ---------- */
+/* ===============================
+   QUESTION CARD (FREE)
+================================ */
 
 async function loadQuestionCard() {
   const cards = await (await fetch("cards.json")).json();
@@ -130,7 +141,9 @@ async function loadQuestionCard() {
   render(id, rev, text);
 }
 
-/* ---------- RENDER ---------- */
+/* ===============================
+   RENDER
+================================ */
 
 function render(id, reversed, text) {
   cardImage.src = `images/cards/${String(id).padStart(2, "0")}.png`;
@@ -158,7 +171,9 @@ function getName(id) {
   }[LANG][id];
 }
 
-/* ---------- GLOSSARY ---------- */
+/* ===============================
+   GLOSSARY
+================================ */
 
 let glossaryData = null;
 const grid = document.getElementById("glossary-grid");
@@ -190,6 +205,12 @@ function openGlossaryCard(id) {
   document.getElementById("glossary-reversed").textContent = c.reversed[LANG];
 }
 
-/* ---------- INIT ---------- */
+/* ===============================
+   INIT (CRITICAL)
+================================ */
 
 loadUI();
+
+if (window.Telegram?.WebApp) {
+  Telegram.WebApp.ready();
+}
