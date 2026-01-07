@@ -15,20 +15,28 @@ body {
   color: #fff;
 }
 
-/* затемнение фона — ВАЖНО: pointer-events */
-body::before {
+/* ---------- APP WRAPPER ---------- */
+
+#app {
+  position: relative;
+  min-height: 100vh;
+  z-index: 0;
+}
+
+/* затемнение — ТОЛЬКО здесь, НЕ на body */
+#app::before {
   content: "";
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.45);
   z-index: 0;
-  pointer-events: none; /* ← критично для мобильных */
+  pointer-events: none; /* теперь работает гарантированно */
 }
 
-#app {
+/* весь UI выше затемнения */
+#app > * {
   position: relative;
   z-index: 1;
-  min-height: 100vh;
 }
 
 /* ---------- SCREENS ---------- */
