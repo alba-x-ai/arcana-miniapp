@@ -4,38 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arcana</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div id="app">
+<div id="app">
 
-    <!-- ГЛАВНЫЙ ЭКРАН -->
-    <section id="home" class="screen active">
-      <h1 class="title">Arcana</h1>
+  <!-- HOME -->
+  <section id="home" class="screen active">
+    <h1 class="title">Arcana</h1>
 
-      <div class="buttons">
-        <button id="btn-day" class="btn">Карта дня</button>
-        <button id="btn-question" class="btn">Карта вопроса</button>
-        <button id="btn-glossary" class="btn">Глоссарий</button>
-      </div>
-    </section>
+    <div class="buttons">
+      <button id="btn-day" class="btn">Карта дня</button>
+      <button id="btn-question" class="btn">Карта вопроса</button>
+      <button id="btn-glossary" class="btn">Глоссарий</button>
+    </div>
+  </section>
 
-    <!-- КАРТА ДНЯ -->
-    <section id="day" class="screen">
-      <div class="card">
-        <img id="card-image" src="" alt="">
-      </div>
+  <!-- DAY / QUESTION CARD -->
+  <section id="card-screen" class="screen">
+    <div class="card">
+      <img id="card-image" src="" alt="">
+    </div>
 
-      <h2 id="card-title"></h2>
-      <p id="card-text"></p>
+    <h2 id="card-title"></h2>
+    <p id="card-text"></p>
 
-      <button id="btn-back" class="btn">Назад</button>
-    </section>
+    <button id="btn-back" class="btn">Назад</button>
+  </section>
 
-  </div>
+  <!-- GLOSSARY LIST -->
+  <section id="glossary" class="screen">
+    <h1 class="title">Глоссарий</h1>
+    <div id="glossary-grid" class="glossary-grid"></div>
+    <button id="btn-back-from-glossary" class="btn">Назад</button>
+  </section>
 
-  <script src="app.js"></script>
+  <!-- GLOSSARY CARD -->
+  <section id="glossary-card" class="screen">
+    <h2 id="glossary-title"></h2>
+    <p id="glossary-archetype"></p>
+    <p id="glossary-description"></p>
+
+    <h4>Прямое значение</h4>
+    <p id="glossary-upright"></p>
+
+    <h4>Перевёрнутое значение</h4>
+    <p id="glossary-reversed"></p>
+
+    <button id="btn-back-to-glossary" class="btn">Назад</button>
+  </section>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
