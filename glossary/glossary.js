@@ -1,18 +1,14 @@
-/* =========================================================
-   LANGUAGE
-   По умолчанию — EN
-   Если язык Telegram = ru → RU
-========================================================= */
+/* ================= LANGUAGE ================= */
 
 let LANG = "en";
+const tgLang =
+  window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code || "";
 
-if (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code === "ru") {
+if (tgLang.toLowerCase().startsWith("ru")) {
   LANG = "ru";
 }
 
-/* =========================================================
-   SCREENS
-========================================================= */
+/* ================= SCREENS ================= */
 
 const screens = document.querySelectorAll(".screen");
 
@@ -21,9 +17,7 @@ function show(id) {
   document.getElementById(id).classList.add("active");
 }
 
-/* =========================================================
-   DOM
-========================================================= */
+/* ================= DOM ================= */
 
 const grid = document.getElementById("glossary-grid");
 
@@ -36,55 +30,39 @@ const description = document.getElementById("glossary-description");
 const upright = document.getElementById("glossary-upright");
 const reversed = document.getElementById("glossary-reversed");
 
-/* =========================================================
-   BUTTON TEXTS
-========================================================= */
+/* ================= BUTTON TEXT ================= */
 
 btnBackHome.textContent = LANG === "ru" ? "← Назад" : "← Back";
-btnBackList.textContent = LANG === "ru" ? "← К списку" : "← Back to list";
+btnBackList.textContent = LANG === "ru" ? "← К списку" : "← Back";
 
-/* =========================================================
-   DATA
-========================================================= */
+/* ================= DATA ================= */
 
 let glossaryData = null;
 
-/* =========================================================
-   LOAD GLOSSARY LIST
-========================================================= */
+/* ================= LOAD LIST ================= */
 
 async function loadGlossary() {
-  if (!glossaryData) {
-    glossaryData = await (await fetch("glossary.json")).json();
-  }
-
+  glossaryData = await (await fetch("glossary.json")).json();
   grid.innerHTML = "";
 
   Object.keys(glossaryData).forEach(id => {
     const card = glossaryData[id];
 
-    const div = document.createElement("div");
-    div.textContent = card.name[LANG];
-    div.className = "glossary-item";
+    const item = document.createElement("div");
+    item.textContent = card.name[LANG];
+    item.onclick = () => openCard(id);
 
-    div.onclick = () => openCard(id);
-
-    grid.appendChild(div);
+    grid.appendChild(item);
   });
 }
 
-/* =========================================================
-   OPEN CARD
-========================================================= */
+/* ================= OPEN CARD ================= */
 
 function openCard(id) {
   const c = glossaryData[id];
 
-  // image
   img.src = `../images/cards/${String(id).padStart(2, "0")}.png`;
-  img.style.transform = "none";
 
-  // texts
   title.textContent = c.name[LANG];
   description.textContent = c.description[LANG];
   upright.textContent = c.upright[LANG];
@@ -93,9 +71,7 @@ function openCard(id) {
   show("glossary-card");
 }
 
-/* =========================================================
-   EVENTS
-========================================================= */
+/* ================= EVENTS ================= */
 
 btnBackHome.onclick = () => {
   window.location.href = "../index.html";
@@ -105,9 +81,7 @@ btnBackList.onclick = () => {
   show("glossary-list");
 };
 
-/* =========================================================
-   INIT
-========================================================= */
+/* ================= INIT ================= */
 
 show("glossary-list");
 loadGlossary();
