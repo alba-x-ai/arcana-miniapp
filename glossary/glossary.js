@@ -1,88 +1,91 @@
-/* ---------- SCREENS ---------- */
+/* =========================================================
+   LANGUAGE
+   По умолчанию — EN
+   Если язык Telegram = ru → RU
+========================================================= */
+
+let LANG = "en";
+
+if (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code === "ru") {
+  LANG = "ru";
+}
+
+/* =========================================================
+   SCREENS
+========================================================= */
+
 const screens = document.querySelectorAll(".screen");
+
 function show(id) {
   screens.forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
-/* ---------- LANGUAGE ---------- */
-let LANG = "ru";
+/* =========================================================
+   DOM
+========================================================= */
 
-if (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code) {
-  const code = Telegram.WebApp.initDataUnsafe.user.language_code;
-  LANG = code.startsWith("en") ? "en" : "ru";
-}
-
-/* ---------- DOM ---------- */
 const grid = document.getElementById("glossary-grid");
-
-const img = document.getElementById("glossary-image");
-const title = document.getElementById("glossary-title");
-const archetype = document.getElementById("glossary-archetype");
-const description = document.getElementById("glossary-description");
-const upright = document.getElementById("glossary-upright");
-const reversed = document.getElementById("glossary-reversed");
 
 const btnBackHome = document.getElementById("btn-back-home");
 const btnBackList = document.getElementById("btn-back-list");
 
-const listTitle = document.getElementById("glossary-list-title");
-const labelUpright = document.getElementById("label-upright");
-const labelReversed = document.getElementById("label-reversed");
+const img = document.getElementById("glossary-image");
+const title = document.getElementById("glossary-title");
+const description = document.getElementById("glossary-description");
+const upright = document.getElementById("glossary-upright");
+const reversed = document.getElementById("glossary-reversed");
 
-/* ---------- UI TEXTS ---------- */
-const UI = {
-  ru: {
-    listTitle: "Глоссарий Арканов",
-    back: "← Назад",
-    upright: "Прямое положение",
-    reversed: "Перевёрнутое положение"
-  },
-  en: {
-    listTitle: "Arcana Glossary",
-    back: "← Back",
-    upright: "Upright position",
-    reversed: "Reversed position"
-  }
-};
+/* =========================================================
+   BUTTON TEXTS
+========================================================= */
 
-/* ---------- APPLY UI TEXT ---------- */
-listTitle.textContent = UI[LANG].listTitle;
-btnBackHome.textContent = UI[LANG].back;
-btnBackList.textContent = UI[LANG].back;
-labelUpright.innerHTML = `<strong>${UI[LANG].upright}</strong>`;
-labelReversed.innerHTML = `<strong>${UI[LANG].reversed}</strong>`;
+btnBackHome.textContent = LANG === "ru" ? "← Назад" : "← Back";
+btnBackList.textContent = LANG === "ru" ? "← К списку" : "← Back to list";
 
-/* ---------- DATA ---------- */
+/* =========================================================
+   DATA
+========================================================= */
+
 let glossaryData = null;
 
-/* ---------- LOAD LIST ---------- */
+/* =========================================================
+   LOAD GLOSSARY LIST
+========================================================= */
+
 async function loadGlossary() {
   if (!glossaryData) {
-    const res = await fetch("glossary.json");
-    glossaryData = await res.json();
+    glossaryData = await (await fetch("glossary.json")).json();
   }
 
   grid.innerHTML = "";
 
   Object.keys(glossaryData).forEach(id => {
-    const item = document.createElement("div");
-    item.className = "glossary-item";
-    item.textContent = glossaryData[id].name[LANG];
-    item.onclick = () => openCard(id);
-    grid.appendChild(item);
+    const card = glossaryData[id];
+
+    const div = document.createElement("div");
+    div.textContent = card.name[LANG];
+    div.className = "glossary-item";
+
+    div.onclick = () => openCard(id);
+
+    grid.appendChild(div);
   });
 }
 
-/* ---------- OPEN CARD ---------- */
+/* =========================================================
+   OPEN CARD
+========================================================= */
+
 function openCard(id) {
   const c = glossaryData[id];
 
+  // image
   img.src = `../images/cards/${String(id).padStart(2, "0")}.png`;
   img.style.transform = "none";
 
+  // texts
   title.textContent = c.name[LANG];
-  archetype.textContent = c.archetype?.[LANG] || "";
   description.textContent = c.description[LANG];
   upright.textContent = c.upright[LANG];
   reversed.textContent = c.reversed[LANG];
@@ -90,7 +93,10 @@ function openCard(id) {
   show("glossary-card");
 }
 
-/* ---------- EVENTS ---------- */
+/* =========================================================
+   EVENTS
+========================================================= */
+
 btnBackHome.onclick = () => {
   window.location.href = "../index.html";
 };
@@ -99,5 +105,9 @@ btnBackList.onclick = () => {
   show("glossary-list");
 };
 
-/* ---------- INIT ---------- */
+/* =========================================================
+   INIT
+========================================================= */
+
+show("glossary-list");
 loadGlossary();
