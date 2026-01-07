@@ -1,110 +1,94 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #0f1114;
-  color: #eaeaea;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: system-ui, sans-serif;
 }
 
-/* ===== SCREENS ===== */
+body {
+  background: url("images/background/bg.png") center / cover no-repeat;
+  color: #fff;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 0;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+}
 
 .screen {
   display: none;
-  min-height: 100vh;
-  padding: 24px 16px;
+  padding: 32px 20px;
+  text-align: center;
 }
 
 .screen.active {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: block;
 }
-
-/* ===== HOME ===== */
-
-#home {
-  justify-content: center;   /* ВЕРТИКАЛЬНЫЙ ЦЕНТР */
-  gap: 24px;
-}
-
-/* ===== TITLES ===== */
 
 .title {
-  font-size: 28px;
-  font-weight: 500;
-  text-align: center;
+  font-size: 36px;
+  margin-bottom: 32px;
 }
-
-.card-title {
-  font-size: 22px;
-  margin: 16px 0 8px;
-  text-align: center;
-}
-
-.sub {
-  margin-top: 16px;
-  font-weight: 500;
-  opacity: 0.8;
-}
-
-/* ===== BUTTONS ===== */
 
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  width: 100%;
-  max-width: 280px;
-}
-
-button {
-  padding: 14px 20px;
-  font-size: 16px;
-  border-radius: 14px;
-  border: none;
-  cursor: pointer;
-
-  background: rgba(255,255,255,0.14);
-  color: #ffffff;
-}
-
-button:active {
-  opacity: 0.85;
-}
-
-/* ===== CARD ===== */
-
-.card-image {
-  width: 100%;
+  gap: 16px;
   max-width: 320px;
-  margin: 0 auto 16px;
-  display: block;
+  margin: 0 auto;
 }
 
-.card-text {
+.btn {
+  padding: 14px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.card {
+  max-width: 320px;
+  margin: 0 auto 20px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+#card-text {
+  margin: 16px 0 32px;
+  line-height: 1.5;
+}
+
+/* GLOSSARY */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
   max-width: 420px;
-  line-height: 1.55;
-  opacity: 0.95;
-  text-align: center;
+  margin: 0 auto 24px;
 }
 
-.archetype {
-  font-style: italic;
-  opacity: 0.8;
-  margin-bottom: 12px;
-  text-align: center;
-}
-
-.hidden {
-  display: none;
-}
-
-/* ===== BACK ===== */
-
-.back-btn {
-  margin-top: 24px;
+.glossary-grid div {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  cursor: pointer;
 }
