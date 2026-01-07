@@ -15,6 +15,7 @@ body {
   color: #fff;
 }
 
+/* затемнение фона */
 body::before {
   content: "";
   position: fixed;
@@ -27,6 +28,8 @@ body::before {
   position: relative;
   z-index: 1;
 }
+
+/* SCREENS */
 
 .screen {
   display: none;
@@ -43,21 +46,19 @@ body::before {
   margin-bottom: 32px;
 }
 
-/* =========================
-   MAIN BUTTONS (HOME)
-========================= */
+/* BUTTONS */
 
 .buttons {
   display: flex;
   flex-direction: column;
-  align-items: center;        /* ← ЦЕНТРИРОВАНИЕ */
+  align-items: center;   /* центрируем кнопки */
   gap: 16px;
   max-width: 320px;
   margin: 0 auto;
 }
 
 .btn {
-  width: 100%;                /* ← одинаковая ширина */
+  width: 100%;           /* одинаковая ширина */
   padding: 14px 18px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.4);
@@ -65,12 +66,10 @@ body::before {
   color: #fff;
   cursor: pointer;
   backdrop-filter: blur(8px);
-  text-align: center;
+  text-align: center;    /* центр текста */
 }
 
-/* =========================
-   CARD
-========================= */
+/* CARD */
 
 .card {
   max-width: 320px;
@@ -87,26 +86,7 @@ body::before {
   line-height: 1.5;
 }
 
-/* =========================
-   BACK BUTTONS (CENTERED)
-========================= */
-
-.back-btn {
-  display: block;
-  margin: 32px auto 0;        /* ← ЦЕНТР */
-  padding: 12px 20px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  text-align: center;
-}
-
-/* =========================
-   GLOSSARY GRID
-========================= */
+/* GLOSSARY */
 
 .glossary-grid {
   display: grid;
@@ -122,41 +102,4 @@ body::before {
   background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.3);
   cursor: pointer;
-  text-align: center;
-}
-
-/* =========================
-   GLOSSARY CARD IMAGE
-========================= */
-
-.card-image {
-  width: 220px;
-  margin: 0 auto 24px;
-  display: block;
-  border-radius: 12px;
-}
-
-/* =========================
-   GLOSSARY TEXT
-========================= */
-
-.card-title {
-  font-size: 28px;
-  margin-bottom: 12px;
-}
-
-.archetype {
-  font-style: italic;
-  opacity: 0.85;
-  margin-bottom: 16px;
-}
-
-.description {
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-.meanings p {
-  line-height: 1.5;
-  margin-bottom: 12px;
 }
