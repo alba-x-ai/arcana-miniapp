@@ -2,440 +2,440 @@
   "0": {
     "name": { "ru": "Шут", "en": "The Fool" },
     "archetype": {
-      "ru": "Архетип начала, открытости и доверия жизни.",
-      "en": "The archetype of beginnings, openness, and trust in life."
+      "ru": "Начало пути и доверие жизни.",
+      "en": "The beginning of the path and trust in life."
     },
     "description": {
-      "ru": "Шут появляется там, где ещё нет формы. Он идёт вперёд не из знания, а из доверия происходящему.",
-      "en": "The Fool appears where form has not yet emerged. He moves forward not from knowledge, but from trust."
+      "ru": "Шут появляется в момент, когда прежние формы больше не работают, а новые ещё не оформились. Это состояние чистого шага — без гарантий, но с живым ощущением движения.",
+      "en": "The Fool appears when old forms no longer hold and new ones have not yet taken shape. It is a state of a pure step, without guarantees but full of living motion."
     },
     "upright": {
-      "ru": "Шаг в неизвестное с доверием. Спонтанность, свобода от ожиданий, готовность начать путь.",
-      "en": "A step into the unknown with trust. Spontaneity and readiness to begin."
+      "ru": "Ты находишься в точке начала. Сейчас важнее не знать путь, а быть готовой идти. Доверие процессу открывает пространство возможностей.",
+      "en": "You are at a point of beginning. What matters now is not knowing the path, but being willing to walk it. Trust opens new space."
     },
     "reversed": {
-      "ru": "Страх первого шага или импульсивность без осознанности.",
-      "en": "Fear of the first step or reckless impulsivity."
+      "ru": "Энергия Шута может искажаться в страх сделать первый шаг или в импульсивность без опоры на внутреннее ощущение.",
+      "en": "The Fool’s energy may distort into fear of the first step or impulsive movement without inner grounding."
     }
   },
 
   "1": {
     "name": { "ru": "Маг", "en": "The Magician" },
     "archetype": {
-      "ru": "Архетип воли и намеренного действия.",
-      "en": "The archetype of will and intentional action."
+      "ru": "Намерение и способность влиять.",
+      "en": "Intention and the power to influence."
     },
     "description": {
-      "ru": "Маг отражает способность направлять энергию и превращать замысел в форму.",
-      "en": "The Magician represents the ability to direct energy and shape intention into form."
+      "ru": "Маг соединяет идею и действие. Он знает, что внимание и воля способны придавать форму происходящему.",
+      "en": "The Magician unites idea and action. He knows that attention and will can shape reality."
     },
     "upright": {
-      "ru": "Осознанное использование ресурсов, ясность намерения.",
-      "en": "Conscious use of resources and clear intention."
+      "ru": "У тебя есть ресурсы и ясность, чтобы действовать. Сейчас важно осознанно направлять энергию.",
+      "en": "You have the resources and clarity to act. Conscious direction of energy is essential now."
     },
     "reversed": {
-      "ru": "Рассеянная энергия или манипуляция.",
-      "en": "Scattered energy or manipulation."
+      "ru": "Энергия рассеивается или используется неискренне. Возможно, ты утратила контакт с истинной целью.",
+      "en": "Energy scatters or is used without integrity. Connection to the true intention may be lost."
     }
   },
 
   "2": {
     "name": { "ru": "Жрица", "en": "The High Priestess" },
     "archetype": {
-      "ru": "Архетип внутреннего знания и тишины.",
-      "en": "The archetype of inner knowledge and silence."
+      "ru": "Внутреннее знание и тишина.",
+      "en": "Inner knowing and silence."
     },
     "description": {
-      "ru": "Жрица хранит скрытое знание и приглашает слушать внутренний голос.",
-      "en": "The High Priestess guards hidden knowledge and invites inner listening."
+      "ru": "Жрица указывает на глубинные слои восприятия. Она предлагает замедлиться и услышать то, что обычно скрыто за шумом.",
+      "en": "The High Priestess points to deeper layers of perception. She invites slowing down and listening beneath the noise."
     },
     "upright": {
-      "ru": "Интуиция, чувствительность, доверие внутреннему знанию.",
-      "en": "Intuition and trust in inner knowing."
+      "ru": "Интуиция сейчас особенно точна. Ответы приходят через ощущения и тонкие внутренние сигналы.",
+      "en": "Intuition is especially precise now. Answers arrive through subtle inner signals."
     },
     "reversed": {
-      "ru": "Игнорирование интуиции или внутренний разрыв.",
-      "en": "Ignoring intuition or inner disconnection."
+      "ru": "Связь с внутренним голосом ослаблена. Внешние влияния могут заглушать важное.",
+      "en": "Connection to the inner voice is weakened. External influences may drown out what matters."
     }
   },
 
   "3": {
     "name": { "ru": "Императрица", "en": "The Empress" },
     "archetype": {
-      "ru": "Архетип роста и заботы.",
-      "en": "The archetype of growth and nurturing."
+      "ru": "Созидание, забота и рост.",
+      "en": "Creation, care, and growth."
     },
     "description": {
-      "ru": "Императрица символизирует созидание, питание и связь с жизнью.",
-      "en": "The Empress symbolizes creation, nourishment, and life force."
+      "ru": "Императрица отражает живую силу, которая питает и поддерживает. Она связана с телом, чувствами и естественным развитием.",
+      "en": "The Empress reflects the living force that nourishes and sustains. She is connected to the body, feelings, and natural growth."
     },
     "upright": {
-      "ru": "Плодородие, поддержка, мягкое развитие.",
-      "en": "Fertility, support, and gentle growth."
+      "ru": "Поддержка и мягкое развитие. То, что ты питаешь вниманием, постепенно раскрывается.",
+      "en": "Support and gentle growth. What you nourish with attention begins to unfold."
     },
     "reversed": {
-      "ru": "Истощение или утрата контакта с собой.",
-      "en": "Exhaustion or loss of self-connection."
+      "ru": "Забота может быть направлена вовне в ущерб себе. Возможны истощение или потеря контакта с телом.",
+      "en": "Care may be directed outward at the expense of yourself. Exhaustion or loss of bodily connection is possible."
     }
   },
 
   "4": {
     "name": { "ru": "Император", "en": "The Emperor" },
     "archetype": {
-      "ru": "Архетип структуры и опоры.",
-      "en": "The archetype of structure and stability."
+      "ru": "Структура, границы и опора.",
+      "en": "Structure, boundaries, and stability."
     },
     "description": {
-      "ru": "Император создаёт границы и устойчивость через порядок.",
-      "en": "The Emperor creates stability through order and boundaries."
+      "ru": "Император создаёт порядок и форму. Он отвечает за устойчивость, правила и способность держать пространство.",
+      "en": "The Emperor creates order and form. He is responsible for stability, rules, and holding space."
     },
     "upright": {
-      "ru": "Контроль, ответственность, устойчивость.",
-      "en": "Control, responsibility, and stability."
+      "ru": "Чёткие границы и ответственность дают ощущение опоры и контроля над происходящим.",
+      "en": "Clear boundaries and responsibility provide a sense of stability and control."
     },
     "reversed": {
-      "ru": "Жёсткость или потеря опоры.",
-      "en": "Rigidity or loss of stability."
+      "ru": "Структура становится слишком жёсткой или, наоборот, теряет устойчивость. Контроль может давить.",
+      "en": "Structure becomes too rigid or loses stability. Control may feel oppressive."
     }
   },
 
   "5": {
     "name": { "ru": "Иерофант", "en": "The Hierophant" },
     "archetype": {
-      "ru": "Архетип традиции и ценностей.",
-      "en": "The archetype of tradition and values."
+      "ru": "Традиция, передача смысла и внутренняя опора.",
+      "en": "Tradition, transmission of meaning, and inner foundation."
     },
     "description": {
-      "ru": "Иерофант связывает личный опыт с коллективной мудростью.",
-      "en": "The Hierophant connects personal experience with collective wisdom."
+      "ru": "Иерофант связывает личный опыт с коллективной мудростью. Он появляется там, где важно опереться на знание, проверенное временем, и услышать голос традиции — внешней или внутренней.",
+      "en": "The Hierophant connects personal experience with collective wisdom. He appears where it is important to rely on time-tested knowledge and hear the voice of tradition, outer or inner."
     },
     "upright": {
-      "ru": "Поиск смысла, обучение, следование ценностям.",
-      "en": "Seeking meaning and shared wisdom."
+      "ru": "Поиск смысла через обучение, наставничество или собственные ценности. Подходит момент для выстраивания внутреннего кодекса.",
+      "en": "Seeking meaning through learning, guidance, or personal values. A time to form an inner code."
     },
     "reversed": {
-      "ru": "Слепое следование правилам или отказ от внутренних ориентиров.",
-      "en": "Blind conformity or rejection of inner values."
+      "ru": "Слепое следование правилам или отказ от собственных ориентиров. Возможен внутренний конфликт между формой и смыслом.",
+      "en": "Blind conformity or rejection of personal values. A conflict between form and meaning may arise."
     }
   },
 
   "6": {
     "name": { "ru": "Влюблённые", "en": "The Lovers" },
     "archetype": {
-      "ru": "Архетип выбора и согласия.",
-      "en": "The archetype of choice and alignment."
+      "ru": "Выбор и согласие с собой.",
+      "en": "Choice and inner alignment."
     },
     "description": {
-      "ru": "Этот аркан говорит о решениях, сделанных из внутреннего согласия.",
-      "en": "This arcana speaks of decisions made from inner alignment."
+      "ru": "Эта карта говорит не только о союзе, но и о моменте внутреннего выбора. Влюблённые указывают на точку, где важно быть честной с собой.",
+      "en": "This card speaks not only of union, but of an inner choice. The Lovers point to a moment where honesty with oneself is essential."
     },
     "upright": {
-      "ru": "Осознанный выбор и гармония.",
-      "en": "Conscious choice and harmony."
+      "ru": "Осознанный выбор, сделанный в согласии с внутренними ценностями. Единство чувств и решений.",
+      "en": "A conscious choice aligned with inner values. Unity between feeling and decision."
     },
     "reversed": {
-      "ru": "Сомнение или внутренний конфликт.",
-      "en": "Indecision or inner conflict."
+      "ru": "Сомнение, внутренний раскол или уход от ответственности за выбор.",
+      "en": "Doubt, inner conflict, or avoidance of responsibility for a choice."
     }
   },
 
   "7": {
     "name": { "ru": "Колесница", "en": "The Chariot" },
     "archetype": {
-      "ru": "Архетип движения и воли.",
-      "en": "The archetype of movement and will."
+      "ru": "Движение и направленная воля.",
+      "en": "Movement and directed will."
     },
     "description": {
-      "ru": "Колесница отражает движение вперёд через собранность.",
-      "en": "The Chariot reflects forward motion through focus."
+      "ru": "Колесница символизирует момент, когда путь уже выбран, и требуется собранность. Это энергия движения, удерживаемого намерением.",
+      "en": "The Chariot symbolizes a moment when the path is chosen and focus is required. Movement held by intention."
     },
     "upright": {
-      "ru": "Продвижение и контроль направления.",
-      "en": "Progress and control of direction."
+      "ru": "Продвижение вперёд, концентрация и контроль направления. Усилие приносит результат.",
+      "en": "Forward movement, focus, and control of direction. Effort brings results."
     },
     "reversed": {
-      "ru": "Потеря управления или разбросанность.",
-      "en": "Loss of control or scattered effort."
+      "ru": "Потеря управления или движение без ясной цели. Напряжение может мешать продвижению.",
+      "en": "Loss of control or movement without clear purpose. Tension may block progress."
     }
   },
 
   "8": {
     "name": { "ru": "Сила", "en": "Strength" },
     "archetype": {
-      "ru": "Архетип мягкой силы.",
-      "en": "The archetype of gentle strength."
+      "ru": "Мягкая внутренняя сила.",
+      "en": "Gentle inner strength."
     },
     "description": {
-      "ru": "Сила говорит о принятии и внутреннем равновесии.",
-      "en": "Strength speaks of acceptance and inner balance."
+      "ru": "Сила говорит о способности быть устойчивой без давления. Это энергия принятия, терпения и внутреннего равновесия.",
+      "en": "Strength speaks of resilience without force. It is the energy of acceptance, patience, and inner balance."
     },
     "upright": {
-      "ru": "Спокойная уверенность и устойчивость.",
-      "en": "Quiet confidence and resilience."
+      "ru": "Тихая уверенность и контакт с собой. Ситуация решается через мягкость, а не борьбу.",
+      "en": "Quiet confidence and self-connection. Resolution comes through gentleness, not struggle."
     },
     "reversed": {
-      "ru": "Подавленная энергия или внутреннее напряжение.",
-      "en": "Suppressed energy or inner tension."
+      "ru": "Подавленная энергия или действие через напряжение. Возможна усталость от постоянного самоконтроля.",
+      "en": "Suppressed energy or forceful action. Fatigue from constant self-control may appear."
     }
   },
 
   "9": {
     "name": { "ru": "Отшельник", "en": "The Hermit" },
     "archetype": {
-      "ru": "Архетип уединения и поиска.",
-      "en": "The archetype of solitude and search."
+      "ru": "Уединение и внутренний поиск.",
+      "en": "Solitude and inner search."
     },
     "description": {
-      "ru": "Отшельник указывает путь внутрь себя.",
-      "en": "The Hermit points the way inward."
+      "ru": "Отшельник приглашает к паузе и осмыслению. Это время, когда ответы рождаются в тишине, вдали от внешнего шума.",
+      "en": "The Hermit invites pause and reflection. Answers are born in silence, away from external noise."
     },
     "upright": {
-      "ru": "Размышление и внутренняя ясность.",
-      "en": "Reflection and inner clarity."
+      "ru": "Осознанное уединение, внутренняя настройка и поиск собственного света.",
+      "en": "Conscious solitude, inner alignment, and searching for one’s own light."
     },
     "reversed": {
-      "ru": "Изоляция или избегание контакта.",
-      "en": "Isolation or avoidance."
+      "ru": "Изоляция вместо уединения или страх остаться наедине с собой.",
+      "en": "Isolation instead of solitude, or fear of being alone with oneself."
     }
   },
 
   "10": {
     "name": { "ru": "Колесо Фортуны", "en": "Wheel of Fortune" },
     "archetype": {
-      "ru": "Архетип перемен и циклов.",
-      "en": "The archetype of change and cycles."
+      "ru": "Циклы, перемены и движение времени.",
+      "en": "Cycles, change, and the movement of time."
     },
     "description": {
-      "ru": "Колесо Фортуны напоминает о непостоянстве процессов.",
-      "en": "The Wheel of Fortune reminds us of constant change."
+      "ru": "Колесо Фортуны указывает на момент смены ритма. События разворачиваются независимо от личного контроля, напоминая о большем процессе, частью которого ты являешься.",
+      "en": "The Wheel of Fortune points to a shift in rhythm. Events unfold beyond personal control, reminding you of a larger process you are part of."
     },
     "upright": {
-      "ru": "Поворот событий и смена этапа.",
-      "en": "A turning point and shift."
+      "ru": "Поворот судьбы и смена этапа. Готовность принять движение открывает новые возможности.",
+      "en": "A turning point and change of phase. Openness to movement brings new possibilities."
     },
     "reversed": {
-      "ru": "Сопротивление изменениям.",
-      "en": "Resistance to change."
+      "ru": "Сопротивление переменам или ощущение застревания. Возможен страх утраты привычного.",
+      "en": "Resistance to change or a sense of stagnation. Fear of losing the familiar may arise."
     }
   },
 
   "11": {
     "name": { "ru": "Справедливость", "en": "Justice" },
     "archetype": {
-      "ru": "Архетип истины и баланса.",
-      "en": "The archetype of truth and balance."
+      "ru": "Баланс, истина и ответственность.",
+      "en": "Balance, truth, and responsibility."
     },
     "description": {
-      "ru": "Справедливость отражает честный взгляд на происходящее.",
-      "en": "Justice reflects an honest view of reality."
+      "ru": "Справедливость говорит о необходимости ясного взгляда. Это момент, когда важно увидеть ситуацию без искажений и признать последствия своих решений.",
+      "en": "Justice speaks of the need for clarity. It is a moment to see the situation without distortion and acknowledge the consequences of choices."
     },
     "upright": {
-      "ru": "Ясность и ответственность.",
-      "en": "Clarity and responsibility."
+      "ru": "Честность с собой и окружающими. Восстановление внутреннего равновесия.",
+      "en": "Honesty with yourself and others. Restoration of inner balance."
     },
     "reversed": {
-      "ru": "Искажение истины или внутренний конфликт.",
-      "en": "Distorted truth or imbalance."
+      "ru": "Искажение истины или внутренний перекос. Возможна попытка избежать ответственности.",
+      "en": "Distortion of truth or inner imbalance. Avoidance of responsibility is possible."
     }
   },
 
   "12": {
     "name": { "ru": "Повешенный", "en": "The Hanged Man" },
     "archetype": {
-      "ru": "Архетип паузы и переосмысления.",
-      "en": "The archetype of pause and re-evaluation."
+      "ru": "Пауза и смена перспективы.",
+      "en": "Pause and a shift in perspective."
     },
     "description": {
-      "ru": "Повешенный предлагает взглянуть на мир иначе.",
-      "en": "The Hanged Man invites a new perspective."
+      "ru": "Повешенный останавливает привычное движение. Он предлагает взглянуть на происходящее иначе, даже если это требует временного отказа от действия.",
+      "en": "The Hanged Man halts habitual motion. He invites seeing the situation differently, even if it requires temporary non-action."
     },
     "upright": {
-      "ru": "Остановка ради понимания.",
-      "en": "Pause for insight."
+      "ru": "Добровольная пауза ради понимания. Новое видение рождается в остановке.",
+      "en": "A voluntary pause for insight. New vision is born in stillness."
     },
     "reversed": {
-      "ru": "Застой без осознания.",
-      "en": "Stagnation without insight."
+      "ru": "Застревание без осмысления или сопротивление необходимости остановиться.",
+      "en": "Stagnation without insight or resistance to the need for pause."
     }
   },
 
   "13": {
     "name": { "ru": "Смерть", "en": "Death" },
     "archetype": {
-      "ru": "Архетип завершения и трансформации.",
-      "en": "The archetype of endings and transformation."
+      "ru": "Завершение и трансформация.",
+      "en": "Ending and transformation."
     },
     "description": {
-      "ru": "Смерть говорит о переходе и освобождении.",
-      "en": "Death speaks of transition and release."
+      "ru": "Смерть обозначает завершение формы, а не исчезновение смысла. Это процесс очищения, после которого возможно обновление.",
+      "en": "Death marks the end of a form, not the loss of meaning. It is a process of clearing that allows renewal."
     },
     "upright": {
-      "ru": "Завершение и обновление.",
-      "en": "Ending and renewal."
+      "ru": "Завершение этапа и освобождение пространства для нового.",
+      "en": "Completion of a phase and release of space for the new."
     },
     "reversed": {
-      "ru": "Страх перемен.",
-      "en": "Fear of change."
+      "ru": "Страх перемен или удерживание прошлого. Процесс трансформации замедляется.",
+      "en": "Fear of change or clinging to the past. Transformation is delayed."
     }
   },
 
   "14": {
     "name": { "ru": "Умеренность", "en": "Temperance" },
     "archetype": {
-      "ru": "Архетип гармонии и меры.",
-      "en": "The archetype of harmony and moderation."
+      "ru": "Гармония и внутренний ритм.",
+      "en": "Harmony and inner rhythm."
     },
     "description": {
-      "ru": "Умеренность соединяет противоположности.",
-      "en": "Temperance blends opposites."
+      "ru": "Умеренность говорит о тонком балансе. Это состояние, в котором противоположности постепенно находят общее движение.",
+      "en": "Temperance speaks of subtle balance. It is a state where opposites gradually find a shared flow."
     },
     "upright": {
-      "ru": "Баланс и плавность.",
-      "en": "Balance and flow."
+      "ru": "Плавное выравнивание процессов. Гармония приходит через меру и терпение.",
+      "en": "Gentle alignment of processes. Harmony comes through moderation and patience."
     },
     "reversed": {
-      "ru": "Нарушение внутреннего ритма.",
-      "en": "Inner imbalance."
+      "ru": "Перекос или утрата внутреннего ритма. Возможна спешка или крайности.",
+      "en": "Imbalance or loss of inner rhythm. Extremes or haste may appear."
     }
   },
 
   "15": {
     "name": { "ru": "Дьявол", "en": "The Devil" },
     "archetype": {
-      "ru": "Архетип привязанностей и тени.",
-      "en": "The archetype of attachment and shadow."
+      "ru": "Привязанность и теневая сторона желания.",
+      "en": "Attachment and the shadow side of desire."
     },
     "description": {
-      "ru": "Дьявол показывает скрытые зависимости.",
-      "en": "The Devil reveals hidden attachments."
+      "ru": "Дьявол проявляется там, где желание становится цепью. Он показывает не зло, а места, где энергия связана страхом, привычкой или зависимостью.",
+      "en": "The Devil appears where desire turns into a chain. He reveals not evil, but places where energy is bound by fear, habit, or dependency."
     },
     "upright": {
-      "ru": "Осознание теневых сторон.",
-      "en": "Awareness of shadow aspects."
+      "ru": "Осознание привязанностей и скрытых мотивов. Первый шаг к освобождению начинается с честного взгляда.",
+      "en": "Awareness of attachments and hidden motives. Liberation begins with honest recognition."
     },
     "reversed": {
-      "ru": "Освобождение или отрицание проблемы.",
-      "en": "Release or denial."
+      "ru": "Связи начинают ослабевать, но страх отпустить всё ещё присутствует. Возможен внутренний торг.",
+      "en": "Bonds begin to loosen, yet fear of release remains. An inner bargaining may occur."
     }
   },
 
   "16": {
     "name": { "ru": "Башня", "en": "The Tower" },
     "archetype": {
-      "ru": "Архетип разрушения иллюзий.",
-      "en": "The archetype of disruption."
+      "ru": "Разрушение иллюзий и внезапное прозрение.",
+      "en": "Collapse of illusions and sudden revelation."
     },
     "description": {
-      "ru": "Башня разрушает ложные конструкции.",
-      "en": "The Tower breaks false structures."
+      "ru": "Башня приходит, когда форма больше не выдерживает истины. Разрушение здесь — не наказание, а обнажение реальности.",
+      "en": "The Tower arrives when a structure can no longer hold truth. Destruction here is not punishment, but revelation."
     },
     "upright": {
-      "ru": "Резкие перемены.",
-      "en": "Sudden change."
+      "ru": "Резкий слом старых конструкций. То, что казалось устойчивым, освобождает место для нового.",
+      "en": "Sudden breakdown of old structures. What seemed stable makes space for renewal."
     },
     "reversed": {
-      "ru": "Отложенный кризис.",
-      "en": "Delayed upheaval."
+      "ru": "Отложенный кризис или попытка удержать разрушенную форму. Напряжение накапливается.",
+      "en": "Delayed crisis or attempt to preserve a broken form. Tension accumulates."
     }
   },
 
   "17": {
     "name": { "ru": "Звезда", "en": "The Star" },
     "archetype": {
-      "ru": "Архетип надежды и исцеления.",
-      "en": "The archetype of hope and healing."
+      "ru": "Надежда и тихое восстановление.",
+      "en": "Hope and gentle renewal."
     },
     "description": {
-      "ru": "Звезда приносит мягкий свет и веру.",
-      "en": "The Star brings gentle light and faith."
+      "ru": "Звезда появляется после разрушения. Она не обещает мгновенного счастья, но возвращает ощущение смысла и направления.",
+      "en": "The Star appears after destruction. It does not promise instant joy, but restores meaning and direction."
     },
     "upright": {
-      "ru": "Восстановление и доверие.",
-      "en": "Renewal and trust."
+      "ru": "Тихая вера и постепенное исцеление. Свет присутствует, даже если он пока далёк.",
+      "en": "Quiet faith and gradual healing. Light is present, even if it feels distant."
     },
     "reversed": {
-      "ru": "Потеря надежды.",
-      "en": "Loss of hope."
+      "ru": "Недоверие процессу восстановления или утрата надежды. Возможно, ты не видишь свет, который уже есть.",
+      "en": "Distrust in the healing process or loss of hope. You may not see the light that is already there."
     }
   },
 
   "18": {
     "name": { "ru": "Луна", "en": "The Moon" },
     "archetype": {
-      "ru": "Архетип неясности и глубинных чувств.",
-      "en": "The archetype of uncertainty and deep emotion."
+      "ru": "Неясность и глубинные чувства.",
+      "en": "Uncertainty and deep emotion."
     },
     "description": {
-      "ru": "Луна отражает скрытые страхи и сны.",
-      "en": "The Moon reflects hidden fears and dreams."
+      "ru": "Луна погружает в пространство полутеней. Здесь активны страхи, интуиция и образы подсознания.",
+      "en": "The Moon draws you into a realm of half-shadows. Fears, intuition, and subconscious imagery are active here."
     },
     "upright": {
-      "ru": "Интуиция и тонкое восприятие.",
-      "en": "Intuition and subtle perception."
+      "ru": "Тонкие переживания и работа с внутренними образами. Не всё требует немедкого прояснения.",
+      "en": "Subtle experiences and inner imagery. Not everything needs immediate clarity."
     },
     "reversed": {
-      "ru": "Прояснение иллюзий.",
-      "en": "Revelation of illusions."
+      "ru": "Страхи начинают рассеиваться или, наоборот, вытесняются. Прояснение близко, но требует честности.",
+      "en": "Fears begin to dissolve or are suppressed. Clarity approaches but requires honesty."
     }
   },
 
   "19": {
     "name": { "ru": "Солнце", "en": "The Sun" },
     "archetype": {
-      "ru": "Архетип ясности и жизненной энергии.",
-      "en": "The archetype of clarity and vitality."
+      "ru": "Ясность и жизненная энергия.",
+      "en": "Clarity and life energy."
     },
     "description": {
-      "ru": "Солнце несёт тепло и открытость.",
-      "en": "The Sun brings warmth and openness."
+      "ru": "Солнце освещает происходящее без искажений. Это энергия простоты, радости и прямого присутствия.",
+      "en": "The Sun illuminates without distortion. It is the energy of simplicity, joy, and direct presence."
     },
     "upright": {
-      "ru": "Радость и жизненность.",
-      "en": "Joy and vitality."
+      "ru": "Ясность, открытость и естественная радость. Энергия течёт свободно.",
+      "en": "Clarity, openness, and natural joy. Energy flows freely."
     },
     "reversed": {
-      "ru": "Временное выгорание.",
-      "en": "Temporary burnout."
+      "ru": "Свет временно затенён. Возможна усталость или потеря контакта с радостью.",
+      "en": "Light is temporarily dimmed. Fatigue or disconnection from joy may appear."
     }
   },
 
   "20": {
     "name": { "ru": "Суд", "en": "Judgement" },
     "archetype": {
-      "ru": "Архетип пробуждения и призыва.",
-      "en": "The archetype of awakening and calling."
+      "ru": "Пробуждение и внутренний зов.",
+      "en": "Awakening and the inner call."
     },
     "description": {
-      "ru": "Суд говорит о моменте осознания.",
-      "en": "Judgement speaks of realization."
+      "ru": "Суд обозначает момент, когда прежняя версия себя больше не может продолжать путь. Это не оценка и не приговор, а приглашение услышать зов к изменению.",
+      "en": "Judgement marks the moment when an old version of the self can no longer continue. It is not a verdict, but an invitation to hear the call to change."
     },
     "upright": {
-      "ru": "Пробуждение и решение.",
-      "en": "Awakening and decision."
+      "ru": "Осознание и готовность откликнуться на внутренний зов. Наступает время решения, которое невозможно отложить.",
+      "en": "Awareness and readiness to answer the inner call. A decision arises that can no longer be postponed."
     },
     "reversed": {
-      "ru": "Игнорирование зова.",
-      "en": "Ignoring the call."
+      "ru": "Игнорирование зова или страх перемен. Процесс пробуждения задерживается.",
+      "en": "Ignoring the call or fear of change. The awakening process is delayed."
     }
   },
 
   "21": {
     "name": { "ru": "Мир", "en": "The World" },
     "archetype": {
-      "ru": "Архетип целостности и завершения.",
-      "en": "The archetype of completion and wholeness."
+      "ru": "Целостность и завершённость.",
+      "en": "Wholeness and completion."
     },
     "description": {
-      "ru": "Мир символизирует завершённый цикл.",
-      "en": "The World symbolizes a completed cycle."
+      "ru": "Мир завершает путь Старших Арканов. Это состояние собранности, в котором опыт интегрирован, а движение приходит к естественному завершению.",
+      "en": "The World completes the journey of the Major Arcana. It is a state of integration, where experience is unified and motion reaches its natural completion."
     },
     "upright": {
-      "ru": "Завершённость и полнота.",
-      "en": "Completion and fulfillment."
+      "ru": "Ощущение полноты и завершённого цикла. Всё находится на своём месте.",
+      "en": "A sense of fulfillment and a completed cycle. Everything rests where it belongs."
     },
     "reversed": {
-      "ru": "Незавершённость.",
-      "en": "Incompletion."
+      "ru": "Незавершённость или ощущение, что цикл ещё требует внимания. Возможна пауза перед финальным шагом.",
+      "en": "Incompletion or a feeling that the cycle still needs attention. A pause before the final step."
     }
   }
 }
