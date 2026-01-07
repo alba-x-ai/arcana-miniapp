@@ -4,6 +4,14 @@ function show(id) {
   document.getElementById(id).classList.add("active");
 }
 
+/* ---------- LANGUAGE ---------- */
+let LANG = "ru";
+
+if (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code) {
+  const tgLang = Telegram.WebApp.initDataUnsafe.user.language_code;
+  LANG = tgLang.startsWith("en") ? "en" : "ru";
+}
+
 /* ---------- DOM ---------- */
 const btnDay = document.getElementById("btn-day");
 const btnQuestion = document.getElementById("btn-question");
@@ -15,6 +23,14 @@ const btnBackToGlossary = document.getElementById("btn-back-to-glossary");
 const cardImage = document.getElementById("card-image");
 const cardTitle = document.getElementById("card-title");
 const cardText  = document.getElementById("card-text");
+
+/* --- glossary DOM --- */
+const glossaryImage = document.getElementById("glossary-card-image");
+const glossaryTitle = document.getElementById("glossary-title");
+const glossaryArchetype = document.getElementById("glossary-archetype");
+const glossaryDescription = document.getElementById("glossary-description");
+const glossaryUpright = document.getElementById("glossary-upright");
+const glossaryReversed = document.getElementById("glossary-reversed");
 
 /* ---------- BACKEND ---------- */
 const API_URL =
@@ -57,7 +73,7 @@ async function loadDayCard() {
   const texts = await (await fetch("texts/day-texts.json")).json();
   const pos = reversed ? "reversed" : "upright";
 
-  render(card, reversed, texts[card].ru[pos]);
+  render(card, reversed, texts[card][LANG][pos]);
 }
 
 /* ---------- QUESTION CARD ---------- */
@@ -65,7 +81,10 @@ async function loadQuestionCard() {
   const cards = await (await fetch("cards.json")).json();
   const id = Math.floor(Math.random() * 22);
   const rev = Math.random() < 0.5;
-  const text = rev ? cards[id].reversed.ru : cards[id].upright.ru;
+
+  const text = rev
+    ? cards[id].reversed[LANG]
+    : cards[id].upright[LANG];
 
   render(id, rev, text);
 }
@@ -79,13 +98,32 @@ function render(id, reversed, text) {
 }
 
 function getName(id) {
-  return [
-    "Шут","Маг","Жрица","Императрица","Император",
-    "Иерофант","Влюблённые","Колесница","Сила","Отшельник",
-    "Колесо Фортуны","Справедливость","Повешенный","Смерть",
-    "Умеренность","Дьявол","Башня","Звезда","Луна",
-    "Солнце","Суд","Мир"
-  ][id];
+  const names = [
+    { ru:"Шут", en:"The Fool" },
+    { ru:"Маг", en:"The Magician" },
+    { ru:"Жрица", en:"The High Priestess" },
+    { ru:"Императрица", en:"The Empress" },
+    { ru:"Император", en:"The Emperor" },
+    { ru:"Иерофант", en:"The Hierophant" },
+    { ru:"Влюблённые", en:"The Lovers" },
+    { ru:"Колесница", en:"The Chariot" },
+    { ru:"Сила", en:"Strength" },
+    { ru:"Отшельник", en:"The Hermit" },
+    { ru:"Колесо Фортуны", en:"Wheel of Fortune" },
+    { ru:"Справедливость", en:"Justice" },
+    { ru:"Повешенный", en:"The Hanged Man" },
+    { ru:"Смерть", en:"Death" },
+    { ru:"Умеренность", en:"Temperance" },
+    { ru:"Дьявол", en:"The Devil" },
+    { ru:"Башня", en:"The Tower" },
+    { ru:"Звезда", en:"The Star" },
+    { ru:"Луна", en:"The Moon" },
+    { ru:"Солнце", en:"The Sun" },
+    { ru:"Суд", en:"Judgement" },
+    { ru:"Мир", en:"The World" }
+  ];
+
+  return names[id][LANG];
 }
 
 /* ---------- GLOSSARY ---------- */
@@ -96,11 +134,13 @@ async function loadGlossary() {
   if (!glossaryData) {
     glossaryData = await (await fetch("glossary/glossary.json")).json();
   }
+
   grid.innerHTML = "";
 
   Object.keys(glossaryData).forEach(id => {
     const div = document.createElement("div");
-    div.textContent = glossaryData[id].name.ru;
+    div.className = "glossary-item";
+    div.textContent = glossaryData[id].name[LANG];
     div.onclick = () => openGlossaryCard(id);
     grid.appendChild(div);
   });
@@ -110,9 +150,12 @@ function openGlossaryCard(id) {
   const c = glossaryData[id];
   show("glossary-card");
 
-  document.getElementById("glossary-title").textContent = c.name.ru;
-  document.getElementById("glossary-archetype").textContent = c.archetype.ru;
-  document.getElementById("glossary-description").textContent = c.description.ru;
-  document.getElementById("glossary-upright").textContent = c.upright.ru;
-  document.getElementById("glossary-reversed").textContent = c.reversed.ru;
+  glossaryImage.src =
+    `images/cards/${String(id).padStart(2,"0")}.png`;
+
+  glossaryTitle.textContent = c.name[LANG];
+  glossaryArchetype.textContent = c.archetype?.[LANG] || "";
+  glossaryDescription.textContent = c.description[LANG];
+  glossaryUpright.textContent = c.upright[LANG];
+  glossaryReversed.textContent = c.reversed[LANG];
 }
