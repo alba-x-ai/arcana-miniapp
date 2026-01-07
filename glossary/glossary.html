@@ -11,11 +11,17 @@
 
   <!-- ===== SCREEN: LIST ===== -->
   <section id="glossary-list" class="screen active">
-    <h1 class="title">Глоссарий Арканов</h1>
+    <!-- Заголовок будет меняться из glossary.js -->
+    <h1 class="title" id="glossary-list-title">
+      Глоссарий Арканов
+    </h1>
 
     <div id="glossary-grid" class="grid"></div>
 
-    <button id="btn-back-home" class="back-btn">← Назад</button>
+    <!-- Кнопка назад: текст управляется из glossary.js -->
+    <button id="btn-back-home" class="back-btn">
+      ← Назад
+    </button>
   </section>
 
   <!-- ===== SCREEN: CARD ===== -->
@@ -23,18 +29,26 @@
     <img id="glossary-image" class="card-image" />
 
     <h2 id="glossary-title" class="card-title"></h2>
+
+    <!-- Архетип -->
     <p id="glossary-archetype" class="archetype"></p>
+
+    <!-- Описание -->
     <p id="glossary-description" class="description"></p>
 
     <div class="meanings">
-      <p><strong>Прямое положение</strong></p>
+      <!-- Заголовки управляются из glossary.js -->
+      <p id="label-upright"><strong>Прямое положение</strong></p>
       <p id="glossary-upright"></p>
 
-      <p><strong>Перевёрнутое положение</strong></p>
+      <p id="label-reversed"><strong>Перевёрнутое положение</strong></p>
       <p id="glossary-reversed"></p>
     </div>
 
-    <button id="btn-back-list" class="back-btn">← К списку</button>
+    <!-- Назад к списку -->
+    <button id="btn-back-list" class="back-btn">
+      ← К списку
+    </button>
   </section>
 
   <script src="glossary.js"></script>
