@@ -15,13 +15,14 @@ body {
   color: #fff;
 }
 
-/* затемнение фона */
+/* затемнение фона — ВАЖНО: pointer-events */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.45);
   z-index: 0;
+  pointer-events: none; /* ← критично для мобильных */
 }
 
 #app {
@@ -39,7 +40,6 @@ body::before {
   padding: 32px 20px;
   text-align: center;
 
-  /* ключевое */
   display: flex;
   flex-direction: column;
   justify-content: center;
