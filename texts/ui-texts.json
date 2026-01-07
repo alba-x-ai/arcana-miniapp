@@ -1,0 +1,22 @@
+{
+  "ru": {
+    "title": "Арканы",
+    "btn_day": "Карта дня",
+    "btn_question": "Задать вопрос",
+    "btn_glossary": "Глоссарий",
+    "btn_back": "Назад",
+    "glossary_title": "Глоссарий",
+    "upright": "Прямое положение",
+    "reversed": "Перевёрнутое положение"
+  },
+  "en": {
+    "title": "Arcana",
+    "btn_day": "Card of the Day",
+    "btn_question": "Ask a Question",
+    "btn_glossary": "Glossary",
+    "btn_back": "Back",
+    "glossary_title": "Glossary",
+    "upright": "Upright",
+    "reversed": "Reversed"
+  }
+}
