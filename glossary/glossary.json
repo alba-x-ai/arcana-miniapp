@@ -1,353 +1,441 @@
 {
   "0": {
     "name": { "ru": "Шут", "en": "The Fool" },
-    "description": {
+    "archetype": {
       "ru": "Архетип начала, открытости и доверия жизни.",
       "en": "The archetype of beginnings, openness, and trust in life."
     },
+    "description": {
+      "ru": "Шут появляется там, где ещё нет формы. Он идёт вперёд не из знания, а из доверия происходящему.",
+      "en": "The Fool appears where form has not yet emerged. He moves forward not from knowledge, but from trust."
+    },
     "upright": {
-      "ru": "Прямое значение:\nШаг в неизвестное с доверием. Спонтанность, свобода от ожиданий, готовность начать путь.",
-      "en": "Upright meaning:\nA step into the unknown with trust. Spontaneity, freedom from expectations, and readiness to begin."
+      "ru": "Шаг в неизвестное с доверием. Спонтанность, свобода от ожиданий, готовность начать путь.",
+      "en": "A step into the unknown with trust. Spontaneity and readiness to begin."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nИмпульсивность без осознанности или страх сделать первый шаг.",
-      "en": "Reversed meaning:\nRecklessness without awareness or fear of taking the first step."
+      "ru": "Страх первого шага или импульсивность без осознанности.",
+      "en": "Fear of the first step or reckless impulsivity."
     }
   },
 
   "1": {
     "name": { "ru": "Маг", "en": "The Magician" },
+    "archetype": {
+      "ru": "Архетип воли и намеренного действия.",
+      "en": "The archetype of will and intentional action."
+    },
     "description": {
-      "ru": "Архетип воли, намерения и активного проявления.",
-      "en": "The archetype of will, intention, and conscious manifestation."
+      "ru": "Маг отражает способность направлять энергию и превращать замысел в форму.",
+      "en": "The Magician represents the ability to direct energy and shape intention into form."
     },
     "upright": {
-      "ru": "Прямое значение:\nОсознанное использование своих ресурсов. Ясность намерения и способность влиять.",
-      "en": "Upright meaning:\nConscious use of resources. Clear intention and the ability to influence reality."
+      "ru": "Осознанное использование ресурсов, ясность намерения.",
+      "en": "Conscious use of resources and clear intention."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nРассеянная энергия, манипуляция или утрата контакта с истинной целью.",
-      "en": "Reversed meaning:\nScattered energy, manipulation, or loss of connection to true purpose."
+      "ru": "Рассеянная энергия или манипуляция.",
+      "en": "Scattered energy or manipulation."
     }
   },
 
   "2": {
     "name": { "ru": "Жрица", "en": "The High Priestess" },
-    "description": {
+    "archetype": {
       "ru": "Архетип внутреннего знания и тишины.",
       "en": "The archetype of inner knowledge and silence."
     },
+    "description": {
+      "ru": "Жрица хранит скрытое знание и приглашает слушать внутренний голос.",
+      "en": "The High Priestess guards hidden knowledge and invites inner listening."
+    },
     "upright": {
-      "ru": "Прямое значение:\nИнтуиция, скрытые процессы, доверие внутреннему знанию.",
-      "en": "Upright meaning:\nIntuition, hidden processes, and trust in inner knowing."
+      "ru": "Интуиция, чувствительность, доверие внутреннему знанию.",
+      "en": "Intuition and trust in inner knowing."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nИгнорирование интуиции или разрыв с внутренним голосом.",
-      "en": "Reversed meaning:\nIgnoring intuition or disconnection from inner voice."
+      "ru": "Игнорирование интуиции или внутренний разрыв.",
+      "en": "Ignoring intuition or inner disconnection."
     }
   },
 
   "3": {
     "name": { "ru": "Императрица", "en": "The Empress" },
+    "archetype": {
+      "ru": "Архетип роста и заботы.",
+      "en": "The archetype of growth and nurturing."
+    },
     "description": {
-      "ru": "Архетип созидания, заботы и роста.",
-      "en": "The archetype of creation, nurturing, and growth."
+      "ru": "Императрица символизирует созидание, питание и связь с жизнью.",
+      "en": "The Empress symbolizes creation, nourishment, and life force."
     },
     "upright": {
-      "ru": "Прямое значение:\nПлодородие, поддержка, мягкое развитие.",
-      "en": "Upright meaning:\nFertility, support, and gentle growth."
+      "ru": "Плодородие, поддержка, мягкое развитие.",
+      "en": "Fertility, support, and gentle growth."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nИстощение, гиперопека или утрата контакта с телом.",
-      "en": "Reversed meaning:\nExhaustion, overprotection, or loss of connection with the body."
+      "ru": "Истощение или утрата контакта с собой.",
+      "en": "Exhaustion or loss of self-connection."
     }
   },
 
   "4": {
     "name": { "ru": "Император", "en": "The Emperor" },
+    "archetype": {
+      "ru": "Архетип структуры и опоры.",
+      "en": "The archetype of structure and stability."
+    },
     "description": {
-      "ru": "Архетип структуры и ответственности.",
-      "en": "The archetype of structure and responsibility."
+      "ru": "Император создаёт границы и устойчивость через порядок.",
+      "en": "The Emperor creates stability through order and boundaries."
     },
     "upright": {
-      "ru": "Прямое значение:\nГраницы, порядок, устойчивость и контроль.",
-      "en": "Upright meaning:\nBoundaries, order, stability, and control."
+      "ru": "Контроль, ответственность, устойчивость.",
+      "en": "Control, responsibility, and stability."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nЖёсткий контроль или потеря опоры.",
-      "en": "Reversed meaning:\nExcessive control or loss of stability."
+      "ru": "Жёсткость или потеря опоры.",
+      "en": "Rigidity or loss of stability."
     }
   },
 
   "5": {
     "name": { "ru": "Иерофант", "en": "The Hierophant" },
+    "archetype": {
+      "ru": "Архетип традиции и ценностей.",
+      "en": "The archetype of tradition and values."
+    },
     "description": {
-      "ru": "Архетип традиций и внутренних ценностей.",
-      "en": "The archetype of tradition and inner values."
+      "ru": "Иерофант связывает личный опыт с коллективной мудростью.",
+      "en": "The Hierophant connects personal experience with collective wisdom."
     },
     "upright": {
-      "ru": "Прямое значение:\nПоиск смысла через знание и опыт.",
-      "en": "Upright meaning:\nSeeking meaning through knowledge and shared wisdom."
+      "ru": "Поиск смысла, обучение, следование ценностям.",
+      "en": "Seeking meaning and shared wisdom."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nОтказ от внутренних ориентиров или слепое следование правилам.",
-      "en": "Reversed meaning:\nRejection of inner values or blind conformity."
+      "ru": "Слепое следование правилам или отказ от внутренних ориентиров.",
+      "en": "Blind conformity or rejection of inner values."
     }
   },
 
   "6": {
     "name": { "ru": "Влюблённые", "en": "The Lovers" },
-    "description": {
+    "archetype": {
       "ru": "Архетип выбора и согласия.",
       "en": "The archetype of choice and alignment."
     },
+    "description": {
+      "ru": "Этот аркан говорит о решениях, сделанных из внутреннего согласия.",
+      "en": "This arcana speaks of decisions made from inner alignment."
+    },
     "upright": {
-      "ru": "Прямое значение:\nОсознанный выбор и внутреннее согласие.",
-      "en": "Upright meaning:\nConscious choice and inner alignment."
+      "ru": "Осознанный выбор и гармония.",
+      "en": "Conscious choice and harmony."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nСомнение, раскол или уход от ответственности.",
-      "en": "Reversed meaning:\nIndecision, inner conflict, or avoidance of responsibility."
+      "ru": "Сомнение или внутренний конфликт.",
+      "en": "Indecision or inner conflict."
     }
   },
 
   "7": {
     "name": { "ru": "Колесница", "en": "The Chariot" },
+    "archetype": {
+      "ru": "Архетип движения и воли.",
+      "en": "The archetype of movement and will."
+    },
     "description": {
-      "ru": "Архетип движения и намеренного пути.",
-      "en": "The archetype of movement and directed will."
+      "ru": "Колесница отражает движение вперёд через собранность.",
+      "en": "The Chariot reflects forward motion through focus."
     },
     "upright": {
-      "ru": "Прямое значение:\nПродвижение вперёд, собранность, контроль направления.",
-      "en": "Upright meaning:\nForward movement, focus, and control of direction."
+      "ru": "Продвижение и контроль направления.",
+      "en": "Progress and control of direction."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nПотеря управления или движение без цели.",
-      "en": "Reversed meaning:\nLoss of control or movement without purpose."
+      "ru": "Потеря управления или разбросанность.",
+      "en": "Loss of control or scattered effort."
     }
   },
 
   "8": {
     "name": { "ru": "Сила", "en": "Strength" },
+    "archetype": {
+      "ru": "Архетип мягкой силы.",
+      "en": "The archetype of gentle strength."
+    },
     "description": {
-      "ru": "Архетип мягкой внутренней силы.",
-      "en": "The archetype of gentle inner strength."
+      "ru": "Сила говорит о принятии и внутреннем равновесии.",
+      "en": "Strength speaks of acceptance and inner balance."
     },
     "upright": {
-      "ru": "Прямое значение:\nТихая уверенность, принятие и внутренний баланс.",
-      "en": "Upright meaning:\nQuiet confidence, acceptance, and inner balance."
+      "ru": "Спокойная уверенность и устойчивость.",
+      "en": "Quiet confidence and resilience."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nПодавленная энергия или действие через напряжение.",
-      "en": "Reversed meaning:\nSuppressed energy or forceful action."
+      "ru": "Подавленная энергия или внутреннее напряжение.",
+      "en": "Suppressed energy or inner tension."
     }
   },
 
   "9": {
     "name": { "ru": "Отшельник", "en": "The Hermit" },
+    "archetype": {
+      "ru": "Архетип уединения и поиска.",
+      "en": "The archetype of solitude and search."
+    },
     "description": {
-      "ru": "Архетип уединения и поиска смысла.",
-      "en": "The archetype of solitude and inner search."
+      "ru": "Отшельник указывает путь внутрь себя.",
+      "en": "The Hermit points the way inward."
     },
     "upright": {
-      "ru": "Прямое значение:\nПауза, размышление, возвращение к себе.",
-      "en": "Upright meaning:\nPause, reflection, and return to oneself."
+      "ru": "Размышление и внутренняя ясность.",
+      "en": "Reflection and inner clarity."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nИзоляция или страх одиночества.",
-      "en": "Reversed meaning:\nIsolation or fear of being alone."
+      "ru": "Изоляция или избегание контакта.",
+      "en": "Isolation or avoidance."
     }
   },
 
   "10": {
     "name": { "ru": "Колесо Фортуны", "en": "Wheel of Fortune" },
+    "archetype": {
+      "ru": "Архетип перемен и циклов.",
+      "en": "The archetype of change and cycles."
+    },
     "description": {
-      "ru": "Архетип циклов и перемен.",
-      "en": "The archetype of cycles and change."
+      "ru": "Колесо Фортуны напоминает о непостоянстве процессов.",
+      "en": "The Wheel of Fortune reminds us of constant change."
     },
     "upright": {
-      "ru": "Прямое значение:\nПоворот судьбы, смена этапа.",
-      "en": "Upright meaning:\nA turning point and change of cycle."
+      "ru": "Поворот событий и смена этапа.",
+      "en": "A turning point and shift."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nСопротивление переменам или ощущение застоя.",
-      "en": "Reversed meaning:\nResistance to change or feeling stuck."
+      "ru": "Сопротивление изменениям.",
+      "en": "Resistance to change."
     }
   },
 
   "11": {
     "name": { "ru": "Справедливость", "en": "Justice" },
+    "archetype": {
+      "ru": "Архетип истины и баланса.",
+      "en": "The archetype of truth and balance."
+    },
     "description": {
-      "ru": "Архетип баланса и истины.",
-      "en": "The archetype of balance and truth."
+      "ru": "Справедливость отражает честный взгляд на происходящее.",
+      "en": "Justice reflects an honest view of reality."
     },
     "upright": {
-      "ru": "Прямое значение:\nЧестность, ясность и принятие последствий.",
-      "en": "Upright meaning:\nHonesty, clarity, and acceptance of consequences."
+      "ru": "Ясность и ответственность.",
+      "en": "Clarity and responsibility."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nИскажение истины или внутренний конфликт.",
-      "en": "Reversed meaning:\nDistorted truth or inner imbalance."
+      "ru": "Искажение истины или внутренний конфликт.",
+      "en": "Distorted truth or imbalance."
     }
   },
 
   "12": {
     "name": { "ru": "Повешенный", "en": "The Hanged Man" },
+    "archetype": {
+      "ru": "Архетип паузы и переосмысления.",
+      "en": "The archetype of pause and re-evaluation."
+    },
     "description": {
-      "ru": "Архетип паузы и смены перспективы.",
-      "en": "The archetype of pause and altered perspective."
+      "ru": "Повешенный предлагает взглянуть на мир иначе.",
+      "en": "The Hanged Man invites a new perspective."
     },
     "upright": {
-      "ru": "Прямое значение:\nДобровольная остановка ради понимания.",
-      "en": "Upright meaning:\nVoluntary pause for deeper understanding."
+      "ru": "Остановка ради понимания.",
+      "en": "Pause for insight."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nЗастой без осознания или сопротивление паузе.",
-      "en": "Reversed meaning:\nStagnation without insight or resistance to pause."
+      "ru": "Застой без осознания.",
+      "en": "Stagnation without insight."
     }
   },
 
   "13": {
     "name": { "ru": "Смерть", "en": "Death" },
-    "description": {
+    "archetype": {
       "ru": "Архетип завершения и трансформации.",
       "en": "The archetype of endings and transformation."
     },
+    "description": {
+      "ru": "Смерть говорит о переходе и освобождении.",
+      "en": "Death speaks of transition and release."
+    },
     "upright": {
-      "ru": "Прямое значение:\nЗавершение этапа и освобождение пространства.",
-      "en": "Upright meaning:\nEnding of a phase and release for renewal."
+      "ru": "Завершение и обновление.",
+      "en": "Ending and renewal."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nСтрах перемен или удерживание прошлого.",
-      "en": "Reversed meaning:\nFear of change or clinging to the past."
+      "ru": "Страх перемен.",
+      "en": "Fear of change."
     }
   },
 
   "14": {
     "name": { "ru": "Умеренность", "en": "Temperance" },
-    "description": {
+    "archetype": {
       "ru": "Архетип гармонии и меры.",
-      "en": "The archetype of balance and moderation."
+      "en": "The archetype of harmony and moderation."
+    },
+    "description": {
+      "ru": "Умеренность соединяет противоположности.",
+      "en": "Temperance blends opposites."
     },
     "upright": {
-      "ru": "Прямое значение:\nПлавное соединение противоположностей.",
-      "en": "Upright meaning:\nGentle integration of opposites."
+      "ru": "Баланс и плавность.",
+      "en": "Balance and flow."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nПерекос и утрата внутреннего ритма.",
-      "en": "Reversed meaning:\nImbalance and loss of inner rhythm."
+      "ru": "Нарушение внутреннего ритма.",
+      "en": "Inner imbalance."
     }
   },
 
   "15": {
     "name": { "ru": "Дьявол", "en": "The Devil" },
-    "description": {
-      "ru": "Архетип привязанностей и теней.",
+    "archetype": {
+      "ru": "Архетип привязанностей и тени.",
       "en": "The archetype of attachment and shadow."
     },
+    "description": {
+      "ru": "Дьявол показывает скрытые зависимости.",
+      "en": "The Devil reveals hidden attachments."
+    },
     "upright": {
-      "ru": "Прямое значение:\nОсознание зависимостей и скрытых желаний.",
-      "en": "Upright meaning:\nAwareness of attachments and hidden desires."
+      "ru": "Осознание теневых сторон.",
+      "en": "Awareness of shadow aspects."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nОсвобождение от контроля или вытеснение проблемы.",
-      "en": "Reversed meaning:\nRelease from control or denial of the issue."
+      "ru": "Освобождение или отрицание проблемы.",
+      "en": "Release or denial."
     }
   },
 
   "16": {
     "name": { "ru": "Башня", "en": "The Tower" },
-    "description": {
+    "archetype": {
       "ru": "Архетип разрушения иллюзий.",
-      "en": "The archetype of sudden disruption."
+      "en": "The archetype of disruption."
+    },
+    "description": {
+      "ru": "Башня разрушает ложные конструкции.",
+      "en": "The Tower breaks false structures."
     },
     "upright": {
-      "ru": "Прямое значение:\nРезкое разрушение старых конструкций.",
-      "en": "Upright meaning:\nSudden breakdown of false structures."
+      "ru": "Резкие перемены.",
+      "en": "Sudden change."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nОтложенный кризис или страх перемен.",
-      "en": "Reversed meaning:\nDelayed crisis or fear of upheaval."
+      "ru": "Отложенный кризис.",
+      "en": "Delayed upheaval."
     }
   },
 
   "17": {
     "name": { "ru": "Звезда", "en": "The Star" },
+    "archetype": {
+      "ru": "Архетип надежды и исцеления.",
+      "en": "The archetype of hope and healing."
+    },
     "description": {
-      "ru": "Архетип надежды и восстановления.",
-      "en": "The archetype of hope and renewal."
+      "ru": "Звезда приносит мягкий свет и веру.",
+      "en": "The Star brings gentle light and faith."
     },
     "upright": {
-      "ru": "Прямое значение:\nТихая вера и исцеление.",
-      "en": "Upright meaning:\nQuiet faith and healing."
+      "ru": "Восстановление и доверие.",
+      "en": "Renewal and trust."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nУтрата надежды или недоверие процессу.",
-      "en": "Reversed meaning:\nLoss of hope or distrust in the process."
+      "ru": "Потеря надежды.",
+      "en": "Loss of hope."
     }
   },
 
   "18": {
     "name": { "ru": "Луна", "en": "The Moon" },
+    "archetype": {
+      "ru": "Архетип неясности и глубинных чувств.",
+      "en": "The archetype of uncertainty and deep emotion."
+    },
     "description": {
-      "ru": "Архетип тумана и глубинных чувств.",
-      "en": "The archetype of illusion and deep emotion."
+      "ru": "Луна отражает скрытые страхи и сны.",
+      "en": "The Moon reflects hidden fears and dreams."
     },
     "upright": {
-      "ru": "Прямое значение:\nНеясность, сны, тонкие переживания.",
-      "en": "Upright meaning:\nUncertainty, dreams, and subtle emotions."
+      "ru": "Интуиция и тонкое восприятие.",
+      "en": "Intuition and subtle perception."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nПрояснение страхов или вытеснение чувств.",
-      "en": "Reversed meaning:\nRevelation of fears or emotional avoidance."
+      "ru": "Прояснение иллюзий.",
+      "en": "Revelation of illusions."
     }
   },
 
   "19": {
     "name": { "ru": "Солнце", "en": "The Sun" },
-    "description": {
+    "archetype": {
       "ru": "Архетип ясности и жизненной энергии.",
       "en": "The archetype of clarity and vitality."
     },
+    "description": {
+      "ru": "Солнце несёт тепло и открытость.",
+      "en": "The Sun brings warmth and openness."
+    },
     "upright": {
-      "ru": "Прямое значение:\nРадость, открытость, уверенность.",
-      "en": "Upright meaning:\nJoy, openness, and confidence."
+      "ru": "Радость и жизненность.",
+      "en": "Joy and vitality."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nВременное затмение радости или выгорание.",
-      "en": "Reversed meaning:\nTemporary dimming of joy or burnout."
+      "ru": "Временное выгорание.",
+      "en": "Temporary burnout."
     }
   },
 
   "20": {
     "name": { "ru": "Суд", "en": "Judgement" },
+    "archetype": {
+      "ru": "Архетип пробуждения и призыва.",
+      "en": "The archetype of awakening and calling."
+    },
     "description": {
-      "ru": "Архетип пробуждения и внутреннего зова.",
-      "en": "The archetype of awakening and inner call."
+      "ru": "Суд говорит о моменте осознания.",
+      "en": "Judgement speaks of realization."
     },
     "upright": {
-      "ru": "Прямое значение:\nОсознание, решение, переход на новый уровень.",
-      "en": "Upright meaning:\nAwakening, decision, and transition."
+      "ru": "Пробуждение и решение.",
+      "en": "Awakening and decision."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nИгнорирование зова или страх изменений.",
-      "en": "Reversed meaning:\nIgnoring the call or fear of change."
+      "ru": "Игнорирование зова.",
+      "en": "Ignoring the call."
     }
   },
 
   "21": {
     "name": { "ru": "Мир", "en": "The World" },
-    "description": {
-      "ru": "Архетип завершённости и целостности.",
+    "archetype": {
+      "ru": "Архетип целостности и завершения.",
       "en": "The archetype of completion and wholeness."
     },
+    "description": {
+      "ru": "Мир символизирует завершённый цикл.",
+      "en": "The World symbolizes a completed cycle."
+    },
     "upright": {
-      "ru": "Прямое значение:\nЗавершение цикла и ощущение полноты.",
-      "en": "Upright meaning:\nCompletion of a cycle and fulfillment."
+      "ru": "Завершённость и полнота.",
+      "en": "Completion and fulfillment."
     },
     "reversed": {
-      "ru": "Перевёрнутое значение:\nНезавершённость или ощущение недосказанности.",
-      "en": "Reversed meaning:\nIncomplete closure or lingering tension."
+      "ru": "Незавершённость.",
+      "en": "Incompletion."
     }
   }
 }
