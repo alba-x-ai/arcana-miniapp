@@ -1,7 +1,3 @@
-/* ===============================
-   RESET
-================================ */
-
 * {
   margin: 0;
   padding: 0;
@@ -14,147 +10,89 @@ html, body {
   font-family: system-ui, sans-serif;
 }
 
-/* ===============================
-   BODY BACKGROUND
-================================ */
-
 body {
-  min-height: 100vh;
-  color: #fff;
-
-  /* затемнение БЕЗ overlay */
   background:
-    linear-gradient(
-      rgba(0,0,0,0.45),
-      rgba(0,0,0,0.45)
-    ),
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
     url("images/background/bg.png") center / cover no-repeat;
-
-  /* критично для Android */
-  touch-action: manipulation;
+  color: #fff;
 }
-
-/* ===============================
-   APP WRAPPER
-================================ */
 
 #app {
   min-height: 100vh;
-  pointer-events: auto;
 }
 
-/* ===============================
-   SCREENS
-================================ */
+/* screens */
 
 .screen {
   display: none;
   min-height: 100vh;
-
   padding: 32px 20px;
   text-align: center;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  pointer-events: auto;
 }
 
 .screen.active {
   display: flex;
 }
 
-/* ===============================
-   TITLE
-================================ */
-
 .title {
   font-size: 36px;
   margin-bottom: 32px;
-  pointer-events: auto;
 }
 
-/* ===============================
-   BUTTONS
-================================ */
+/* buttons */
 
 .buttons {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 16px;
-
   max-width: 320px;
   margin: 0 auto;
-
-  pointer-events: auto;
 }
 
 .btn {
-  width: 100%;
   padding: 14px 18px;
-
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.4);
   background: rgba(255,255,255,0.15);
   color: #fff;
-
-  text-align: center;
   cursor: pointer;
-
-  /* КЛЮЧЕВО */
-  pointer-events: auto;
-  touch-action: manipulation;
-  user-select: none;
 }
 
-/* ===============================
-   CARD
-================================ */
+/* card */
 
 .card {
   max-width: 320px;
   margin: 0 auto 20px;
-  pointer-events: auto;
 }
 
 .card img {
   width: 100%;
   border-radius: 12px;
-  pointer-events: none; /* картинка не ловит тач */
 }
 
 #card-text {
   margin: 16px 0 32px;
   line-height: 1.5;
-  pointer-events: auto;
 }
 
-/* ===============================
-   GLOSSARY
-================================ */
+/* glossary */
 
 .glossary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 12px;
-
   max-width: 420px;
   margin: 0 auto 24px;
-
-  pointer-events: auto;
 }
 
 .glossary-grid div {
   padding: 12px;
   border-radius: 12px;
-
   background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.3);
-
   cursor: pointer;
-  pointer-events: auto;
-  touch-action: manipulation;
-  user-select: none;
 }
