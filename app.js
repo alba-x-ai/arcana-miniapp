@@ -1,13 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
 
 /* ===============================
-   LANGUAGE
+   LANGUAGE (FIXED)
 ================================ */
 
 let LANG = "en";
 
-if (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code === "ru") {
-  LANG = "ru";
+// 1️⃣ язык интерфейса Telegram WebApp
+if (window.Telegram?.WebApp?.language_code) {
+  LANG = Telegram.WebApp.language_code;
+}
+// 2️⃣ fallback — язык браузера
+else if (navigator.language) {
+  LANG = navigator.language.slice(0, 2);
+}
+
+// 3️⃣ поддерживаем только en / ru
+if (!["en", "ru"].includes(LANG)) {
+  LANG = "en";
 }
 
 /* ===============================
@@ -199,7 +209,6 @@ function openGlossaryCard(id) {
 
   show("glossary-card");
 
-  /* картинка карты */
   glossaryCardImage.src =
     `images/cards/${String(id).padStart(2, "0")}.png`;
 
@@ -207,7 +216,6 @@ function openGlossaryCard(id) {
   document.getElementById("glossary-archetype").textContent = c.archetype[LANG];
   document.getElementById("glossary-description").textContent = c.description[LANG];
 
-  /* подписи */
   document.getElementById("label-upright").textContent =
     LANG === "ru" ? "Прямое положение" : "Upright";
 
