@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
   color: #fff;
 
-  /* ФОН + ЗАТЕМНЕНИЕ БЕЗ OVERLAY */
+  /* фон + затемнение БЕЗ overlay */
   background:
     linear-gradient(
       rgba(0,0,0,0.45),
@@ -32,20 +32,19 @@ body {
 /* ---------- SCREENS ---------- */
 
 .screen {
-  display: none;
+  display: none;              /* ВАЖНО: только none */
   min-height: 100vh;
-
   padding: 32px 20px;
   text-align: center;
+}
 
-  display: flex;
+.screen.active {
+  display: flex;              /* flex ТОЛЬКО у активного */
   flex-direction: column;
   justify-content: center;
 }
 
-.screen.active {
-  display: flex;
-}
+/* ---------- TITLE ---------- */
 
 .title {
   font-size: 36px;
