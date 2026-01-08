@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tarot Mini App</title>
+  <title>Arcana</title>
 
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Telegram WebApp -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -16,7 +14,7 @@
 
   <!-- HOME -->
   <section id="home" class="screen active">
-    <h1 id="title" class="title">Tarot</h1>
+    <h1 id="title" class="title">Arcana</h1>
 
     <div class="buttons">
       <button id="btn-day" class="btn">Card of the Day</button>
@@ -25,43 +23,40 @@
     </div>
   </section>
 
-  <!-- CARD SCREEN -->
+  <!-- CARD -->
   <section id="card-screen" class="screen">
     <div class="card">
-      <img id="card-image" src="" alt="Tarot card" />
+      <img id="card-image" />
     </div>
 
     <h2 id="card-title"></h2>
     <div id="card-text"></div>
 
     <div class="buttons">
-      <button id="btn-back" class="btn btn-back">Back</button>
+      <button id="btn-back" class="btn">Back</button>
     </div>
   </section>
 
-  <!-- GLOSSARY LIST -->
+  <!-- GLOSSARY -->
   <section id="glossary" class="screen">
-    <h2 id="glossary-title-main" class="title">Glossary</h2>
-
+    <h2 class="title">Glossary</h2>
     <div id="glossary-grid" class="glossary-grid"></div>
 
     <div class="buttons">
-      <button id="btn-back-from-glossary" class="btn btn-back">Back</button>
+      <button id="btn-back-from-glossary" class="btn">Back</button>
     </div>
   </section>
 
   <!-- GLOSSARY CARD -->
   <section id="glossary-card" class="screen">
     <h2 id="glossary-title"></h2>
-
     <p id="glossary-archetype"></p>
     <p id="glossary-description"></p>
-
-    <h3 id="glossary-upright"></h3>
-    <h3 id="glossary-reversed"></h3>
+    <p id="glossary-upright"></p>
+    <p id="glossary-reversed"></p>
 
     <div class="buttons">
-      <button id="btn-back-to-glossary" class="btn btn-back">Back</button>
+      <button id="btn-back-to-glossary" class="btn">Back</button>
     </div>
   </section>
 
