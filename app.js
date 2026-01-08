@@ -2,7 +2,7 @@
    LANGUAGE
 ================================ */
 
-let LANG = "en"; // default
+let LANG = "en";
 
 if (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code === "ru") {
   LANG = "ru";
@@ -64,6 +64,20 @@ const cardTitle = document.getElementById("card-title");
 const cardText  = document.getElementById("card-text");
 
 /* ===============================
+   SAFE EVENT BINDER
+================================ */
+
+function bindTap(el, handler) {
+  if (!el) return;
+  el.addEventListener("touchstart", e => {
+    e.preventDefault();
+    handler();
+  }, { passive: false });
+
+  el.addEventListener("click", handler);
+}
+
+/* ===============================
    BACKEND
 ================================ */
 
@@ -74,24 +88,24 @@ const API_URL =
    EVENTS
 ================================ */
 
-btnDay.onclick = async () => {
+bindTap(btnDay, async () => {
   show("card-screen");
   await loadDayCard();
-};
+});
 
-btnQuestion.onclick = async () => {
+bindTap(btnQuestion, async () => {
   show("card-screen");
   await loadQuestionCard();
-};
+});
 
-btnGlossary.onclick = () => {
+bindTap(btnGlossary, () => {
   show("glossary");
   loadGlossary();
-};
+});
 
-btnBack.onclick = () => show("home");
-btnBackFromGlossary.onclick = () => show("home");
-btnBackToGlossary.onclick = () => show("glossary");
+bindTap(btnBack, () => show("home"));
+bindTap(btnBackFromGlossary, () => show("home"));
+bindTap(btnBackToGlossary, () => show("glossary"));
 
 /* ===============================
    HELPERS
@@ -105,20 +119,17 @@ function getUserId() {
 }
 
 /* ===============================
-   CARD OF THE DAY (FIXED)
+   CARD OF THE DAY
 ================================ */
 
 async function loadDayCard() {
-  const userId = getUserId();
-
   const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ user_id: userId })
+    body: JSON.stringify({ user_id: getUserId() })
   });
 
   const { card, reversed } = await res.json();
-
   const texts = await (await fetch("texts/day-texts.json")).json();
   const pos = reversed ? "reversed" : "upright";
 
@@ -126,7 +137,7 @@ async function loadDayCard() {
 }
 
 /* ===============================
-   QUESTION CARD (FREE)
+   QUESTION CARD
 ================================ */
 
 async function loadQuestionCard() {
@@ -188,7 +199,7 @@ async function loadGlossary() {
   Object.keys(glossaryData).forEach(id => {
     const div = document.createElement("div");
     div.textContent = glossaryData[id].name[LANG];
-    div.onclick = () => openGlossaryCard(id);
+    bindTap(div, () => openGlossaryCard(id));
     grid.appendChild(div);
   });
 }
@@ -206,7 +217,7 @@ function openGlossaryCard(id) {
 }
 
 /* ===============================
-   INIT (CRITICAL)
+   INIT
 ================================ */
 
 loadUI();
