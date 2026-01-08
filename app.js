@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 /* ===============================
    LANGUAGE
 ================================ */
@@ -64,20 +66,6 @@ const cardTitle = document.getElementById("card-title");
 const cardText  = document.getElementById("card-text");
 
 /* ===============================
-   SAFE EVENT BINDER
-================================ */
-
-function bindTap(el, handler) {
-  if (!el) return;
-  el.addEventListener("touchstart", e => {
-    e.preventDefault();
-    handler();
-  }, { passive: false });
-
-  el.addEventListener("click", handler);
-}
-
-/* ===============================
    BACKEND
 ================================ */
 
@@ -85,27 +73,27 @@ const API_URL =
   "https://dawn-glitter-5c15.j4albaai.workers.dev/card-of-the-day";
 
 /* ===============================
-   EVENTS
+   EVENTS (ПРОСТО И НАДЁЖНО)
 ================================ */
 
-bindTap(btnDay, async () => {
+btnDay.onclick = async () => {
   show("card-screen");
   await loadDayCard();
-});
+};
 
-bindTap(btnQuestion, async () => {
+btnQuestion.onclick = async () => {
   show("card-screen");
   await loadQuestionCard();
-});
+};
 
-bindTap(btnGlossary, () => {
+btnGlossary.onclick = () => {
   show("glossary");
   loadGlossary();
-});
+};
 
-bindTap(btnBack, () => show("home"));
-bindTap(btnBackFromGlossary, () => show("home"));
-bindTap(btnBackToGlossary, () => show("glossary"));
+btnBack.onclick = () => show("home");
+btnBackFromGlossary.onclick = () => show("home");
+btnBackToGlossary.onclick = () => show("glossary");
 
 /* ===============================
    HELPERS
@@ -199,7 +187,7 @@ async function loadGlossary() {
   Object.keys(glossaryData).forEach(id => {
     const div = document.createElement("div");
     div.textContent = glossaryData[id].name[LANG];
-    bindTap(div, () => openGlossaryCard(id));
+    div.onclick = () => openGlossaryCard(id);
     grid.appendChild(div);
   });
 }
@@ -225,3 +213,5 @@ loadUI();
 if (window.Telegram?.WebApp) {
   Telegram.WebApp.ready();
 }
+
+});
