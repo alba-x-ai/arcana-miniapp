@@ -31,6 +31,11 @@ function applyUI() {
   document.querySelectorAll(".btn-back").forEach(
     b => b.textContent = UI[LANG].btn_back
   );
+
+  const glossaryTitle = document.getElementById("glossary-title-main");
+  if (glossaryTitle) {
+    glossaryTitle.textContent = UI[LANG].glossary_title;
+  }
 }
 
 /* ===============================
@@ -194,13 +199,21 @@ function openGlossaryCard(id) {
 
   show("glossary-card");
 
-  /* КАРТИНКА КАРТЫ */
+  /* картинка карты */
   glossaryCardImage.src =
     `images/cards/${String(id).padStart(2, "0")}.png`;
 
   document.getElementById("glossary-title").textContent = c.name[LANG];
   document.getElementById("glossary-archetype").textContent = c.archetype[LANG];
   document.getElementById("glossary-description").textContent = c.description[LANG];
+
+  /* подписи */
+  document.getElementById("label-upright").textContent =
+    LANG === "ru" ? "Прямое положение" : "Upright";
+
+  document.getElementById("label-reversed").textContent =
+    LANG === "ru" ? "Перевёрнутое положение" : "Reversed";
+
   document.getElementById("glossary-upright").textContent = c.upright[LANG];
   document.getElementById("glossary-reversed").textContent = c.reversed[LANG];
 }
