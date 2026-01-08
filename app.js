@@ -60,6 +60,8 @@ const cardImage = document.getElementById("card-image");
 const cardTitle = document.getElementById("card-title");
 const cardText  = document.getElementById("card-text");
 
+const glossaryCardImage = document.getElementById("glossary-card-image");
+
 /* ===============================
    BACKEND
 ================================ */
@@ -191,6 +193,10 @@ function openGlossaryCard(id) {
   const c = glossaryData[id];
 
   show("glossary-card");
+
+  /* КАРТИНКА КАРТЫ */
+  glossaryCardImage.src =
+    `images/cards/${String(id).padStart(2, "0")}.png`;
 
   document.getElementById("glossary-title").textContent = c.name[LANG];
   document.getElementById("glossary-archetype").textContent = c.archetype[LANG];
