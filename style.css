@@ -1,183 +1,97 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+вот мой index.html. на основе него дай полный код
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arcana</title>
 
-/* ---------- BASE ---------- */
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
 
-html {
-  width: 100%;
-}
+  <!-- Telegram Web App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
 
-body {
-  width: 100%;
-  font-family: 'Cormorant Garamond', serif;
-  color: #fff;
-  background: #000;
-}
+<div id="app">
 
-/* ---------- APP ---------- */
+  <!-- =========================
+       HOME
+  ========================== -->
+  <section id="home" class="screen active">
+    <h1 id="title" class="title">Arcana</h1>
 
-#app {
-  min-height: 100vh;
-  width: 100%;
+    <div class="buttons">
+      <button id="btn-day" class="btn">Card of the Day</button>
+      <button id="btn-question" class="btn">Ask a Question</button>
+      <button id="btn-glossary" class="btn">Glossary</button>
+    </div>
+  </section>
 
-  /* ТВОЙ ФОН + мягкое затемнение */
-  background:
-    linear-gradient(
-      rgba(0,0,0,0.35),
-      rgba(0,0,0,0.35)
-    ),
-    url("images/background/bg.png") center center / cover no-repeat;
+  <!-- =========================
+       CARD SCREEN
+  ========================== -->
+  <section id="card-screen" class="screen">
+    <div class="card">
+      <img id="card-image" alt="Card image" />
+    </div>
 
-  display: flex;
-  flex-direction: column;
-}
+    <h2 id="card-title"></h2>
+    <div id="card-text"></div>
 
-/* ---------- SCREENS ---------- */
+    <div class="buttons">
+      <button id="btn-back" class="btn btn-back">Back</button>
+    </div>
+  </section>
 
-.screen {
-  display: none;
-  min-height: 100vh;
-  padding: 40px 20px;
-  text-align: center;
-}
+  <!-- =========================
+       GLOSSARY GRID
+  ========================== -->
+  <section id="glossary" class="screen">
+    <h2 class="title" id="glossary-title-main">Glossary</h2>
 
-.screen.active {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; /* добавили центр по горизонтали */
-}
+    <div id="glossary-grid" class="glossary-grid"></div>
 
-/* ---------- TITLES ---------- */
+    <div class="buttons">
+      <button id="btn-back-from-glossary" class="btn btn-back">Back</button>
+    </div>
+  </section>
 
-.title {
-  font-size: 38px;
-  letter-spacing: 0.08em;
-  margin-bottom: 36px;
-  font-weight: 500;
-}
+  <!-- =========================
+       GLOSSARY CARD
+  ========================== -->
+  <section id="glossary-card" class="screen">
 
-h2 {
-  margin-bottom: 14px;
-}
+    <div class="card">
+      <img id="glossary-card-image" alt="Glossary card image" />
+    </div>
 
-/* ---------- BUTTONS ---------- */
+    <h2 id="glossary-title"></h2>
+    <p id="glossary-archetype"></p>
+    <p id="glossary-description"></p>
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  max-width: 320px;
-  margin: 24px auto 0;
-  width: 100%;
-}
+    <!-- Upright -->
+    <div class="glossary-section">
+      <div class="glossary-label" id="label-upright"></div>
+      <p id="glossary-upright"></p>
+    </div>
 
-.btn {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 999px;
+    <!-- Reversed -->
+    <div class="glossary-section">
+      <div class="glossary-label" id="label-reversed"></div>
+      <p id="glossary-reversed"></p>
+    </div>
 
-  border: 1px solid rgba(255,255,255,0.35);
+    <div class="buttons">
+      <button id="btn-back-to-glossary" class="btn btn-back">Back</button>
+    </div>
+  </section>
 
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.18),
-    rgba(255,255,255,0.08)
-  );
+</div>
 
-  color: #fff;
-  cursor: pointer;
+<!-- App Logic -->
+<script src="app.js"></script>
 
-  backdrop-filter: blur(10px);
-
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  letter-spacing: 0.06em;
-
-  transition: all 0.2s ease;
-}
-
-.btn:active {
-  transform: scale(0.96);
-  background: rgba(255,255,255,0.1);
-}
-
-/* ---------- CARD ---------- */
-
-.card {
-  max-width: 340px;
-  margin: 0 auto 24px;
-}
-
-.card img {
-  width: 100%;
-  border-radius: 14px;
-  display: block;
-}
-
-/* ---------- TEXT ---------- */
-
-#card-text {
-  margin: 18px 0 32px;
-  line-height: 1.6;
-  font-size: 16px;
-}
-
-p {
-  line-height: 1.6;
-  margin-bottom: 14px;
-}
-
-/* ---------- GLOSSARY GRID ---------- */
-
-.glossary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 14px;
-
-  max-width: 420px;
-  margin: 0 auto 28px;
-
-  justify-items: center;
-}
-
-.glossary-grid div {
-  width: 100%;
-  max-width: 160px;
-
-  padding: 14px;
-  border-radius: 14px;
-
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
-
-  cursor: pointer;
-  text-align: center;
-  line-height: 1.35;
-
-  transition: 0.2s;
-}
-
-.glossary-grid div:active {
-  transform: scale(0.95);
-}
-
-/* ---------- GLOSSARY DETAILS ---------- */
-
-.glossary-section {
-  margin-top: 22px;
-  text-align: left;
-  max-width: 420px;
-}
-
-.glossary-label {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.6;
-  margin-bottom: 6px;
-}
+</body>
+</html>
