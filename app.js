@@ -236,43 +236,17 @@ function getName(id){
 }
 
 /* ===============================
-   SHARE
+   SHARE (deep link)
 ================================ */
 
 function shareCard(){
 
-  if(currentCard===null) return;
-
-  const name = getName(currentCard);
-
-  let text;
-
-  if(LANG==="ru"){
-
-    text =
-`🔮 Моя карта дня — ${name}
-
-Вытяни свою карту:
-https://t.me/arcana_app_bot/app`;
-
-  }else{
-
-    text =
-`🔮 My tarot card of the day — ${name}
-
-Draw your card:
-https://t.me/arcana_app_bot/app`;
-
-  }
+  if(currentCard === null) return;
 
   const shareUrl =
-`https://t.me/share/url?url=&text=${encodeURIComponent(text)}`;
+  `https://t.me/arcana_app_bot?start=share_${currentCard}`;
 
-  if(window.Telegram?.WebApp){
-    Telegram.WebApp.openTelegramLink(shareUrl);
-  }else{
-    window.open(shareUrl);
-  }
+  window.open(shareUrl, "_blank");
 
 }
 
