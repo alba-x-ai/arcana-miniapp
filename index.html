@@ -1,98 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arcana</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arcana</title>
 
-  <!-- Google Font: Cormorant Garamond -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css" />
+<!-- Styles -->
+<link rel="stylesheet" href="style.css" />
 
-  <!-- Telegram Web App SDK -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- Telegram Web App SDK -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 </head>
 <body>
 
 <div id="app">
 
-  <!-- =========================
-       HOME
-  ========================== -->
-  <section id="home" class="screen active">
-    <h1 id="title" class="title">Arcana</h1>
+<!-- =========================
+HOME
+========================= -->
 
-    <div class="buttons">
-      <button id="btn-day" class="btn">Card of the Day</button>
-      <button id="btn-question" class="btn">Ask a Question</button>
-      <button id="btn-glossary" class="btn">Glossary</button>
-    </div>
-  </section>
+<section id="home" class="screen active">
 
-  <!-- =========================
-       CARD SCREEN
-  ========================== -->
-  <section id="card-screen" class="screen">
-    <div class="card">
-      <img id="card-image" alt="Card image" />
-    </div>
+<h1 id="title" class="title">Arcana</h1>
 
-    <h2 id="card-title" class="title-small"></h2>
-    <div id="card-text"></div>
+<div class="buttons">
 
-    <div class="buttons">
-      <button id="btn-back" class="btn btn-back">Back</button>
-    </div>
-  </section>
+<button id="btn-day" class="btn">
+Card of the Day
+</button>
 
-  <!-- =========================
-       GLOSSARY GRID
-  ========================== -->
-  <section id="glossary" class="screen">
-    <h2 class="title" id="glossary-title-main">Glossary</h2>
+<button id="btn-question" class="btn">
+Ask a Question
+</button>
 
-    <div id="glossary-grid" class="glossary-grid"></div>
-
-    <div class="buttons">
-      <button id="btn-back-from-glossary" class="btn btn-back">Back</button>
-    </div>
-  </section>
-
-  <!-- =========================
-       GLOSSARY CARD
-  ========================== -->
-  <section id="glossary-card" class="screen">
-
-    <div class="card">
-      <img id="glossary-card-image" alt="Glossary card image" />
-    </div>
-
-    <h2 id="glossary-title" class="title-small"></h2>
-    <p id="glossary-archetype"></p>
-    <p id="glossary-description"></p>
-
-    <!-- Upright -->
-    <div class="glossary-section">
-      <div class="glossary-label" id="label-upright"></div>
-      <p id="glossary-upright"></p>
-    </div>
-
-    <!-- Reversed -->
-    <div class="glossary-section">
-      <div class="glossary-label" id="label-reversed"></div>
-      <p id="glossary-reversed"></p>
-    </div>
-
-    <div class="buttons">
-      <button id="btn-back-to-glossary" class="btn btn-back">Back</button>
-    </div>
-  </section>
+<button id="btn-glossary" class="btn">
+Glossary
+</button>
 
 </div>
 
-<!-- App Logic -->
+</section>
+
+
+<!-- =========================
+CARD SCREEN
+========================= -->
+
+<section id="card-screen" class="screen">
+
+<div class="card">
+<img id="card-image" alt="Card image" />
+</div>
+
+<h2 id="card-title" class="title-small"></h2>
+
+<div id="card-text"></div>
+
+<div class="buttons">
+
+<button id="btn-share" class="btn">
+🔮 Share
+</button>
+
+<button id="btn-back" class="btn btn-back">
+Back
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+GLOSSARY GRID
+========================= -->
+
+<section id="glossary" class="screen">
+
+<h2 class="title" id="glossary-title-main">
+Glossary
+</h2>
+
+<div id="glossary-grid" class="glossary-grid"></div>
+
+<div class="buttons">
+
+<button id="btn-back-from-glossary" class="btn btn-back">
+Back
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+GLOSSARY CARD
+========================= -->
+
+<section id="glossary-card" class="screen">
+
+<div class="card">
+<img id="glossary-card-image" alt="Glossary card image" />
+</div>
+
+<h2 id="glossary-title" class="title-small"></h2>
+
+<p id="glossary-archetype"></p>
+<p id="glossary-description"></p>
+
+<!-- Upright -->
+
+<div class="glossary-section">
+
+<div class="glossary-label" id="label-upright"></div>
+
+<p id="glossary-upright"></p>
+
+</div>
+
+<!-- Reversed -->
+
+<div class="glossary-section">
+
+<div class="glossary-label" id="label-reversed"></div>
+
+<p id="glossary-reversed"></p>
+
+</div>
+
+<div class="buttons">
+
+<button id="btn-back-to-glossary" class="btn btn-back">
+Back
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- APP LOGIC -->
+
 <script src="app.js"></script>
 
 </body>
