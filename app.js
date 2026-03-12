@@ -6,16 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let LANG = "en";
 
-// 1️⃣ язык интерфейса Telegram WebApp
 if (window.Telegram?.WebApp?.language_code) {
   LANG = Telegram.WebApp.language_code;
 }
-// 2️⃣ fallback — язык браузера
 else if (navigator.language) {
   LANG = navigator.language.slice(0, 2);
 }
 
-// 3️⃣ поддерживаем только en / ru
 if (!["en", "ru"].includes(LANG)) {
   LANG = "en";
 }
@@ -32,6 +29,7 @@ async function loadUI() {
 }
 
 function applyUI() {
+
   document.getElementById("title").textContent = UI[LANG].title;
 
   btnDay.textContent = UI[LANG].btn_day;
@@ -75,6 +73,10 @@ const cardImage = document.getElementById("card-image");
 const cardTitle = document.getElementById("card-title");
 const cardText  = document.getElementById("card-text");
 
+/* SHARE BUTTON (NEW) */
+
+const btnShare = document.getElementById("btn-share");
+
 const glossaryCardImage = document.getElementById("glossary-card-image");
 
 /* ===============================
@@ -107,6 +109,12 @@ btnBack.onclick = () => show("home");
 btnBackFromGlossary.onclick = () => show("home");
 btnBackToGlossary.onclick = () => show("glossary");
 
+/* SHARE EVENT */
+
+if (btnShare) {
+  btnShare.onclick = shareCard;
+}
+
 /* ===============================
    HELPERS
 ================================ */
@@ -119,10 +127,19 @@ function getUserId() {
 }
 
 /* ===============================
+   CARD STATE
+================================ */
+
+let currentCard = null;
+let currentText = "";
+let currentReversed = false;
+
+/* ===============================
    CARD OF THE DAY
 ================================ */
 
 async function loadDayCard() {
+
   const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -130,10 +147,15 @@ async function loadDayCard() {
   });
 
   const { card, reversed } = await res.json();
-  const texts = await (await fetch("texts/day-texts.json")).json();
+
+  const texts =
+    await (await fetch("texts/day-texts.json")).json();
+
   const pos = reversed ? "reversed" : "upright";
 
-  render(card, reversed, texts[card][LANG][pos]);
+  const text = texts[card][LANG][pos];
+
+  render(card, reversed, text);
 }
 
 /* ===============================
@@ -141,7 +163,10 @@ async function loadDayCard() {
 ================================ */
 
 async function loadQuestionCard() {
-  const cards = await (await fetch("cards.json")).json();
+
+  const cards =
+    await (await fetch("cards.json")).json();
+
   const id = Math.floor(Math.random() * 22);
   const rev = Math.random() < 0.5;
 
@@ -157,8 +182,17 @@ async function loadQuestionCard() {
 ================================ */
 
 function render(id, reversed, text) {
-  cardImage.src = `images/cards/${String(id).padStart(2, "0")}.png`;
-  cardImage.style.transform = reversed ? "rotate(180deg)" : "none";
+
+  currentCard = id;
+  currentText = text;
+  currentReversed = reversed;
+
+  cardImage.src =
+    `images/cards/${String(id).padStart(2, "0")}.png`;
+
+  cardImage.style.transform =
+    reversed ? "rotate(180deg)" : "none";
+
   cardTitle.textContent = getName(id);
   cardText.textContent = text;
 }
@@ -183,6 +217,46 @@ function getName(id) {
 }
 
 /* ===============================
+   SHARE CARD (NEW)
+================================ */
+
+function shareCard() {
+
+  if (currentCard === null) return;
+
+  const name = getName(currentCard);
+
+  let text;
+
+  if (LANG === "ru") {
+
+    text =
+`🔮 Моя карта дня — ${name}
+
+${currentText}
+
+Вытяни свою карту:
+https://t.me/arcana_app_bot/app`;
+
+  } else {
+
+    text =
+`🔮 My tarot card of the day — ${name}
+
+${currentText}
+
+Draw your card:
+https://t.me/arcana_app_bot/app`;
+
+  }
+
+  const url =
+    `https://t.me/share/url?url=&text=${encodeURIComponent(text)}`;
+
+  window.open(url);
+}
+
+/* ===============================
    GLOSSARY
 ================================ */
 
@@ -190,21 +264,29 @@ let glossaryData = null;
 const grid = document.getElementById("glossary-grid");
 
 async function loadGlossary() {
+
   if (!glossaryData) {
-    glossaryData = await (await fetch("glossary/glossary.json")).json();
+    glossaryData =
+      await (await fetch("glossary/glossary.json")).json();
   }
 
   grid.innerHTML = "";
 
   Object.keys(glossaryData).forEach(id => {
+
     const div = document.createElement("div");
-    div.textContent = glossaryData[id].name[LANG];
+
+    div.textContent =
+      glossaryData[id].name[LANG];
+
     div.onclick = () => openGlossaryCard(id);
+
     grid.appendChild(div);
   });
 }
 
 function openGlossaryCard(id) {
+
   const c = glossaryData[id];
 
   show("glossary-card");
@@ -212,18 +294,30 @@ function openGlossaryCard(id) {
   glossaryCardImage.src =
     `images/cards/${String(id).padStart(2, "0")}.png`;
 
-  document.getElementById("glossary-title").textContent = c.name[LANG];
-  document.getElementById("glossary-archetype").textContent = c.archetype[LANG];
-  document.getElementById("glossary-description").textContent = c.description[LANG];
+  document.getElementById("glossary-title").textContent =
+    c.name[LANG];
+
+  document.getElementById("glossary-archetype").textContent =
+    c.archetype[LANG];
+
+  document.getElementById("glossary-description").textContent =
+    c.description[LANG];
 
   document.getElementById("label-upright").textContent =
-    LANG === "ru" ? "Прямое положение" : "Upright";
+    LANG === "ru"
+      ? "Прямое положение"
+      : "Upright";
 
   document.getElementById("label-reversed").textContent =
-    LANG === "ru" ? "Перевёрнутое положение" : "Reversed";
+    LANG === "ru"
+      ? "Перевёрнутое положение"
+      : "Reversed";
 
-  document.getElementById("glossary-upright").textContent = c.upright[LANG];
-  document.getElementById("glossary-reversed").textContent = c.reversed[LANG];
+  document.getElementById("glossary-upright").textContent =
+    c.upright[LANG];
+
+  document.getElementById("glossary-reversed").textContent =
+    c.reversed[LANG];
 }
 
 /* ===============================
