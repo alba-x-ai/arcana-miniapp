@@ -59,7 +59,7 @@ function applyUI(){
 const screens = document.querySelectorAll(".screen");
 
 function show(id){
-  screens.forEach(s=>s.classList.remove("active"));
+  screens.forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
@@ -265,10 +265,15 @@ https://t.me/arcana_app_bot/app`;
 
   }
 
-  const url =
+  const shareUrl =
 `https://t.me/share/url?url=&text=${encodeURIComponent(text)}`;
 
-  window.open(url);
+  if(window.Telegram?.WebApp){
+    Telegram.WebApp.openTelegramLink(shareUrl);
+  }else{
+    window.open(shareUrl);
+  }
+
 }
 
 /* ===============================
