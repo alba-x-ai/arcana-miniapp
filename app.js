@@ -69,15 +69,15 @@ const btnBack = document.getElementById("btn-back");
 const btnBackFromGlossary = document.getElementById("btn-back-from-glossary");
 const btnBackToGlossary = document.getElementById("btn-back-to-glossary");
 
+const btnShare = document.getElementById("btn-share");
+
 const cardImage = document.getElementById("card-image");
 const cardTitle = document.getElementById("card-title");
 const cardText  = document.getElementById("card-text");
 
-/* SHARE BUTTON (NEW) */
-
-const btnShare = document.getElementById("btn-share");
-
 const glossaryCardImage = document.getElementById("glossary-card-image");
+
+const flipCard = document.getElementById("flip-card");
 
 /* ===============================
    BACKEND
@@ -91,11 +91,17 @@ const API_URL =
 ================================ */
 
 btnDay.onclick = async () => {
+
+  flipCard.classList.remove("flipped");
+
   show("card-screen");
   await loadDayCard();
 };
 
 btnQuestion.onclick = async () => {
+
+  flipCard.classList.remove("flipped");
+
   show("card-screen");
   await loadQuestionCard();
 };
@@ -109,10 +115,8 @@ btnBack.onclick = () => show("home");
 btnBackFromGlossary.onclick = () => show("home");
 btnBackToGlossary.onclick = () => show("glossary");
 
-/* SHARE EVENT */
-
 if (btnShare) {
-  btnShare.onclick = shareCard;
+  btnShare.onclick = generateShareImage;
 }
 
 /* ===============================
@@ -195,6 +199,10 @@ function render(id, reversed, text) {
 
   cardTitle.textContent = getName(id);
   cardText.textContent = text;
+
+  setTimeout(()=>{
+    flipCard.classList.add("flipped");
+  },200);
 }
 
 function getName(id) {
@@ -217,43 +225,69 @@ function getName(id) {
 }
 
 /* ===============================
-   SHARE CARD (NEW)
+   SHARE IMAGE GENERATOR
 ================================ */
 
-function shareCard() {
+function generateShareImage() {
 
   if (currentCard === null) return;
 
-  const name = getName(currentCard);
+  const canvas = document.createElement("canvas");
+  canvas.width = 1080;
+  canvas.height = 1080;
 
-  let text;
+  const ctx = canvas.getContext("2d");
 
-  if (LANG === "ru") {
+  const img = new Image();
 
-    text =
-`🔮 Моя карта дня — ${name}
+  img.onload = () => {
 
-${currentText}
+    ctx.fillStyle = "#0b0b0b";
+    ctx.fillRect(0,0,1080,1080);
 
-Вытяни свою карту:
-https://t.me/arcana_app_bot/app`;
+    ctx.fillStyle = "#e7d8b4";
+    ctx.font = "80px Cormorant Garamond";
+    ctx.textAlign = "center";
 
-  } else {
+    ctx.fillText("ARCANA",540,120);
 
-    text =
-`🔮 My tarot card of the day — ${name}
+    const cardWidth = 360;
+    const cardHeight = 630;
 
-${currentText}
+    ctx.save();
 
-Draw your card:
-https://t.me/arcana_app_bot/app`;
+    if (currentReversed) {
+      ctx.translate(540,520);
+      ctx.rotate(Math.PI);
+      ctx.drawImage(img,-cardWidth/2,-cardHeight/2,cardWidth,cardHeight);
+    } else {
+      ctx.drawImage(img,540-cardWidth/2,210,cardWidth,cardHeight);
+    }
 
-  }
+    ctx.restore();
 
-  const url =
-    `https://t.me/share/url?url=&text=${encodeURIComponent(text)}`;
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "60px Cormorant Garamond";
 
-  window.open(url);
+    const name = getName(currentCard);
+
+    ctx.fillText(name,540,880);
+
+    ctx.fillStyle = "#b8b8b8";
+    ctx.font = "32px Cormorant Garamond";
+
+    ctx.fillText("@arcana_app_bot",540,950);
+
+    const url = canvas.toDataURL("image/png");
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "arcana-card.png";
+    link.click();
+  };
+
+  img.src =
+    `images/cards/${String(currentCard).padStart(2,"0")}.png`;
 }
 
 /* ===============================
