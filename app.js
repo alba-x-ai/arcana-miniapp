@@ -29,7 +29,6 @@ async function loadUI() {
 }
 
 function applyUI() {
-
   document.getElementById("title").textContent = UI[LANG].title;
 
   btnDay.textContent = UI[LANG].btn_day;
@@ -81,8 +80,6 @@ const cardText  = document.getElementById("card-text");
 
 const glossaryCardImage = document.getElementById("glossary-card-image");
 
-const flipCard = document.getElementById("flip-card");
-
 /* ===============================
    BACKEND
 ================================ */
@@ -95,17 +92,11 @@ const API_URL =
 ================================ */
 
 btnDay.onclick = async () => {
-
-  flipCard?.classList.remove("flipped");
-
   show("card-screen");
   await loadDayCard();
 };
 
 btnQuestion.onclick = async () => {
-
-  flipCard?.classList.remove("flipped");
-
   show("card-screen");
   await loadQuestionCard();
 };
@@ -140,7 +131,6 @@ function getUserId() {
 
 let currentCard = null;
 let currentText = "";
-let currentReversed = false;
 
 /* ===============================
    CARD OF THE DAY
@@ -188,7 +178,6 @@ function render(id, reversed, text) {
 
   currentCard = id;
   currentText = text;
-  currentReversed = reversed;
 
   cardImage.src =
     `images/cards/${String(id).padStart(2, "0")}.png`;
@@ -198,10 +187,6 @@ function render(id, reversed, text) {
 
   cardTitle.textContent = getName(id);
   cardText.textContent = text;
-
-  setTimeout(()=>{
-    flipCard?.classList.add("flipped");
-  },200);
 }
 
 function getName(id) {
@@ -224,7 +209,7 @@ function getName(id) {
 }
 
 /* ===============================
-   SHARE
+   SHARE (УЛУЧШЕННЫЙ)
 ================================ */
 
 function shareCard(){
@@ -238,19 +223,25 @@ function shareCard(){
   if (LANG === "ru") {
 
     text =
-`🔮 Моя карта дня — ${name}
+`🔮 Карта дня
+
+${name}
 
 ${currentText}
 
+✨ Вытяни свою карту:
 https://t.me/arcana_app_bot?start=card_${currentCard}`;
 
   } else {
 
     text =
-`🔮 My tarot card of the day — ${name}
+`🔮 Tarot Card of the Day
+
+${name}
 
 ${currentText}
 
+✨ Draw your card:
 https://t.me/arcana_app_bot?start=card_${currentCard}`;
 
   }
