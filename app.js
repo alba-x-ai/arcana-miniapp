@@ -84,6 +84,8 @@ const cardText  = document.getElementById("card-text");
 const glossaryCardImage =
 document.getElementById("glossary-card-image");
 
+const flipCard = document.getElementById("flip-card");
+
 /* ===============================
    BACKEND
 ================================ */
@@ -96,11 +98,21 @@ const API_URL =
 ================================ */
 
 btnDay.onclick = async () => {
+
+  if(flipCard){
+    flipCard.classList.remove("flipped");
+  }
+
   show("card-screen");
   await loadDayCard();
 };
 
 btnQuestion.onclick = async () => {
+
+  if(flipCard){
+    flipCard.classList.remove("flipped");
+  }
+
   show("card-screen");
   await loadQuestionCard();
 };
@@ -200,6 +212,12 @@ function render(id,reversed,text){
 
   cardTitle.textContent = getName(id);
   cardText.textContent = text;
+
+  if(flipCard){
+    setTimeout(()=>{
+      flipCard.classList.add("flipped");
+    },200);
+  }
 }
 
 function getName(id){
@@ -222,7 +240,7 @@ function getName(id){
 }
 
 /* ===============================
-   SHARE (КРАСИВЫЙ ТЕКСТ)
+   SHARE
 ================================ */
 
 function shareCard(){
