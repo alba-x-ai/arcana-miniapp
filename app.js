@@ -84,8 +84,6 @@ const cardText  = document.getElementById("card-text");
 const glossaryCardImage =
 document.getElementById("glossary-card-image");
 
-const flipCard = document.getElementById("flip-card");
-
 /* ===============================
    BACKEND
 ================================ */
@@ -99,6 +97,8 @@ const API_URL =
 
 btnDay.onclick = async () => {
 
+  const flipCard = document.getElementById("flip-card");
+
   if(flipCard){
     flipCard.classList.remove("flipped");
   }
@@ -108,6 +108,8 @@ btnDay.onclick = async () => {
 };
 
 btnQuestion.onclick = async () => {
+
+  const flipCard = document.getElementById("flip-card");
 
   if(flipCard){
     flipCard.classList.remove("flipped");
@@ -203,6 +205,12 @@ function render(id,reversed,text){
 
   currentCard = id;
   currentText = text;
+
+  const flipCard = document.getElementById("flip-card");
+
+  if(flipCard){
+    flipCard.classList.remove("flipped");
+  }
 
   cardImage.src =
   `images/cards/${String(id).padStart(2,"0")}.png`;
