@@ -222,7 +222,7 @@ function getName(id){
 }
 
 /* ===============================
-   SHARE (КРАСИВЫЙ ТЕКСТ)
+   SHARE (без ссылки на карту)
 ================================ */
 
 function shareCard(){
@@ -236,31 +236,31 @@ function shareCard(){
   if(LANG === "ru"){
 
     text =
-`🔮 Arcana
+`🔮 Карта дня
 
 ${name}
 
 ${currentText}
 
-✨ Вытяни свою карту:
-t.me/arcana_app_bot`;
+✨ Попробуй вытянуть свою карту:
+https://t.me/arcana_app_bot`;
 
   }else{
 
     text =
-`🔮 Arcana
+`🔮 Tarot Card of the Day
 
 ${name}
 
 ${currentText}
 
-✨ Draw your card:
-t.me/arcana_app_bot`;
+✨ Try drawing your card:
+https://t.me/arcana_app_bot`;
 
   }
 
   const shareUrl =
-`https://t.me/share/url?url=&text=${encodeURIComponent(text)}`;
+`https://t.me/share/url?url=https://t.me/arcana_app_bot&text=${encodeURIComponent(text)}`;
 
   window.open(shareUrl,"_blank");
 }
