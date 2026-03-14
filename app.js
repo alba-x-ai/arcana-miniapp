@@ -96,11 +96,25 @@ const API_URL =
 ================================ */
 
 btnDay.onclick = async () => {
+
+  const flipCard = document.getElementById("flip-card");
+
+  if(flipCard){
+    flipCard.classList.remove("flipped");
+  }
+
   show("card-screen");
   await loadDayCard();
 };
 
 btnQuestion.onclick = async () => {
+
+  const flipCard = document.getElementById("flip-card");
+
+  if(flipCard){
+    flipCard.classList.remove("flipped");
+  }
+
   show("card-screen");
   await loadQuestionCard();
 };
@@ -192,6 +206,12 @@ function render(id,reversed,text){
   currentCard = id;
   currentText = text;
 
+  const flipCard = document.getElementById("flip-card");
+
+  if(flipCard){
+    flipCard.classList.remove("flipped");
+  }
+
   cardImage.src =
   `images/cards/${String(id).padStart(2,"0")}.png`;
 
@@ -200,6 +220,12 @@ function render(id,reversed,text){
 
   cardTitle.textContent = getName(id);
   cardText.textContent = text;
+
+  if(flipCard){
+    setTimeout(()=>{
+      flipCard.classList.add("flipped");
+    },200);
+  }
 }
 
 function getName(id){
@@ -222,7 +248,7 @@ function getName(id){
 }
 
 /* ===============================
-   SHARE (простая ссылка на бота)
+   SHARE
 ================================ */
 
 function shareCard(){
@@ -236,31 +262,31 @@ function shareCard(){
   if(LANG === "ru"){
 
     text =
-`🔮 Карта дня
+`🔮 Arcana
 
 ${name}
 
 ${currentText}
 
 ✨ Вытяни свою карту:
-https://t.me/arcana_app_bot`;
+t.me/arcana_app_bot`;
 
   }else{
 
     text =
-`🔮 Tarot Card of the Day
+`🔮 Arcana
 
 ${name}
 
 ${currentText}
 
 ✨ Draw your card:
-https://t.me/arcana_app_bot`;
+t.me/arcana_app_bot`;
 
   }
 
   const shareUrl =
-`https://t.me/share/url?url=https://t.me/arcana_app_bot&text=${encodeURIComponent(text)}`;
+`https://t.me/share/url?url=&text=${encodeURIComponent(text)}`;
 
   window.open(shareUrl,"_blank");
 }
