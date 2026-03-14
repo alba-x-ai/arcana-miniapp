@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <title>Arcana</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
@@ -12,22 +14,40 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 </head>
+
 <body>
 
 <div id="app">
+
+<!-- =========================
+HOME
+========================= -->
 
 <section id="home" class="screen active">
 
 <h1 id="title" class="title">Arcana</h1>
 
 <div class="buttons">
-<button id="btn-day" class="btn">Card of the Day</button>
-<button id="btn-question" class="btn">Ask a Question</button>
-<button id="btn-glossary" class="btn">Glossary</button>
+
+<button id="btn-day" class="btn">
+Card of the Day
+</button>
+
+<button id="btn-question" class="btn">
+Ask a Question
+</button>
+
+<button id="btn-glossary" class="btn">
+Glossary
+</button>
+
 </div>
 
 </section>
 
+<!-- =========================
+CARD SCREEN
+========================= -->
 
 <section id="card-screen" class="screen">
 
@@ -38,11 +58,11 @@
 <div class="flip-inner">
 
 <div class="flip-front">
-<img src="images/back.png" class="card-back">
+<img src="images/cards/back.png" class="card-back">
 </div>
 
 <div class="flip-back">
-<img id="card-image" alt="Card image" />
+<img id="card-image" alt="Card image">
 </div>
 
 </div>
@@ -52,51 +72,83 @@
 </div>
 
 <h2 id="card-title" class="title-small"></h2>
+
 <div id="card-text"></div>
 
 <div class="buttons">
-<button id="btn-share" class="btn">🔮 Share</button>
-<button id="btn-back" class="btn btn-back">Back</button>
+
+<button id="btn-share" class="btn">
+🔮 Share
+</button>
+
+<button id="btn-back" class="btn btn-back">
+Back
+</button>
+
 </div>
 
 </section>
 
+<!-- =========================
+GLOSSARY GRID
+========================= -->
 
 <section id="glossary" class="screen">
 
-<h2 class="title" id="glossary-title-main">Glossary</h2>
+<h2 class="title" id="glossary-title-main">
+Glossary
+</h2>
 
 <div id="glossary-grid" class="glossary-grid"></div>
 
 <div class="buttons">
-<button id="btn-back-from-glossary" class="btn btn-back">Back</button>
+
+<button id="btn-back-from-glossary" class="btn btn-back">
+Back
+</button>
+
 </div>
 
 </section>
 
+<!-- =========================
+GLOSSARY CARD
+========================= -->
 
 <section id="glossary-card" class="screen">
 
 <div class="card">
-<img id="glossary-card-image" alt="Glossary card image" />
+<img id="glossary-card-image" alt="Glossary card image">
 </div>
 
 <h2 id="glossary-title" class="title-small"></h2>
+
 <p id="glossary-archetype"></p>
+
 <p id="glossary-description"></p>
 
 <div class="glossary-section">
+
 <div class="glossary-label" id="label-upright"></div>
+
 <p id="glossary-upright"></p>
+
 </div>
 
 <div class="glossary-section">
+
 <div class="glossary-label" id="label-reversed"></div>
+
 <p id="glossary-reversed"></p>
+
 </div>
 
 <div class="buttons">
-<button id="btn-back-to-glossary" class="btn btn-back">Back</button>
+
+<button id="btn-back-to-glossary" class="btn btn-back">
+Back
+</button>
+
 </div>
 
 </section>
