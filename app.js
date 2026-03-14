@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
 /* ===============================
-   LANGUAGE
+   LANGUAGE (FIXED)
 ================================ */
 
 let LANG = "en";
@@ -36,9 +36,7 @@ function applyUI(){
   btnQuestion.textContent = UI[LANG].btn_question;
   btnGlossary.textContent = UI[LANG].btn_glossary;
 
-  if(btnShare){
-    btnShare.textContent = UI[LANG].btn_share;
-  }
+  btnShare.textContent = UI[LANG].btn_share;
 
   document.querySelectorAll(".btn-back").forEach(
     b => b.textContent = UI[LANG].btn_back
@@ -104,6 +102,7 @@ btnDay.onclick = async () => {
   }
 
   show("card-screen");
+
   await loadDayCard();
 };
 
@@ -116,6 +115,7 @@ btnQuestion.onclick = async () => {
   }
 
   show("card-screen");
+
   await loadQuestionCard();
 };
 
@@ -124,13 +124,11 @@ btnGlossary.onclick = () => {
   loadGlossary();
 };
 
-btnBack.onclick = ()=>show("home");
-btnBackFromGlossary.onclick = ()=>show("home");
-btnBackToGlossary.onclick = ()=>show("glossary");
+btnBack.onclick = () => show("home");
+btnBackFromGlossary.onclick = () => show("home");
+btnBackToGlossary.onclick = () => show("glossary");
 
-if(btnShare){
-  btnShare.onclick = shareCard;
-}
+btnShare.onclick = shareCard;
 
 /* ===============================
    HELPERS
@@ -212,20 +210,22 @@ function render(id,reversed,text){
     flipCard.classList.remove("flipped");
   }
 
-  cardImage.src =
-  `images/cards/${String(id).padStart(2,"0")}.png`;
+  setTimeout(()=>{
 
-  cardImage.style.transform =
-  reversed ? "rotate(180deg)":"none";
+    cardImage.src =
+    `images/cards/${String(id).padStart(2,"0")}.png`;
 
-  cardTitle.textContent = getName(id);
-  cardText.textContent = text;
+    cardImage.style.transform =
+    reversed ? "rotate(180deg)" : "none";
 
-  if(flipCard){
-    setTimeout(()=>{
+    cardTitle.textContent = getName(id);
+    cardText.textContent = text;
+
+    if(flipCard){
       flipCard.classList.add("flipped");
-    },200);
-  }
+    }
+
+  },200);
 }
 
 function getName(id){
@@ -295,9 +295,8 @@ t.me/arcana_app_bot`;
    GLOSSARY
 ================================ */
 
-let glossaryData=null;
-const grid =
-document.getElementById("glossary-grid");
+let glossaryData = null;
+const grid = document.getElementById("glossary-grid");
 
 async function loadGlossary(){
 
@@ -306,16 +305,16 @@ async function loadGlossary(){
     await (await fetch("glossary/glossary.json")).json();
   }
 
-  grid.innerHTML="";
+  grid.innerHTML = "";
 
-  Object.keys(glossaryData).forEach(id=>{
+  Object.keys(glossaryData).forEach(id => {
 
-    const div=document.createElement("div");
+    const div = document.createElement("div");
 
     div.textContent =
     glossaryData[id].name[LANG];
 
-    div.onclick = ()=>openGlossaryCard(id);
+    div.onclick = () => openGlossaryCard(id);
 
     grid.appendChild(div);
   });
@@ -330,30 +329,18 @@ function openGlossaryCard(id){
   glossaryCardImage.src =
   `images/cards/${String(id).padStart(2,"0")}.png`;
 
-  document.getElementById("glossary-title").textContent =
-  c.name[LANG];
-
-  document.getElementById("glossary-archetype").textContent =
-  c.archetype[LANG];
-
-  document.getElementById("glossary-description").textContent =
-  c.description[LANG];
+  document.getElementById("glossary-title").textContent = c.name[LANG];
+  document.getElementById("glossary-archetype").textContent = c.archetype[LANG];
+  document.getElementById("glossary-description").textContent = c.description[LANG];
 
   document.getElementById("label-upright").textContent =
-  LANG==="ru"
-  ? "Прямое положение"
-  : "Upright";
+    LANG === "ru" ? "Прямое положение" : "Upright";
 
   document.getElementById("label-reversed").textContent =
-  LANG==="ru"
-  ? "Перевёрнутое положение"
-  : "Reversed";
+    LANG === "ru" ? "Перевёрнутое положение" : "Reversed";
 
-  document.getElementById("glossary-upright").textContent =
-  c.upright[LANG];
-
-  document.getElementById("glossary-reversed").textContent =
-  c.reversed[LANG];
+  document.getElementById("glossary-upright").textContent = c.upright[LANG];
+  document.getElementById("glossary-reversed").textContent = c.reversed[LANG];
 }
 
 /* ===============================
