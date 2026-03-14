@@ -222,7 +222,7 @@ function getName(id){
 }
 
 /* ===============================
-   SHARE (без ссылки на карту)
+   SHARE (простая ссылка на бота)
 ================================ */
 
 function shareCard(){
@@ -242,7 +242,7 @@ ${name}
 
 ${currentText}
 
-✨ Попробуй вытянуть свою карту:
+✨ Вытяни свою карту:
 https://t.me/arcana_app_bot`;
 
   }else{
@@ -254,7 +254,7 @@ ${name}
 
 ${currentText}
 
-✨ Try drawing your card:
+✨ Draw your card:
 https://t.me/arcana_app_bot`;
 
   }
